@@ -1,0 +1,71 @@
+/* Navbar */
+
+nav.navbar li{
+  background-color: transparent !important;
+margin: 0.5em;
+  }
+  
+
+  nav.navbar{
+    background-color: transparent !important;
+  }
+  
+  .navimg{
+    width: 30px;
+  }
+  
+  .navimg:hover {
+    
+    transform: scale(1.1);
+    opacity: 1;
+    transition: transform 1s;
+    cursor: pointer;
+    
+  }
+
+
+
+
+#notepad {
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid #000;
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+ 
+  }
+  
+  .title-bar {
+    background-color: #ccc;
+    padding: 5px;
+    cursor: move;
+  }
+  
+  .title {
+    font-weight: bold;
+  }
+ 
+  .draggable {
+    user-select: none;
+  }
+
+  .txtContent
+{
+
+width: 100%;
+height:180px;
+color:#141414;
+background-color: #fff;
+word-wrap: break-word;
+font-family: Arial, Helvetica, sans-serif;
+padding: 5px;
+font-size: 12px;
+border:none;
+outline: none;
+resize: none; 
+box-sizing: border-box;
+}
+
