@@ -14,6 +14,7 @@
     <title>Document</title>
 </head>
 <body>
+
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <div class="navbar-brands" >
@@ -69,7 +70,15 @@
                 </div>
       
     </div>
-  
+    <div class="wrapper" >
+      <button class="timerbtn" onclick="Pomodoro()">Pomodoro</button>
+      <button class="timerbtn" onclick="Sbreak()">Short Break</button>
+      <button class="timerbtn"onclick="Lbreak()">Long Break</button>
+      <h1 id="timer">25:00</h1>
+      <button class="timerbtn" onclick="startTimer()">Start</button>
+      <button class="timerbtn" onclick="stopTimer()">Stop</button>
+      <button class="timerbtn" onclick="resetTimer() ">Reset</button>
+      </div> 
     <script src="script.js"></script>
   </body>
 </html>

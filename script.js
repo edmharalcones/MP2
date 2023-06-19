@@ -48,3 +48,81 @@ function makeDraggable(element) {
       x.style.display = "none";
     }
   }
+
+  // Timer
+  
+    let countdown;
+    let targetTime;
+    let paused = false;
+    let initialTime = 25 * 60 * 1000; // 25 minutes in milliseconds
+
+    function Pomodoro() {
+      clearInterval(countdown);
+      countdown = null;
+      paused = false;
+      document.getElementById("timer").innerHTML = "25:00";
+      initialTime = 25 * 60 * 1000;
+    }
+
+    function Sbreak() {
+      clearInterval(countdown);
+      countdown = null;
+      paused = false;
+      document.getElementById("timer").innerHTML = "05:00";
+      initialTime = 5 * 60 * 1000;
+    }
+
+    function Lbreak() {
+      clearInterval(countdown);
+      countdown = null;
+      paused = false;
+      document.getElementById("timer").innerHTML = "15:00";
+      initialTime = 15 * 60 * 1000;
+    }
+
+    function startTimer() {
+      if (!countdown) {
+        targetTime = new Date().getTime() + initialTime;
+        countdown = setInterval(updateCountdown, 1000);
+        paused = false;
+      }
+    }
+
+    function stopTimer() {
+      if (countdown) {
+        clearInterval(countdown);
+        countdown = null;
+        paused = true;
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(countdown);
+      countdown = null;
+      paused = false;
+      document.getElementById("timer").innerHTML = "25:00";
+    }
+
+    
+
+    function updateCountdown() {
+      if (!paused) {
+        const now = new Date().getTime();
+        const timeRemaining = targetTime - now;
+
+        // Calculate minutes and seconds
+        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Display the time in the "timer" element
+        document.getElementById("timer").innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+        // If the countdown is finished, clear the interval
+        if (timeRemaining <= 0) {
+          clearInterval(countdown);
+          countdown = null;
+          document.getElementById("timer").innerHTML = "00:00";
+        }
+      }
+    }
+  
