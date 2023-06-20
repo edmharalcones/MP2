@@ -14,6 +14,7 @@
     <title>ThinkTock</title>
 </head>
 <body>
+  
 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
@@ -25,28 +26,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown"  style="margin-right: 40px;">
-            <ul class="navbar-nav" style="display:flex; justify-content:end;">
-              <li class="nav-item">
+            <ul class="navbar-nav" style="display:flex; justify-content:end;" >
                 <img src="resources/spotify.png" class="navimg">
-              </li>
-                <li class="nav-item">
                   <img src="resources/calculator.png" class="navimg">
-                </li>
-                <li class="nav-item">
                   <img src="resources/notepad.png" class="navimg" role="button" onclick="notepadbtn()">
-                </li>
-                <li class="nav-item">
-                  <img src="resources/todo.png" class="navimg">
-                </li>
-                <li class="nav-item">
+                  <img src="resources/todo.png" class="navimg" role="button" onclick="todobtn()">
                   <img src="resources/weather.png" class="navimg">
-                </li>
-                <li class="nav-item">
-                  <img src="resources/calendar.png" class="navimg">
-                </li>
-              <li class="nav-item">
                 <img src="resources/profile.png" class="navimg">
-              </li>
+         
             </ul>
         </div>
     </div>
@@ -68,6 +55,28 @@
 
                 </center>
                 </div>
+
+                
+      
+    </div>
+
+
+    <div id="todo" class="draggable">
+      <div class="title-bar">
+        <span class="title">To do</span>
+      </div>
+     
+        <div class="content">
+          <div id="myDIV" class="header">
+            <input type="text" id="myInput" placeholder=" Task..">
+            <span onclick="newElement()" class="addBtn">Add</span>
+          </div>
+          
+          <ul id="myUL">
+          </ul>
+                </div>
+
+                
       
     </div>
     <div class="wrapper" >
@@ -76,7 +85,6 @@
       <button class="timerbtn"onclick="Lbreak()">Long Break</button>
       <h1 id="timer">25:00</h1>
       <button class="timerbtn" onclick="startTimer()">Start</button>
-      <button class="timerbtn" onclick="stopTimer()">Stop</button>
       <button class="timerbtn" onclick="resetTimer() ">Reset</button>
       </div> 
     <script src="script.js"></script>
