@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,22 +12,21 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="icon" href="resources/icon.png">
 
-    <title>ThinkTock</title>
+    <title>Focusd</title>
 </head>
 <body>
   
 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <div class="navbar-brands" >
-          <a class="nav-link" href="index.html" ><img src="resources/logo.png" class="logo"></a>
+        <div class="navbar-brands">
+          <a class="nav-link" href="index.html"><img src="resources/logo.png" class="logo"></a>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown"  style="margin-right: 40px;">
-            <ul class="navbar-nav" style="display:flex; justify-content:end;" >
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-right: 40px;">
+            <ul class="navbar-nav" style="display:flex; justify-content:end;">
                 <img src="resources/spotify.png" class="navimg">
                   <img src="resources/calculator.png" class="navimg">
                   <img src="resources/notes.png" class="navimg" role="button" onclick="notepadbtn()">
@@ -52,7 +52,6 @@
                 <button onclick="makeBold()" class="btn1"><b>B</b></button>
                 <button onclick="" class="btn1"><i>i</i></button>
                 <button onclick="" class="btn1">u</button>
-
                 </center>
                 </div>
 
@@ -79,14 +78,19 @@
                 
       
     </div>
-    <div class="wrapper" >
+    <div class="wrapper">
       <button class="timerbtn" onclick="Pomodoro()">Pomodoro</button>
       <button class="timerbtn" onclick="Sbreak()">Short Break</button>
-      <button class="timerbtn"onclick="Lbreak()">Long Break</button>
+      <button class="timerbtn" onclick="Lbreak()">Long Break</button>
       <h1 id="timer">25:00</h1>
       <button class="timerbtn" onclick="startTimer()">Start</button>
-      <button class="timerbtn" onclick="resetTimer() ">Reset</button>
+      <br>
+      <div class="d-flex justify-content-center">
+      <input type="image" class="timerimgbtn" onclick="resetTimer()" src="resources/icons/reset.png">
+      <input type="image" class="timerimgbtn" onclick="resetTimer()" src="resources/icons/settings.png">
+     </div>
       </div> 
     <script src="script.js"></script>
-  </body>
+  
+</body>
 </html>
