@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-right: 40px;">
             <ul class="navbar-nav" style="display:flex; justify-content:end;">
                 <img src="resources/spotify.png" class="navimg">
-                  <img src="resources/calculator.png" class="navimg">
+                  <img src="resources/calculator.png" class="navimg" role="button" onclick="calcbtn()">
                   <img src="resources/notes.png" class="navimg" role="button" onclick="notepadbtn()">
                   <img src="resources/todo.png" class="navimg" role="button" onclick="todobtn()">
                   <img src="resources/weather.png" class="navimg">
@@ -40,9 +40,8 @@
   </nav>
     <div id="notepad" class="draggable">
       <div class="title-bar">
-        <span class="title">Note</span>
+        <span class="title">Notes</span>
       </div>
-     
         <div class="content">
             <textarea class="txtContent" id="txtContent"></textarea>
             </div>
@@ -54,12 +53,7 @@
                 <button onclick="" class="btn1">u</button>
                 </center>
                 </div>
-
-                
-      
     </div>
-
-
     <div id="todo" class="draggable">
       <div class="title-bar">
         <span class="title">To do</span>
@@ -73,11 +67,41 @@
           
           <ul id="myUL">
           </ul>
-                </div>
-
-                
-      
+                </div>         
     </div>
+
+    <div id="calculator" class="draggable">
+      <div class="title-bar">
+      </div>
+     <div class="calculator-grid">
+      <div class="output">
+      <div data-previous-operand class="previous-operand"></div>
+      <div data-current-operand class="current-operand"></div>
+      </div>
+      <button data-all-clear>AC</button>
+      <button data-delete>DEL</button>
+      <button data-number>%</button>
+      <button data-operation>÷</button>
+      <button data-number>1</button>
+      <button data-number>2</button>
+      <button data-number>3</button>
+      <button data-operation>*</button>
+      <button data-number>4</button>
+      <button data-number>5</button>
+      <button data-number>6</button>
+      <button data-operation>+</button>
+      <button data-number>7</button>
+      <button data-number>8</button>
+      <button data-number>9</button>
+      <button data-operation>-</button>
+      <button data-number>.</button>
+      <button data-number>0</button>
+      <button data-equals class="span-two" style="border-radius: 25px;">=</button>
+  
+      </div>
+    </div>
+
+
     <div class="wrapper">
       <button class="timerbtn" onclick="Pomodoro()">Pomodoro</button>
       <button class="timerbtn" onclick="Sbreak()">Short Break</button>
