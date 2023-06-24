@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn</title>
+    <script src="https://kit.fontawesome.com/eabe26cd9e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style1.css" type="text/css">
+    <script src="https://kit.fontawesome.com/eabe26cd9e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="sign-in">
+            <form action="" class="sign-in-form">
+                <h2 class="title">Sign in</h2>
+                <div class="input-field">
+                    <i class="fa-solid fa-at"></i>
+                    <input type="text" placeholder="Email"><br>
+                </div><br>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Password">
+                </div>
+                <input type="submit" value="Login" class="btn">
+                <p class="social-text">Or Sign in with social platform</p>
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fa-brands fa-google"></i>
+                    </a>
+                </div>
+                <p class="account-text">Don't have an account?<a href="#" id="sign-up-btn2">Sign up</a></p>
+            </form>   
+
+            <form action="" class="sign-up-form">
+                <h2 class="title">Sign up</h2>
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" placeholder="Name">
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-at"></i>
+                    <input type="text" placeholder="Email">
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Password">
+                </div>
+                <input type="submit" value="Sign Up" class="btn">
+
+                <p class="social-text">Or Sign in with social platform</p>
+                
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fa-brands fa-google"></i>
+                    </a>
+                </div>
+                <p class="account-text">Already have an account?<a href="#" id="sign-in-btn2">Sign in</a></p>
+            </form>    
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Already a member?</h3>
+                    <button class="btn" id="sign-in-btn">Sign in</button>
+                </div>
+                <img src="resources/logo.png" alt="" class="image">
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Become a member!</h3>
+                    <button class="btn" id="sign-up-btn">Sign up</button>
+                </div>
+                <img src="resources/logo.png" alt="" class="image">
+            </div>
+        </div>
+    </div>
+       
+    <script src="app.js"></script>
+</body>
+</html>
