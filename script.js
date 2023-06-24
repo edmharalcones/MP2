@@ -303,7 +303,7 @@ class Calculator {
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
 const equalsButton = document.querySelector('[data-equals]')
-const deleteButton = document.querySelector('[data-delete]')
+const negativeButton = document.querySelector('[data-negative]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
@@ -316,6 +316,8 @@ numberButtons.forEach(button => {
     calculator.updateDisplay()
   })
 })
+
+
 
 operationButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -334,10 +336,6 @@ allClearButton.addEventListener('click', button => {
   calculator.updateDisplay()
 })
 
-deleteButton.addEventListener('click', button => {
-  calculator.delete()
-  calculator.updateDisplay()
-})
 
 document.addEventListener('keydown', function (event) {
   let patternForNumbers = /[0-9]/g;
