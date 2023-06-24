@@ -27,7 +27,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-right: 40px;">
             <ul class="navbar-nav" style="display:flex; justify-content:end;">
-                <img src="resources/spotify.png" class="navimg">
+                <img src="resources/spotify.png" class="navimg" role="button" onclick="spotifybtn()">
                   <img src="resources/calculator.png" class="navimg" role="button" onclick="calcbtn()">
                   <img src="resources/notes.png" class="navimg" role="button" onclick="notepadbtn()">
                   <img src="resources/todo.png" class="navimg" role="button" onclick="todobtn()">
@@ -101,6 +101,15 @@
       </div>
     </div>
 
+    <div id="spotify" class="draggable">
+      <div class="title-bar">
+        <h1>Spotify Web Playback SDK Quick Start</h1>
+      </div>
+    <button id="togglePlay">Toggle Play</button>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+      </div>
+    </div>
+
 
     <div class="wrapper">
       <button class="timerbtn" onclick="Pomodoro()">Pomodoro</button>
@@ -115,6 +124,7 @@
      </div>
       </div> 
     <script src="script.js"></script>
-  
+
+   
 </body>
 </html>
