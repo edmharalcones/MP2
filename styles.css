@@ -50,7 +50,7 @@ margin: 0.5em;
 
 
 
-#notepad, #todo {
+#notepad, #todo{
     width: 300px;
     height: 300px;
     background-color: #fff;
@@ -77,30 +77,57 @@ margin: 0.5em;
  
   }
 
+  #myUL {
+    max-height: 200px; /* Set a maximum height for the list */
+    overflow-y: auto; /* Add vertical scrollbar when necessary */
+    scrollbar-width: thin; /* Set the width of the scrollbar */
+       scrollbar-color: black #f1f1f1;
+  }
+
+  /* Customize the scrollbar track */
+  #myUL::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Set the color of the scrollbar track */
+    border-radius: 10px; /* Set the border radius */
+  }
+  
+  /* Customize the scrollbar thumb */
+  #myUL::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px; /* Set the border radius */
+  }
+  
+  /* Customize the scrollbar thumb on hover */
+  #myUL::-webkit-scrollbar-thumb:hover {
+    background-color: black; /* Set the color of the scrollbar thumb on hover */
+  }
+  
+
   #notepad {
     left: 80%;
     top: 30%;
   }
 
-  #spotify {
-    left: 60%;
-    top: 30%;
-  }
-
-
   #todo {
     left: 20%;
     top: 70%;
   } 
+
+  #calculator {
+    left: 75%;
+    top: 70%;
+  } 
+
   
   .title-bar {
-    background-color: #ccc;
+   
     padding: 5px;
     cursor: move;
   }
   
   .title {
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 20px;
+  
   }
  
   .draggable {
@@ -149,17 +176,23 @@ h1, h2, h3 {
   font-size:2em;
 }
 
-.timerbtn{
-border: black 1px;
-text-decoration:none;
-cursor:pointer;
-font-size:0.75em;
-padding:5px 1px;
-width:10%;
-margin: 10px;
- outline: none;
-	border: solid 1px black;
-	}
+.timerbtn {
+  color: white;
+  background: linear-gradient(black, black) padding-box,
+  linear-gradient(to right, white, #d3738d) border-box;
+border-radius: 50em;
+border: 2px solid transparent;
+  border-radius: 50em;
+  font-size: 0.75em;
+  padding: 5px 1px;
+  width: 10%;
+  margin: 10px;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+
 
   .timerimgbtn{
     width: 10%;
@@ -182,31 +215,31 @@ ul li {
   font-size: 12px;
   transition: 0.2s;
   
-  /* make the list items unselectable */
+
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-/* Set all odd list items to a different color (zebra-stripes) */
+
 ul li:nth-child(odd) {
   background: #f9f9f9;
 }
 
-/* Darker background-color on hover */
+
 ul li:hover {
   background: #ddd;
 }
 
-/* When clicked on, add a background color and strike out text */
+
 ul li.checked {
   background: #888;
   color: #fff;
   text-decoration: line-through;
 }
 
-/* Add a "checked" mark when clicked on */
+
 ul li.checked::before {
   content: '';
   position: absolute;
@@ -220,7 +253,7 @@ ul li.checked::before {
   width: 7px;
 }
 
-/* Style the close button */
+
 .close {
   position: absolute;
   right: 0;
@@ -229,26 +262,26 @@ ul li.checked::before {
 }
 
 .close:hover {
-  background-color: #f44336;
+  background-color: grey;
   color: white;
 }
 
-/* Style the header */
+
 .header {
-  background-color: #f44336;
-  padding: 30px 40px;
+
+  padding: 15px 20px;
   color: white;
   text-align: center;
 }
 
-/* Clear floats after the header */
+
 .header:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Style the input */
+
 input {
   margin: 0;
   border: none;
@@ -257,15 +290,19 @@ input {
   padding: 10px;
   float: left;
   font-size: 12px;
+  border-radius: 25px;
 }
 
-/* Style the "Add" button */
+#myInput{
+  background-color: rgb(182, 178, 178);
+}
+
 .addBtn {
   padding: 10px;
   width: 25%;
-  background: #d9d9d9;
-  color: #555;
   float: left;
+  color: black;
+  font-weight: 500;
   text-align: center;
   font-size: 12px;
   cursor: pointer;
@@ -273,23 +310,53 @@ input {
   border-radius: 0;
 }
 
-.addBtn:hover {
-  background-color: #bbb;
-}
 
-/*home page*/
-.signin{
-  color: white;
-}
-.carousel{
-  width: 70vh;
-  height: 70vh;
-  position: absolute;
+/* calculator */
+
+.calculator-grid {
+  display: grid;
   justify-content: center;
-  display: flex;
-  transform: translate(70%, 20%);
-  overflow: hidden;
-}
+  align-content: center;
+  min-height: 15vh;
+  grid-template-columns: repeat(4, 50px);
+  grid-template-rows: minmax(15px, auto) repeat(5, 50px);
+  }
+
+  .calculator-grid > button {
+    cursor: pointer;
+    font-size: 0.75rem;
+    border: 1px, solid white;
+    outline: none;     
+    border-radius: 50%;
+    color: white;
+    background-color: black;
+  }
+
+    .calculator-grid > button:hover {
+      background-color: #a9a9a9;
+    }
+
+    .span-two {
+      grid-column: span 2;
+      color: white;
+      background-color: black;
+    }
+
+    .output{
+      grid-column: 1 / -1;
+      background-color: white;
+   
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      flex-direction: column;
+      padding: 30px;
+      word-wrap: break-word;
+      word-break: break-all;
+      max-height: 50px;
+      max-width: 100%;
+      overflow: hidden;
+    }
 
     .output .previous-operand{
       color: black !important;
