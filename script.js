@@ -38,6 +38,8 @@ function makeDraggable(element) {
 makeDraggable(document.getElementById('notepad'));
 makeDraggable(document.getElementById('todo'));
 makeDraggable(document.getElementById('calculator'));
+makeDraggable(document.getElementById('spotify'));
+
 
 
 
@@ -66,6 +68,15 @@ function calcbtn() {
     TodoView.style.display = "none";
   } else {
     TodoView.style.display = "block";
+  }
+}
+
+function spotifybtn() {
+  var NotepadView = document.getElementById("spotify");
+  if (NotepadView.style.display === "block") {
+    NotepadView.style.display = "none";
+  } else {
+    NotepadView.style.display = "block";
   }
 }
 
@@ -372,3 +383,6 @@ if (event.key == 'Delete') {
 }
 
 });
+
+// spotify
+
