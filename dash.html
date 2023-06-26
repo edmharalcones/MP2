@@ -16,27 +16,23 @@
 <body>
   
 
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar ">
     <div class="container-fluid">
-        <div class="navbar-brands">
+        <div class="navbar-brands  d-flex justify-content-start">
           <a class="nav-link" href="index.html"><img src="resources/logo.png" class="logo"></a>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-right: 40px;">
-            <ul class="navbar-nav" style="display:flex; justify-content:end;">
-                <img src="resources/spotify.png" class="navimg" role="button" onclick="spotifybtn()">
-                  <img src="resources/calculator.png" class="navimg" role="button" onclick="calcbtn()">
-                  <img src="resources/notes.png" class="navimg" role="button" onclick="notepadbtn()">
-                  <img src="resources/todo.png" class="navimg" role="button" onclick="todobtn()">
-                  <img src="resources/weather.png" class="navimg">
+        <div class=" d-flex justify-content-end">
                 <img src="resources/profile.png" class="navimg">
-         
-            </ul>
+              </div>
         </div>
-    </div>
   </nav>
+  <img src="resources/nav/calculator.png" class="navimg" role="button" style="position: absolute; top: 60%;"  onclick="calcbtn()">
+  <img src="resources/nav/weather.png" class="navimg" style="position: absolute; top: 65%;" >
+  <img src="resources/nav/calendar.png" class="navimg" style="position: absolute; top: 70%;" >
+  <img src="resources/nav/todo.png" class="navimg" role="button"  style="position: absolute; top: 75%;" onclick="todobtn()">
+  <img src="resources/nav/notes.png" class="navimg" role="button" style="position: absolute; top: 80%;"  onclick="notepadbtn()">
+  <img src="resources/nav/spotify.png" class="navimg" role="button" style="position: absolute; top: 85%;" onclick="spotifybtn()">
+
     <div id="notepad" class="draggable">
       <div class="title-bar">
         <span class="title">Notes</span>
@@ -101,9 +97,14 @@
     </div>
 
     <div id="spotify" class="draggable">
-    <div class="title-bar"></div>
-    <div id="spotify-player"></div>
-  </div>
+      <div class="title-bar">
+      </div>
+      <iframe width="100%" height="80" frameborder="0" allowfullscreen=""
+       data-src="https://open.spotify.com/embed/playlist/5Ob9EjYpTvbmNGxhdQe5JM?utm_source=generator" allow="autoplay;
+        clipboard-write; encrypted-media; fullscreen; 
+        picture-in-picture" src="https://open.spotify.com/embed/playlist/5Ob9EjYpTvbmNGxhdQe5JM?utm_source=generator">
+      </iframe>
+    </div>
 
 
     <div class="wrapper">
@@ -115,9 +116,35 @@
       <br>
       <div class="d-flex justify-content-center">
       <input type="image" class="timerimgbtn" onclick="resetTimer()" src="resources/icons/reset.png">
-      <input type="image" class="timerimgbtn" onclick="resetTimer()" src="resources/icons/settings.png">
+      <input type="image" class="timerimgbtn" data-bs-toggle="modal" data-bs-target="#settings" src="resources/icons/settings.png">
      </div>
       </div> 
+      <div class="modal" id="settings">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal header -->
+                <div class="modal-header">
+                  <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"></button>  
+                    
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                <div class="row">
+               <div class="d-flex justify-content-center" style="margin-bottom: 10px;">
+                <label for="SetLongBreak">Set longbreak in minutes</label>
+                 <input type="number" id="SetLongBreak" placeholder="60">
+                 <button class="btn btn-submit" id="SubmitLongBreak"  data-bs-dismiss="modal" onclick="LongBreakbtn()"> Submit</button>  
+               </div>
+                </div>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div> 
      <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
   <script src="spotify/Spotify/my-app/src/screens/home.js"></script>

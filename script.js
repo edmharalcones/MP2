@@ -40,9 +40,7 @@ makeDraggable(document.getElementById('todo'));
 makeDraggable(document.getElementById('calculator'));
 makeDraggable(document.getElementById('spotify'));
 
-
-
-
+// navbuttons
 
 function notepadbtn() {
   var NotepadView = document.getElementById("notepad");
@@ -63,30 +61,33 @@ function todobtn() {
 }
 
 function calcbtn() {
-  var TodoView = document.getElementById("calculator");
-  if (TodoView.style.display === "block") {
-    TodoView.style.display = "none";
+  var CalculatorView = document.getElementById("calculator");
+  if (CalculatorView.style.display === "block") {
+    CalculatorView.style.display = "none";
   } else {
-    TodoView.style.display = "block";
+    CalculatorView.style.display = "block";
   }
 }
 
 function spotifybtn() {
-  var NotepadView = document.getElementById("spotify");
-  if (NotepadView.style.display === "block") {
-    NotepadView.style.display = "none";
+  var SpotifyView = document.getElementById("spotify");
+  if (SpotifyView.style.display === "block") {
+    SpotifyView.style.display = "none";
   } else {
-    NotepadView.style.display = "block";
+    SpotifyView.style.display = "block";
   }
 }
 
-
+// timer
 
   let countdown;
   let targetTime;
   let paused = false;
   let initialTime = 25 * 60 * 1000; 
   let reset = 1;
+  let longbreak = "60:00";
+
+  
 
   function Pomodoro() {
     clearInterval(countdown);
@@ -104,15 +105,17 @@ function spotifybtn() {
     reset = 2;
     document.getElementById("timer").innerHTML = "05:00";
     initialTime = 5 * 60 * 1000;
+    
   }
 
   function Lbreak() {
+ 
     clearInterval(countdown);
     countdown = null;
     paused = false;
     reset = 3;
-    document.getElementById("timer").innerHTML = "60:00";
-    initialTime = 60 * 60 * 1000;
+    document.getElementById("timer").innerHTML = longbreak;
+    initialTime = longbreak.substring(0,2) * 60 * 1000;
   }
 
   function startTimer() {
@@ -139,11 +142,21 @@ function spotifybtn() {
     }
 
     else{
-      document.getElementById("timer").innerHTML = "60:00"; 
+      document.getElementById("timer").innerHTML = longbreak; 
     }
 
   }
 
+  function LongBreakbtn(){
+    var lngbreak = document.getElementById("SetLongBreak").value;
+    if (lngbreak > 60 ){
+      alert("Long break can only be 60 mins or less");
+    }
+    else{
+    longbreak = document.getElementById("SetLongBreak").value + ":00";
+    document.getElementById("SetLongBreak").value=" ";
+  }
+  }
   
 
   function updateCountdown() {
@@ -224,165 +237,164 @@ for (i = 0; i < close.length; i++) {
 // calculator
 
 class Calculator {
-constructor(previousOperandTextElement, currentOperandTextElement) {
-  this.previousOperandTextElement = previousOperandTextElement
-  this.currentOperandTextElement = currentOperandTextElement
-  this.clear()
-}
-
-clear() {
-  this.currentOperand = ''
-  this.previousOperand = ''
-  this.operation = undefined
-}
-
-delete() {
-  this.currentOperand = this.currentOperand.toString().slice(0, -1)
-}
-
-appendNumber(number) {
-  if (number === '.' && this.currentOperand.includes('.')) return
-  this.currentOperand = this.currentOperand.toString() + number.toString()
-}
-
-chooseOperation(operation) {
-  if (this.currentOperand === '') return
-  if (this.previousOperand !== '') {
-    this.compute()
+  constructor(previousOperandTextElement, currentOperandTextElement) {
+    this.previousOperandTextElement = previousOperandTextElement
+    this.currentOperandTextElement = currentOperandTextElement
+    this.clear()
   }
-  this.operation = operation
-  this.previousOperand = this.currentOperand
-  this.currentOperand = ''
-}
-
-compute() {
-  let computation
-  const prev = parseFloat(this.previousOperand)
-  const current = parseFloat(this.currentOperand)
-  if (isNaN(prev) || isNaN(current)) return
-  switch (this.operation) {
-    case '+':
-      computation = prev + current
-      break
-    case '-':
-      computation = prev - current
-      break
-    case '*':
-      computation = prev * current
-      break
-    case '÷':
-      computation = prev / current
-      break
-    default:
-      return
+  
+  clear() {
+    this.currentOperand = ''
+    this.previousOperand = ''
+    this.operation = undefined
   }
-  this.currentOperand = computation
-  this.operation = undefined
-  this.previousOperand = ''
-}
-
-getDisplayNumber(number) {
-  const stringNumber = number.toString()
-  const integerDigits = parseFloat(stringNumber.split('.')[0])
-  const decimalDigits = stringNumber.split('.')[1]
-  let integerDisplay
-  if (isNaN(integerDigits)) {
-    integerDisplay = ''
-  } else {
-    integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+  
+  delete() {
+    this.currentOperand = this.currentOperand.toString().slice(0, -1)
   }
-  if (decimalDigits != null) {
-    return `${integerDisplay}.${decimalDigits}`
-  } else {
-    return integerDisplay
+  
+  appendNumber(number) {
+    if (number === '.' && this.currentOperand.includes('.')) return
+    this.currentOperand = this.currentOperand.toString() + number.toString()
   }
-}
-
-updateDisplay() {
-  this.currentOperandTextElement.innerText =
-    this.getDisplayNumber(this.currentOperand)
-  if (this.operation != null) {
-    this.previousOperandTextElement.innerText =
-      `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
-  } else {
-    this.previousOperandTextElement.innerText = ''
+  
+  chooseOperation(operation) {
+    if (this.currentOperand === '') return
+    if (this.previousOperand !== '') {
+      this.compute()
+    }
+    this.operation = operation
+    this.previousOperand = this.currentOperand
+    this.currentOperand = ''
   }
-}
-}
-
-
-const numberButtons = document.querySelectorAll('[data-number]')
-const operationButtons = document.querySelectorAll('[data-operation]')
-const equalsButton = document.querySelector('[data-equals]')
-const negativeButton = document.querySelector('[data-negative]')
-const allClearButton = document.querySelector('[data-all-clear]')
-const previousOperandTextElement = document.querySelector('[data-previous-operand]')
-const currentOperandTextElement = document.querySelector('[data-current-operand]')
-
-const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
-
-numberButtons.forEach(button => {
-button.addEventListener('click', () => {
-  calculator.appendNumber(button.innerText)
-  calculator.updateDisplay()
-})
-})
-
-
-
-operationButtons.forEach(button => {
-button.addEventListener('click', () => {
-  calculator.chooseOperation(button.innerText)
-  calculator.updateDisplay()
-})
-})
-
-equalsButton.addEventListener('click', button => {
-calculator.compute()
-calculator.updateDisplay()
-})
-
-allClearButton.addEventListener('click', button => {
-calculator.clear()
-calculator.updateDisplay()
-})
-
-
-document.addEventListener('keydown', function (event) {
-let patternForNumbers = /[0-9]/g;
-let patternForOperators = /[+\-*\/]/g
-if (event.key.match(patternForNumbers)) {
-  event.preventDefault();
-  calculator.appendNumber(event.key)
-  calculator.updateDisplay()
-}
-if (event.key === '.') {
-  event.preventDefault();
-  calculator.appendNumber(event.key)
-  calculator.updateDisplay()
-}
-if (event.key.match(patternForOperators)) {
-  event.preventDefault();
-  calculator.chooseOperation(event.key)
-  calculator.updateDisplay()
-}
-if (event.key === 'Enter' || event.key === '=') {
-  event.preventDefault();
-  calculator.compute()
-  calculator.updateDisplay()
-}
-if (event.key === "Backspace") {
-  event.preventDefault();
-  calculator.delete()
-  calculator.updateDisplay()
-}
-if (event.key == 'Delete') {
-  event.preventDefault();
-  calculator.clear()
-  calculator.updateDisplay()
-}
-
-});
-
+  
+  compute() {
+    let computation
+    const prev = parseFloat(this.previousOperand)
+    const current = parseFloat(this.currentOperand)
+    if (isNaN(prev) || isNaN(current)) return
+    switch (this.operation) {
+      case '+':
+        computation = prev + current
+        break
+      case '-':
+        computation = prev - current
+        break
+      case '*':
+        computation = prev * current
+        break
+      case '÷':
+        computation = prev / current
+        break
+      default:
+        return
+    }
+    this.currentOperand = computation
+    this.operation = undefined
+    this.previousOperand = ''
+  }
+  
+  getDisplayNumber(number) {
+    const stringNumber = number.toString()
+    const integerDigits = parseFloat(stringNumber.split('.')[0])
+    const decimalDigits = stringNumber.split('.')[1]
+    let integerDisplay
+    if (isNaN(integerDigits)) {
+      integerDisplay = ''
+    } else {
+      integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`
+    } else {
+      return integerDisplay
+    }
+  }
+  
+  updateDisplay() {
+    this.currentOperandTextElement.innerText =
+      this.getDisplayNumber(this.currentOperand)
+    if (this.operation != null) {
+      this.previousOperandTextElement.innerText =
+        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+    } else {
+      this.previousOperandTextElement.innerText = ''
+    }
+  }
+  }
+  
+  
+  const numberButtons = document.querySelectorAll('[data-number]')
+  const operationButtons = document.querySelectorAll('[data-operation]')
+  const equalsButton = document.querySelector('[data-equals]')
+  const negativeButton = document.querySelector('[data-negative]')
+  const allClearButton = document.querySelector('[data-all-clear]')
+  const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+  const currentOperandTextElement = document.querySelector('[data-current-operand]')
+  
+  const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+  
+  numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.appendNumber(button.innerText)
+      calculator.updateDisplay()
+    })
+  })
+  
+  operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.chooseOperation(button.innerText)
+      calculator.updateDisplay()
+    })
+  })
+  
+  equalsButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
+  })
+  
+  allClearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
+  })
+  
+  // function calculatorKeydownHandler(event) {
+  //   var CalculatorView = document.getElementById("#calculator");
+  //   if (document.activeElement === CalculatorView) {
+  //     let patternForNumbers = /[0-9]/g;
+  //     let patternForOperators = /[+\-*\/]/g;
+  //     if (event.key.match(patternForNumbers)) {
+  //       event.preventDefault();
+  //       calculator.appendNumber(event.key);
+  //       calculator.updateDisplay();
+  //     }
+  //     if (event.key === '.') {
+  //       event.preventDefault();
+  //       calculator.appendNumber(event.key);
+  //       calculator.updateDisplay();
+  //     }
+  //     if (event.key.match(patternForOperators)) {
+  //       event.preventDefault();
+  //       calculator.chooseOperation(event.key);
+  //       calculator.updateDisplay();
+  //     }
+  //     if (event.key === 'Enter' || event.key === '=') {
+  //       event.preventDefault();
+  //       calculator.compute();
+  //       calculator.updateDisplay();
+  //     }
+  //     if (event.key === "Backspace") {
+  //       event.preventDefault();
+  //       calculator.delete();
+  //       calculator.updateDisplay();
+  //     }
+  //     if (event.key === 'Delete') {
+  //       event.preventDefault();
+  //       calculator.clear();
+  //       calculator.updateDisplay();
+  //     }
+  //   }
+  // }
+  
 // spotify
 
