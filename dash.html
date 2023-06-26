@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="icon" href="resources/tab.png">
-
     <title>Focusd</title>
 </head>
 <body>
@@ -32,21 +31,35 @@
   <img src="resources/nav/todo.png" class="navimg" role="button"  style="position: absolute; top: 75%;" onclick="todobtn()">
   <img src="resources/nav/notes.png" class="navimg" role="button" style="position: absolute; top: 80%;"  onclick="notepadbtn()">
   <img src="resources/nav/spotify.png" class="navimg" role="button" style="position: absolute; top: 85%;" onclick="spotifybtn()">
-
-    <div id="notepad" class="draggable">
+    
+  <div id="notepad" class="draggable">
       <div class="title-bar">
         <span class="title">Notes</span>
       </div>
-          <div id="input-text" class="editable-div" contenteditable="true"></div>
+      <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+      </div>
+      
+      <div id="London" class="tabcontent">
+        <div id="input-text" class="editable-div" contenteditable="true"></div>
+      </div>
+      
+      <div id="Paris" class="tabcontent">
+        <div id="input-text" class="editable-div" contenteditable="true"></div>
+      </div>
+      <div id="Tokyo" class="tabcontent">
+        <div id="input-text" class="editable-div" contenteditable="true"></div>
+      </div>
+         
             <hr>
             <div class="options">
-                <center>
                 <button onclick="makeBold()" class="btn1"><b>B</b></button>
                 <button onclick="makeItalic()" class="btn1"><i>i</i></button>
                 <button onclick="makeUnderline()" class="btn1">u</button>
                 <button onclick="makeStrikethrough()" class="btn1">S</button>
-                
-                </center>
+
                 </div>
     </div>
     <div id="todo" class="draggable">
