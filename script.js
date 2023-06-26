@@ -233,7 +233,37 @@ for (i = 0; i < close.length; i++) {
   }
 }
 }
+// notepad
+function makeBold() {
+  var div = document.getElementById("input-text");
+  document.execCommand('bold', false, null);
+}
 
+function makeItalic() {
+  var div = document.getElementById("input-text");
+  document.execCommand('italic', false, null);
+}
+
+function makeUnderline() {
+  var div = document.getElementById("input-text");
+  document.execCommand('underline', false, null);
+}
+
+function makeStrikethrough() {
+  var div = document.getElementById("input-text");
+  document.execCommand('styleWithCSS', false, true); // Enable CSS styling
+  document.execCommand('insertHTML', false, '<span class="strikeout">' + getSelectionText() + '</span>');
+}
+
+function getSelectionText() {
+  var text = "";
+  if (window.getSelection) {
+    text = window.getSelection().toString();
+  } else if (document.selection && document.selection.type != "Control") {
+    text = document.selection.createRange().text;
+  }
+  return text;
+}
 // calculator
 
 class Calculator {
