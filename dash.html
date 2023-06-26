@@ -32,36 +32,33 @@
   <img src="resources/nav/notes.png" class="navimg" role="button" style="position: absolute; top: 80%;"  onclick="notepadbtn()">
   <img src="resources/nav/spotify.png" class="navimg" role="button" style="position: absolute; top: 85%;" onclick="spotifybtn()">
     
-  <div id="notepad" class="draggable">
-      <div class="title-bar">
-        <span class="title">Notes</span>
-      </div>
-      <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-      </div>
-      
-      <div id="London" class="tabcontent">
-        <div id="input-text" class="editable-div" contenteditable="true"></div>
-      </div>
-      
-      <div id="Paris" class="tabcontent">
-        <div id="input-text" class="editable-div" contenteditable="true"></div>
-      </div>
-      <div id="Tokyo" class="tabcontent">
-        <div id="input-text" class="editable-div" contenteditable="true"></div>
-      </div>
-         
-            <hr>
-            <div class="options">
-                <button onclick="makeBold()" class="btn1"><b>B</b></button>
-                <button onclick="makeItalic()" class="btn1"><i>i</i></button>
-                <button onclick="makeUnderline()" class="btn1">u</button>
-                <button onclick="makeStrikethrough()" class="btn1">S</button>
-
-                </div>
+  <!-- notepad -->
+   <div id="notepad" class="draggable">
+    <div class="title-bar">
+      <span class="title">Notes</span>
     </div>
+    <div class="tab">
+      <button class="tablinks" onclick="openTabs(event, 'Tab1')" id="defaultOpen">Tab 1</button>
+      <button class="tablinks" onclick=" addTab()"><center>+</center></button>
+    </div>
+    <div class="tabs">
+    <div id="Tab1" class="tabcontent">
+      <div id="input-text" class="editable-div" contenteditable="true"></div>
+    </div>
+    </div>
+    <hr>
+    <center>
+      <div class="btn-group" role="group" >
+        <button type="button"  onclick="makeBold()" class="btn1"><b>B</b></button>
+        <button type="button"  onclick="makeItalic()"  class="btn1"><i>i</i></button>
+        <button type="button"  onclick="makeUnderline()" class="btn1"><u>u</u></button>
+        <button type="button"  onclick="makeStrikethrough()"  class="btn1">S</button>
+      </div>
+      </center>
+          
+  </div>
+
+    <!-- Todo -->
     <div id="todo" class="draggable">
       <div class="title-bar">
         <span class="title">To do</span>

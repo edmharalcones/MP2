@@ -224,7 +224,7 @@ var span = document.createElement("SPAN");
 var txt = document.createTextNode("\u00D7");
 span.className = "close";
 span.appendChild(txt);
-li.appendChild(span);
+li.appendChil(span);
 
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
@@ -264,8 +264,7 @@ function getSelectionText() {
   }
   return text;
 }
-
-function openCity(evt, cityName) {
+function openTabs(evt, TabsName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
@@ -273,14 +272,54 @@ function openCity(evt, cityName) {
   }
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    tablinks[i].classList.remove("active");
   }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+  document.getElementById(TabsName).style.display = "block";
+  evt.currentTarget.classList.add("active");
 }
 
-// Get the element with id="defaultOpen" and click on it
+function addTab() {
+  var tabsContainer = document.querySelector(".tab");
+  var tabCount = tabsContainer.children.length + 1;
+  var tabName = "Tab " + tabCount;
+
+  var tabButton = document.createElement("button");
+  tabButton.className = "tablinks";
+  tabButton.textContent = tabName;
+  tabButton.onclick = function () {
+    openTabs(event, "Tab" + tabCount);
+  };
+
+  var lastTabButton = tabsContainer.lastElementChild;
+  tabsContainer.insertBefore(tabButton, lastTabButton);
+
+  var tabContent = document.createElement("div");
+  tabContent.id = "Tab" + tabCount;
+  tabContent.className = "tabcontent";
+
+  var editableDiv = document.createElement("div");
+  editableDiv.id = "input-text" + tabCount;
+  editableDiv.className = "editable-div";
+  editableDiv.contentEditable = true;
+
+  tabContent.appendChild(editableDiv);
+
+  var tabsSection = document.querySelector(".tabs");
+  tabsSection.appendChild(tabContent);
+
+  openTabs(event, "Tab" + tabCount);
+}
+
 document.getElementById("defaultOpen").click();
+
+function renameTab() {
+  var currentTabButton = document.querySelector(".tablinks.active");
+  var newTabName = prompt("Enter the new tab name:");
+  if (newTabName) {
+    currentTabButton.textContent = newTabName;
+  }
+}
+
 // calculator
 
 class Calculator {
