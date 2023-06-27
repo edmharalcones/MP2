@@ -179,60 +179,59 @@ function spotifybtn() {
 
   // Todo
 
-  var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-var span = document.createElement("SPAN");
-var txt = document.createTextNode("\u00D7");
-span.className = "close";
-span.appendChild(txt);
-myNodelist[i].appendChild(span);
-}
-
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-close[i].onclick = function() {
-  var div = this.parentElement;
-  div.style.display = "none";
-}
-}
-
-
-var ul = document.querySelector('#myUL');
-ul.addEventListener('click', function(ev) {
-if (ev.target.tagName === 'LI') {
-  ev.target.classList.toggle('checked');
-  ul.appendChild(ev.target); 
-}
-}, false);
-
-
-function newElement() {
-var li = document.createElement("li");
-var inputValue = document.getElementById("myInput").value;
-var t = document.createTextNode(inputValue);
-li.appendChild(t);
-if (inputValue === '') {
-  alert("You must write something!");
-} else {
-  document.getElementById("myUL").appendChild(li);
-}
-document.getElementById("myInput").value = "";
-
-var span = document.createElement("SPAN");
-var txt = document.createTextNode("\u00D7");
-span.className = "close";
-span.appendChild(txt);
-li.appendChil(span);
-
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
+  var activeCounter = document.getElementById("activeCounter");
+  var completedCounter = document.getElementById("completedCounter");
+  
+  function updateCounters() {
+    var tasks = document.getElementsByTagName("LI");
+    var activeCount = 0;
+    var completedCount = 0;
+  
+    for (var i = 0; i < tasks.length; i++) {
+      activeCount++;
+      if (tasks[i].classList.contains("checked")) {
+        completedCount++;
+      } else {
+       
+      }
+    }
+  
+    activeCounter.textContent = activeCount;
+    completedCounter.textContent = completedCount;
   }
-}
-}
+  
+  function newElement() {
+    var li = document.createElement("li");
+    var inputValue = document.getElementById("myInput").value;
+    var t = document.createTextNode(inputValue);
+    li.appendChild(t);
+    
+    if (inputValue === '') {
+      alert("You must write something!");
+    } else {
+      document.getElementById("myUL").appendChild(li);
+      updateCounters();
+    }
+    
+    document.getElementById("myInput").value = "";
+  
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+  
+    span.onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+      updateCounters();
+    };
+  
+    li.onclick = function() {
+      this.classList.toggle("checked");
+      updateCounters();
+    };
+  }
 // notepad
 function makeBold() {
   var div = document.getElementById("input-text");
