@@ -281,17 +281,15 @@ function openTabs(evt, TabsName) {
 function addTab() {
   var tabsContainer = document.querySelector(".tab");
   var tabCount = tabsContainer.children.length + 1;
-  var tabName = "Tab " + tabCount;
+  var tabName = "Note " + tabCount;
 
   var tabButton = document.createElement("button");
   tabButton.className = "tablinks";
   tabButton.textContent = tabName;
   tabButton.onclick = function () {
-    openTabs(event, "Tab" + tabCount);
+    openTabs(event, "Note" + tabCount);
   };
-
-  var lastTabButton = tabsContainer.lastElementChild;
-  tabsContainer.insertBefore(tabButton, lastTabButton);
+  tabsContainer.appendChild(tabButton);
 
   var tabContent = document.createElement("div");
   tabContent.id = "Tab" + tabCount;
@@ -320,6 +318,9 @@ function renameTab() {
   }
 }
 
+function printTab() {
+  $("#Tab1 .editable-div").printElement();
+}
 // calculator
 
 class Calculator {
