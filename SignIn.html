@@ -3,64 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focusd</title>
+    <title>SignIn</title>
     <script src="https://kit.fontawesome.com/eabe26cd9e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style1.css" type="text/css">
     <script src="https://kit.fontawesome.com/eabe26cd9e.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="resources/tab.png">
 </head>
 <body>
 
 
-
     <div class="container">
         <div class="sign-in">
-            <form action="" class="sign-in-form">
+            <form action="" class="sign-in-form" onsubmit="handleLogin(event)">
                 <h2 class="title">Sign in</h2>
                 <div class="input-field">
                     <i class="fa-solid fa-at"></i>
-                    <input type="text" placeholder="Email"><br>
+                    <input type="text" placeholder="Email" id="email" required><br>
                 </div><br>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" id="password" required>
                 </div>
-                <button type="button" onclick="window.location.href = 'dash.html';"class="btn">Login</button>
+                <input type="submit" value="Login" class="btn">
                 <p class="social-text">Or Sign in with social platform</p>
                 <div class="social-media">
-                    <a href="#" class="social-icon">
+                    <a href="#" class="social-icon" aria-label="Facebook">
                         <i class="fa-brands fa-facebook"></i>
                     </a>
-                    <a href="#" class="social-icon">
+                    <a href="#" class="social-icon" aria-label="Google">
                         <i class="fa-brands fa-google"></i>
                     </a>
                 </div>
                 <p class="account-text">Don't have an account?<a href="#" id="sign-up-btn2">Sign up</a></p>
             </form>   
 
-            <form action="" class="sign-up-form">
+            <form action="" class="sign-up-form" onsubmit="handleSignUp(event)">
                 <h2 class="title">Sign up</h2>
                 <div class="input-field">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Name">
+                    <input type="text" placeholder="Name" id="signupname" required>
                 </div>
                 <div class="input-field">
                     <i class="fa-solid fa-at"></i>
-                    <input type="text" placeholder="Email">
+                    <input type="email" placeholder="Email" id="signupemail" required>
                 </div>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" id="signuppass" required>
                 </div>
-                <input type="submit" value="Sign Up" class="btn">
+                <input type="submit" value="Sign Up" class="btn" id="signupBtn">
 
                 <p class="social-text">Or Sign in with social platform</p>
                 
                 <div class="social-media">
-                    <a href="#" class="social-icon">
+                    <a href="#" class="social-icon" aria-label="Facebook">
                         <i class="fa-brands fa-facebook"></i>
                     </a>
-                    <a href="#" class="social-icon">
+                    <a href="#" class="social-icon" aria-label="Google">
                         <i class="fa-brands fa-google"></i>
                     </a>
                 </div>
