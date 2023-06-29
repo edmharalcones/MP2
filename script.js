@@ -244,7 +244,8 @@ function spotifybtn() {
       updateCounters();
     };
   }
-// notepad function
+// notepad
+
 function makeBold() {
   var div = document.querySelector(".tabcontent.active .editable-div");
   document.execCommand('bold', false, null);
@@ -388,6 +389,7 @@ function loadTabsContent() {
 
 document.getElementById("defaultOpen").click();
 loadTabsContent();
+
 
 
 // calculator
