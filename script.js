@@ -332,21 +332,20 @@ function addTab() {
 
 
 function saveTabsContent() {
-  var tabLinks = document.getElementsByClassName("tablinks");
-  var tabContents = document.getElementsByClassName("tabcontent");
-  var tabsData = [];
-  for (var i = 0; i < tabLinks.length; i++) {
-    var tabId = tabContents[i].id;
-    var tabName = tabLinks[i].textContent;
-    var editableDiv = tabContents[i].querySelector(".editable-div");
-    var content = editableDiv.innerHTML;
-    var tabData = {
-      id: tabId,
-      name: tabName,
-      content: content
-    };
-    tabsData.push(tabData);
+  var tabContents = document.getElementsByClassName("editable-div");
+  var tabContentsData = [];
+  for (var i = 0; i < tabContents.length; i++) {
+    tabContentsData.push(tabContents[i].innerHTML);
   }
+  var tabLinks = document.getElementsByClassName("tablinks");
+  var tabLinksData = [];
+  for (var i = 0; i < tabLinks.length; i++) {
+    tabLinksData.push(tabLinks[i].textContent);
+  }
+  var tabsData = {
+    tabContents: tabContentsData,
+    tabLinks: tabLinksData
+  };
   localStorage.setItem("tabsData", JSON.stringify(tabsData));
 }
 
@@ -354,37 +353,20 @@ function loadTabsContent() {
   var tabsData = localStorage.getItem("tabsData");
   if (tabsData) {
     tabsData = JSON.parse(tabsData);
-    var tabsContainer = document.querySelector(".tab");
-    var tabsSection = document.querySelector(".tabs");
-    tabsContainer.innerHTML = "";
-    tabsSection.innerHTML = "";
-    for (var i = 0; i < tabsData.length; i++) {
-      var tabData = tabsData[i];
-      var tabButton = document.createElement("button");
-      tabButton.className = "tablinks";
-      tabButton.textContent = tabData.name;
-      tabButton.onclick = function (event) {
-        openTabs(event, tabData.id);
-      };
-      tabsContainer.appendChild(tabButton);
-
-      var tabContent = document.createElement("div");
-      tabContent.id = tabData.id;
-      tabContent.className = "tabcontent";
-
-      var editableDiv = document.createElement("div");
-      editableDiv.className = "editable-div";
-      editableDiv.contentEditable = true;
-      editableDiv.addEventListener('input', saveTabsContent);
-      editableDiv.innerHTML = tabData.content;
-
-      tabContent.appendChild(editableDiv);
-
-      tabsSection.appendChild(tabContent);
+    var tabContents = document.getElementsByClassName("editable-div");
+    for (var i = 0; i < tabContents.length; i++) {
+      if (tabsData.tabContents[i]) {
+        tabContents[i].innerHTML = tabsData.tabContents[i];
+      }
+    }
+    var tabLinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tabLinks.length; i++) {
+      if (tabsData.tabLinks[i]) {
+        tabLinks[i].textContent = tabsData.tabLinks[i];
+      }
     }
   }
 }
-
 
 
 document.getElementById("defaultOpen").click();
