@@ -246,24 +246,28 @@ function spotifybtn() {
   }
 // notepad
 function makeBold() {
-  var div = document.getElementById("input-text");
+  var div = document.querySelector(".tabcontent.active .editable-div");
   document.execCommand('bold', false, null);
+  saveTabsContent();
 }
 
 function makeItalic() {
-  var div = document.getElementById("input-text");
+  var div = document.querySelector(".tabcontent.active .editable-div");
   document.execCommand('italic', false, null);
+  saveTabsContent();
 }
 
 function makeUnderline() {
-  var div = document.getElementById("input-text");
+  var div = document.querySelector(".tabcontent.active .editable-div");
   document.execCommand('underline', false, null);
+  saveTabsContent();
 }
 
 function makeStrikethrough() {
-  var div = document.getElementById("input-text");
+  var div = document.querySelector(".tabcontent.active .editable-div");
   document.execCommand('styleWithCSS', false, true); // Enable CSS styling
   document.execCommand('insertHTML', false, '<span class="strikeout">' + getSelectionText() + '</span>');
+  saveTabsContent();
 }
 
 function getSelectionText() {
@@ -275,6 +279,7 @@ function getSelectionText() {
   }
   return text;
 }
+
 function openTabs(evt, TabsName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -297,9 +302,13 @@ function addTab() {
   var tabButton = document.createElement("button");
   tabButton.className = "tablinks";
   tabButton.textContent = tabName;
-  tabButton.onclick = function () {
-    openTabs(event, "Note" + tabCount);
+  tabButton.setAttribute("data-tab-id", "Tab" + tabCount); // Set a custom attribute to identify the tab
+
+  tabButton.onclick = function (event) {
+    var tabId = event.currentTarget.getAttribute("data-tab-id");
+    openTabs(event, tabId);
   };
+
   tabsContainer.appendChild(tabButton);
 
   var tabContent = document.createElement("div");
@@ -310,6 +319,7 @@ function addTab() {
   editableDiv.id = "input-text" + tabCount;
   editableDiv.className = "editable-div";
   editableDiv.contentEditable = true;
+  editableDiv.addEventListener('input', saveTabsContent);
 
   tabContent.appendChild(editableDiv);
 
@@ -319,19 +329,67 @@ function addTab() {
   openTabs(event, "Tab" + tabCount);
 }
 
-document.getElementById("defaultOpen").click();
 
-function renameTab() {
-  var currentTabButton = document.querySelector(".tablinks.active");
-  var newTabName = prompt("Enter the new tab name:");
-  if (newTabName) {
-    currentTabButton.textContent = newTabName;
+function saveTabsContent() {
+  var tabLinks = document.getElementsByClassName("tablinks");
+  var tabContents = document.getElementsByClassName("tabcontent");
+  var tabsData = [];
+  for (var i = 0; i < tabLinks.length; i++) {
+    var tabId = tabContents[i].id;
+    var tabName = tabLinks[i].textContent;
+    var editableDiv = tabContents[i].querySelector(".editable-div");
+    var content = editableDiv.innerHTML;
+    var tabData = {
+      id: tabId,
+      name: tabName,
+      content: content
+    };
+    tabsData.push(tabData);
+  }
+  localStorage.setItem("tabsData", JSON.stringify(tabsData));
+}
+
+function loadTabsContent() {
+  var tabsData = localStorage.getItem("tabsData");
+  if (tabsData) {
+    tabsData = JSON.parse(tabsData);
+    var tabsContainer = document.querySelector(".tab");
+    var tabsSection = document.querySelector(".tabs");
+    tabsContainer.innerHTML = "";
+    tabsSection.innerHTML = "";
+    for (var i = 0; i < tabsData.length; i++) {
+      var tabData = tabsData[i];
+      var tabButton = document.createElement("button");
+      tabButton.className = "tablinks";
+      tabButton.textContent = tabData.name;
+      tabButton.onclick = function (event) {
+        openTabs(event, tabData.id);
+      };
+      tabsContainer.appendChild(tabButton);
+
+      var tabContent = document.createElement("div");
+      tabContent.id = tabData.id;
+      tabContent.className = "tabcontent";
+
+      var editableDiv = document.createElement("div");
+      editableDiv.className = "editable-div";
+      editableDiv.contentEditable = true;
+      editableDiv.addEventListener('input', saveTabsContent);
+      editableDiv.innerHTML = tabData.content;
+
+      tabContent.appendChild(editableDiv);
+
+      tabsSection.appendChild(tabContent);
+    }
   }
 }
 
-function printTab() {
-  $("#Tab1 .editable-div").printElement();
-}
+
+
+document.getElementById("defaultOpen").click();
+loadTabsContent();
+
+
 // calculator
 
 class Calculator {
