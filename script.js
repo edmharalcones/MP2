@@ -244,7 +244,7 @@ function spotifybtn() {
       updateCounters();
     };
   }
-// notepad
+// notepad function
 function makeBold() {
   var div = document.querySelector(".tabcontent.active .editable-div");
   document.execCommand('bold', false, null);
