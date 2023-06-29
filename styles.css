@@ -68,7 +68,7 @@ margin: 0.5em;
     top: 100%;
     left: -50%;
     min-width: 100%;
-    transform: scale(0.75);
+    transform: scale(0.5);
     transform-origin: top left;
     background-color: black;
   }
