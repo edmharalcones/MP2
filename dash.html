@@ -19,16 +19,28 @@
 <body>
   
 
-  <nav class="navbar ">
+  <nav class="navbar">
     <div class="container-fluid">
-        <div class="navbar-brands  d-flex justify-content-start">
-          <a class="nav-link" href="index.html"><img src="resources/logo.png" class="logo"></a>
+      <div class="navbar-brands d-flex justify-content-start">
+        <a class="nav-link" href="index.html">
+          <img src="resources/logo.png" class="logo">
+        </a>
+      </div>
+      <div class="navbar-profile">
+        <div class="dropdown">
+          <img src="resources/profile.png" class="navimg dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+            <li><a class="dropdown-item active" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+          </ul>
         </div>
-        <div class=" d-flex justify-content-end">
-                <img src="resources/profile.png" class="navimg">
-              </div>
-        </div>
+      </div>
+    </div>
   </nav>
+  
   <img src="resources/nav/calculator.png" class="navimg" role="button" style="position: absolute; top: 60%;"  onclick="calcbtn()">
   <img src="resources/nav/weather.png" class="navimg" style="position: absolute; top: 65%;" >
   <img src="resources/nav/calendar.png" class="navimg" style="position: absolute; top: 70%;" >
@@ -73,8 +85,8 @@
       <div class="title-bar">
         <span class="title">To do</span>
         <div class="counter">
-          <span id="activeCounter">0</span> /
-          <span id="completedCounter">0</span> 
+          Completed <span id="completedCounter">0</span> /
+          <span id="activeCounter">0</span> 
         </div>
       </div>
      
@@ -98,8 +110,8 @@
       <div data-current-operand class="current-operand"></div>
       </div>
       <button data-all-clear>AC</button>
-      <button data-negative>+/-</button>
-      <button data-number>%</button>
+      <button data-delete>DEL</button>
+      <button data-number>.</button>
       <button data-operation>÷</button>
       <button data-number>1</button>
       <button data-number>2</button>
@@ -113,12 +125,14 @@
       <button data-number>8</button>
       <button data-number>9</button>
       <button data-operation>-</button>
-      <button data-number>.</button>
+      <button data-number>00</button>
       <button data-number>0</button>
       <button data-equals class="span-two" style="border-radius: 25px;">=</button>
   
       </div>
     </div>
+
+    <!-- Spotify -->
 
     <div id="spotify" class="draggable">
       <div class="title-bar">
@@ -135,7 +149,7 @@
       <button class="timerbtn" onclick="Pomodoro()">Pomodoro</button>
       <button class="timerbtn" onclick="Sbreak()">Short Break</button>
       <button class="timerbtn" onclick="Lbreak()">Long Break</button>
-      <h1 id="timer">25:00</h1>
+      <h1 id="timer">00:25:00</h1>
       <button class="timerbtn" onclick="startTimer()">Start</button>
       <br>
       <div class="d-flex justify-content-center">

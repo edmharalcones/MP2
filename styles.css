@@ -53,8 +53,25 @@ margin: 0.5em;
     }
   }
   
-
-
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-profile {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -50%;
+    min-width: 100%;
+    transform: scale(0.75);
+    transform-origin: top left;
+    background-color: black;
+  }
 
 #notepad{
     width: 300px;

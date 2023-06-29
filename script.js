@@ -85,7 +85,7 @@ function spotifybtn() {
   let paused = false;
   let initialTime = 25 * 60 * 1000; 
   let reset = 1;
-  let longbreak = "60:00";
+  let longbreak = "00:60:00";
 
   
 
@@ -94,7 +94,7 @@ function spotifybtn() {
     countdown = null;
     paused = false;
     reset = 1;
-    document.getElementById("timer").innerHTML = "25:00";
+    document.getElementById("timer").innerHTML = "00:25:00";
     initialTime = 25 * 60 * 1000;
   }
 
@@ -103,29 +103,29 @@ function spotifybtn() {
     countdown = null;
     paused = false;
     reset = 2;
-    document.getElementById("timer").innerHTML = "05:00";
+    document.getElementById("timer").innerHTML = "00:05:00";
     initialTime = 5 * 60 * 1000;
     
   }
 
   function Lbreak() {
- 
     clearInterval(countdown);
     countdown = null;
     paused = false;
     reset = 3;
     document.getElementById("timer").innerHTML = longbreak;
-    initialTime = longbreak.substring(0,2) * 60 * 1000;
+    
+    const [hours, minutes, seconds] = longbreak.split(":").map(Number);
+    initialTime = (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
   }
-
+  
   function startTimer() {
     if (!countdown) {
-      targetTime = new Date().getTime() + initialTime;
+      targetTime = new Date().getTime() + initialTime - 1000; 
       countdown = setInterval(updateCountdown, 1000);
       paused = false;
     }
   }
-
 
   function resetTimer() {
     clearInterval(countdown);
@@ -133,11 +133,11 @@ function spotifybtn() {
     paused = false;
 
     if (reset == 1){
-    document.getElementById("timer").innerHTML = "25:00";
+    document.getElementById("timer").innerHTML = "00:25:00";
     }
 
     else if (reset == 2) {
-      document.getElementById("timer").innerHTML = "5:00";
+      document.getElementById("timer").innerHTML = "00:05:00";
 
     }
 
@@ -147,35 +147,47 @@ function spotifybtn() {
 
   }
 
-  function LongBreakbtn(){
+  function LongBreakbtn() {
     var lngbreak = document.getElementById("SetLongBreak").value;
-    if (lngbreak > 60 ){
-      alert("Long break can only be 60 mins or less");
-    }
-    else{
-    longbreak = document.getElementById("SetLongBreak").value + ":00";
-    document.getElementById("SetLongBreak").value=" ";
-  }
-  }
   
+    if (lngbreak >= 60) {
+      var hours = Math.floor(lngbreak / 60);
+      var minutes = lngbreak % 60;
+  
+      var formattedHours = hours.toString().padStart(2, "0");
+      var formattedMinutes = minutes.toString().padStart(2, "0");
+  
+      longbreak = formattedHours + ":" + formattedMinutes + ":00";
+      document.getElementById("SetLongBreak").value = "";
+    } else {
+      longbreak = "00:" + lngbreak.toString().padStart(2, "0") + ":00";
+      document.getElementById("SetLongBreak").value = "";
+    }
+  }
 
   function updateCountdown() {
     if (!paused) {
       const now = new Date().getTime();
       const timeRemaining = targetTime - now;
-
+  
+      const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
       const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-      document.getElementById("timer").innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
+  
+      const formattedHours = hours.toString().padStart(2, "0");
+      const formattedMinutes = minutes.toString().padStart(2, "0");
+      const formattedSeconds = seconds.toString().padStart(2, "0");
+  
+      document.getElementById("timer").innerHTML = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  
       if (timeRemaining <= 0) {
         clearInterval(countdown);
         countdown = null;
-        document.getElementById("timer").innerHTML = "00:00";
+        document.getElementById("timer").innerHTML = "00:00:00";
       }
     }
   }
+  
 
   // Todo
 
@@ -415,6 +427,7 @@ class Calculator {
   const equalsButton = document.querySelector('[data-equals]')
   const negativeButton = document.querySelector('[data-negative]')
   const allClearButton = document.querySelector('[data-all-clear]')
+  const deleteButton = document.querySelector('[data-delete]')
   const previousOperandTextElement = document.querySelector('[data-previous-operand]')
   const currentOperandTextElement = document.querySelector('[data-current-operand]')
   
@@ -443,44 +456,67 @@ class Calculator {
     calculator.clear()
     calculator.updateDisplay()
   })
+
+  deleteButton.addEventListener('click', button => {
+    calculator.delete()
+    calculator.updateDisplay()
+  })
   
-  // function calculatorKeydownHandler(event) {
-  //   var CalculatorView = document.getElementById("#calculator");
-  //   if (document.activeElement === CalculatorView) {
-  //     let patternForNumbers = /[0-9]/g;
-  //     let patternForOperators = /[+\-*\/]/g;
-  //     if (event.key.match(patternForNumbers)) {
-  //       event.preventDefault();
-  //       calculator.appendNumber(event.key);
-  //       calculator.updateDisplay();
-  //     }
-  //     if (event.key === '.') {
-  //       event.preventDefault();
-  //       calculator.appendNumber(event.key);
-  //       calculator.updateDisplay();
-  //     }
-  //     if (event.key.match(patternForOperators)) {
-  //       event.preventDefault();
-  //       calculator.chooseOperation(event.key);
-  //       calculator.updateDisplay();
-  //     }
-  //     if (event.key === 'Enter' || event.key === '=') {
-  //       event.preventDefault();
-  //       calculator.compute();
-  //       calculator.updateDisplay();
-  //     }
-  //     if (event.key === "Backspace") {
-  //       event.preventDefault();
-  //       calculator.delete();
-  //       calculator.updateDisplay();
-  //     }
-  //     if (event.key === 'Delete') {
-  //       event.preventDefault();
-  //       calculator.clear();
-  //       calculator.updateDisplay();
-  //     }
-  //   }
-  // }
+  function calculatorKeydownHandler(event) {
+    var calculator = document.getElementById("calculator");
+    var isHovered = false;
+  
+    calculator.addEventListener("mouseenter", function() {
+      isHovered = true;
+    });
+  
+    calculator.addEventListener("mouseleave", function() {
+      isHovered = false;
+    });
+  
+    document.addEventListener("keydown", function(event) {
+      if (isHovered && document.activeElement === calculator) {
+        let patternForNumbers = /[0-9]/g;
+        let patternForOperators = /[+\-*\/]/g;
+  
+        if (event.key.match(patternForNumbers)) {
+          event.preventDefault();
+          calculator.appendNumber(event.key);
+          calculator.updateDisplay();
+        }
+  
+        if (event.key === '.') {
+          event.preventDefault();
+          calculator.appendNumber(event.key);
+          calculator.updateDisplay();
+        }
+  
+        if (event.key.match(patternForOperators)) {
+          event.preventDefault();
+          calculator.chooseOperation(event.key);
+          calculator.updateDisplay();
+        }
+  
+        if (event.key === 'Enter' || event.key === '=') {
+          event.preventDefault();
+          calculator.compute();
+          calculator.updateDisplay();
+        }
+  
+        if (event.key === "Backspace") {
+          event.preventDefault();
+          calculator.delete();
+          calculator.updateDisplay();
+        }
+  
+        if (event.key === 'Delete') {
+          event.preventDefault();
+          calculator.clear();
+          calculator.updateDisplay();
+        }
+      }
+    });
+  }
   
 // spotify
 
