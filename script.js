@@ -103,7 +103,6 @@ imageInput.addEventListener('change', event => {
   }
 });
 
-// Load image from localStorage on page load
 window.addEventListener('DOMContentLoaded', () => {
   const storedImage = localStorage.getItem('image');
   if (storedImage) {
