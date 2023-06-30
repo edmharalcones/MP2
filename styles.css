@@ -22,8 +22,9 @@ margin: 0.5em;
   
   .navimg{
     width: 30px;
-   margin: 10px;
+    margin-left: 10px;
   }
+
   
   .navimg:hover {
     
@@ -64,10 +65,7 @@ margin: 0.5em;
   }
   
   .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: -50%;
-    min-width: 100%;
+    
     transform: scale(0.5);
     transform-origin: top left;
     background-color: black;
