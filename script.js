@@ -77,6 +77,41 @@ function spotifybtn() {
     SpotifyView.style.display = "block";
   }
 }
+
+function triggerFileInput() {
+  document.getElementById("input-file").click();
+}
+
+const imageInput = document.getElementById('input-file');
+const avatarImage = document.getElementById('avatar');
+
+function triggerFileInput() {
+  imageInput.click();
+}
+
+imageInput.addEventListener('change', event => {
+  const image = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener('load', () => {
+    localStorage.setItem('image', reader.result);
+    avatarImage.src = localStorage.getItem('image');
+  });
+
+  if (image) {
+    reader.readAsDataURL(image);
+  }
+});
+
+// Load image from localStorage on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const storedImage = localStorage.getItem('image');
+  if (storedImage) {
+    avatarImage.src = storedImage;
+  }
+});
+
+
 // fullscreen
 const fullscreenButton = document.getElementById('fullscreen-button');
 let isFullscreen = false;
