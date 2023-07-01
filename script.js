@@ -332,7 +332,7 @@ function makeUnderline() {
 
 function makeStrikethrough() {
   var div = document.querySelector(".tabcontent.active .editable-div");
-  document.execCommand('styleWithCSS', false, true); // Enable CSS styling
+  document.execCommand('styleWithCSS', false, true);
   document.execCommand('insertHTML', false, '<span class="strikeout">' + getSelectionText() + '</span>');
   saveTabsContent();
 }
@@ -347,54 +347,54 @@ function getSelectionText() {
   return text;
 }
 
-function openTabs(evt, TabsName) {
+function openTabs(event, tabName) {
   var i, tabcontent, tablinks;
+  
+  // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
+  
+  // Get all elements with class="tablinks" and remove the active class
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].classList.remove("active");
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
-  document.getElementById(TabsName).style.display = "block";
-  evt.currentTarget.classList.add("active");
+  
+  // Show the current tab and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  event.currentTarget.className += " active";
 }
 
 function addTab() {
-  var tabsContainer = document.querySelector(".tab");
-  var tabCount = tabsContainer.children.length + 1;
-  var tabName = "Note " + tabCount;
+  var tabId = "Tab" + (tabsData.length + 1);
+  var tabContent = ""; // Set the initial content for the new tab
 
-  var tabButton = document.createElement("button");
-  tabButton.className = "tablinks";
-  tabButton.textContent = tabName;
-  tabButton.setAttribute("data-tab-id", "Tab" + tabCount); // Set a custom attribute to identify the tab
+  // Add a new object to the tabsData array
+  tabsData.push({
+    id: tabId,
+    content: tabContent
+  });
 
-  tabButton.onclick = function (event) {
-    var tabId = event.currentTarget.getAttribute("data-tab-id");
-    openTabs(event, tabId);
-  };
+  // Update the HTML for the tabs
+  var tabButtons = document.querySelector('.tab');
+  var newTabButton = document.createElement('button');
+  newTabButton.className = 'tablinks';
+  newTabButton.setAttribute('data-tab-id', tabId);
+  newTabButton.innerText = "Note " + (tabsData.length);
+  tabButtons.appendChild(newTabButton);
 
-  tabsContainer.appendChild(tabButton);
-
-  var tabContent = document.createElement("div");
-  tabContent.id = "Tab" + tabCount;
-  tabContent.className = "tabcontent";
-
-  var editableDiv = document.createElement("div");
-  editableDiv.id = "input-text" + tabCount;
-  editableDiv.className = "editable-div";
-  editableDiv.contentEditable = true;
-  editableDiv.addEventListener('input', saveTabsContent);
-
-  tabContent.appendChild(editableDiv);
-
-  var tabsSection = document.querySelector(".tabs");
-  tabsSection.appendChild(tabContent);
-
-  openTabs(event, "Tab" + tabCount);
+  // Update the HTML for the tab contents
+  var tabContents = document.querySelector('.tabs');
+  var newTabContent = document.createElement('div');
+  newTabContent.id = tabId;
+  newTabContent.className = 'tabcontent';
+  newTabContent.style.display = 'none';
+  newTabContent.innerHTML = '<div id="input-text" class="editable-div" contenteditable="true">' + tabContent + '</div>';
+  tabContents.appendChild(newTabContent);
 }
+
 
 
 function saveTabsContent() {
@@ -431,8 +431,30 @@ function loadTabsContent() {
         tabLinks[i].textContent = tabsData.tabLinks[i];
       }
     }
+
+    // Load the created tabs
+    var tabsContainer = document.querySelector(".tab");
+    tabsContainer.innerHTML = ""; // Clear existing tabs
+
+    for (var i = 0; i < tabsData.tabLinks.length; i++) {
+      var tabName = tabsData.tabLinks[i];
+      var tabId = "Tab" + (i + 1);
+
+      var tabButton = document.createElement("button");
+      tabButton.className = "tablinks";
+      tabButton.textContent = tabName;
+      tabButton.setAttribute("data-tab-id", tabId);
+
+      tabButton.onclick = function (event) {
+        var tabId = event.currentTarget.getAttribute("data-tab-id");
+        openTabs(event, tabId);
+      };
+
+      tabsContainer.appendChild(tabButton);
+    }
   }
 }
+
 
 
 document.getElementById("defaultOpen").click();
