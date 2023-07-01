@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focusd</title>
+    <title>Home</title>
     <script src="https://kit.fontawesome.com/eabe26cd9e.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <link rel="icon" href="resources/tab.png">
+
     <style>
       *{
         margin: 0;
@@ -74,21 +74,7 @@
       .banner h3{
         color: white;
         font-size: 35px;
-      }
-      .review{
-        display: flex;
-        position: relative;
-        justify-content: center;
-        bottom: 5%;
-        height: 100vh;
-        overflow: hidden;
-        padding-top: 25px;
-      }
-      .review h4{
-        color: white;
-        display: flex;
-        position: absolute;
-        bottom: 85%;
+        font-weight: 700px;
       }
       .card-div{
         display: flex;
@@ -124,6 +110,84 @@
       li a{
         color: white;
       }
+      .review{
+      width: 80%;
+      max-width: 800px;
+      margin: auto;
+      }
+      .review-text{
+        background: lightgreen;
+        width: 100%;
+        height: 350px;
+        position: relative;
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 2%;
+        overflow: hidden;
+      }
+      .user-text{
+        width: 80%;
+        text-align: center;
+        line-height: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+      .user-text .fas{
+        font-size: 30px;
+        margin-bottom: 50px;
+        margin-top: 20px;
+      }
+      .user-text span{
+        display: block;
+        font-size: 15px;
+        margin-top: 60px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      .review-pic{
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .user-pic{
+        width: 75px;
+        padding: 5px;
+        border-radius: 50%;
+        margin: 10px;
+        cursor: pointer;
+      }
+      .user-text.active-text{
+        display: block;
+        animation: moveup 1s linear forwards;
+      }
+      .user-pic.active-pic{
+        width: 100px;
+        border: 3px solid lightgreen;
+      }
+      @keyframes moveup {
+          0%{
+            margin-top: 25px;
+          }
+          100%{
+            margin-top: 0px;
+          }
+      }
+      h2{
+        color: white;
+        position: relative;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 10px;
+        font-weight: 700;
+      }
+      .container.for-review{
+        text-align: center;
+      }
     </style>
    
 </head>
@@ -131,7 +195,7 @@
     <nav class="navbar navbar-expand-lg" >
         <div class="container-fluid">
             <div class="navbar-brands">
-              <a class="nav-link" href="home.html"><img src="resources/logo.png" class="logo"></a>
+              <a class="nav-link" href="index.html"><img src="resources/logo.png" class="logo"></a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -197,67 +261,46 @@
         </button>
     </div>
 
-    <div class="review container-fluid" id="review">
-      <h4>REVIEWS</h4>
-      <div class="card-div container-fluid">
-        <div class="row row-cols-1 row-cols-md-4 g-md-4">
-          <div class="col">
-            <div class="card h-70">
-              <img src="resources/review/Bamboo.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Bamboo</h5>
-                <p class="card-text">I appreciate the depth of seed data and transactions provided. Makes it so much easier for me to test and demo different capabilities</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-              </div>
-            </div>
+<!-----Review-->
+<div class="container for-review">
+    <h2>What our users say</h2>
+  <div class="review">
+      <div class="review-text">
+          <div class="user-text active-text">
+              <i class="fa-solid fa-quote-left"></i>
+              <p>I cannot recommend Focusd enough! I cannot imagine my study sessions without it. The distraction-free environment and built-in productivity tools have transformed my productivity levels. This virtual study space is a must-have for every serious student.</p>
+              <span>Zenna M.</span>
           </div>
-          <div class="col">
-            <div class="card h-70">
-              <img src="resources/review/Sarah.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Sarah</h5>
-                <p class="card-text">An excellent app that will help you add dummy Orders/Customers/Products. Great for developers that want to test their apps.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-70">
-              <img src="resources/review/Martin.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Martin</h5>
-                <p class="card-text">The app by itself is reeally cheap so for now is almost perfect, but it could be great if you give more options of data, like sample data for tech stores, etc.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-70">
-              <img src="resources/review/Lea.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Lea</h5>
-                <p class="card-text">Great app, highly recommendend! I used this in the beginning to check the structure of the products, so I knew how to upload my real ones.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-              </div>
-            </div>
-          </div>
+          <div class="user-text">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>Focusd is a total game-changer for me. The Pomodoro timer keeps me focused, helps me break down my study sessions into manageable chunks, and encourages regular breaks, while the Spotify player creates a soothing study atmosphere.</p>
+            <span>Angelica A.</span>
         </div>
-      </div>  
+        <div class="user-text">
+          <i class="fa-solid fa-quote-left"></i>
+          <p>The Pomodoro timer, coupled with the Spotify player, creates a perfect harmony for deep work. The integrated to-do lists and note-taking features help me stay organized and make progress on my tasks. It's a true productivity booster.</p>
+          <span>Lily G.</span>
+      </div>
+      <div class="user-text">
+        <i class="fa-solid fa-quote-left"></i>
+        <p>I'm absolutely hooked on Focusd. Its productivity features work seamlessly together to optimize my workflow. And the backgrounds transport me to a calm and inspiring space, helping me stay focused and motivated throughout the workday.</p>
+        <span>Travis B.</span>
     </div>
+      </div>
+        <div class="review-pic">
+            <img src="resources/review/pic1.png" class="user-pic active-pic" onclick="displayReview()">
+            <img src="resources/review/pic2.png" class="user-pic" onclick="displayReview()">
+            <img src="resources/review/pic3.png" class="user-pic" onclick="displayReview()">
+            <img src="resources/review/pic4.png" class="user-pic" onclick="displayReview()">
+        </div>
+  </div>      
+</div>
 
   <!-----Footer------>
   <footer class="text-white pt-5 pb-4 mb-1">
     <div class="container-fluid">
       <div class="navbar-brands">
-        <a class="nav-link" href="home.html"><img src="resources/logo.png" class="logo"></a>
+        <a class="nav-link" href="index.html"><img src="resources/logo.png" class="logo"></a>
       </div>
       <div class="container text-center text-md-start">
        <div class="row text-center text-md-end">
@@ -265,7 +308,7 @@
                 <h5>&nbsp;&nbsp;Company</h5>
                 <ul>
                   <li><a href="#">About</a></li>
-                  <li><a href="#review">Reviews</a></li>
+                  <li><a href="#container">Reviews</a></li>
                   <li><a href="#">Terms</a></li>
                 </ul>
           </div>
@@ -305,36 +348,24 @@
 
   </footer>  
   </div>
-  <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
+  
+  <script>
+    let userTexts = document.getElementsByClassName("user-text");
+    let userPics = document.getElementsByClassName("user-pic");
 
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
+    function displayReview(){
+        for(userPic of userPics){
+            userPic.classList.remove("active-pic");
+        }
+        for(userText of userTexts){
+            userText.classList.remove("active-text");
+        }
+        let i = Array.from(userPics).indexOf(event.target);
 
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "101730169646137");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-    <!-- Your SDK code -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v17.0'
-        });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+        userPics[i].classList.add("active-pic");
+        userTexts[i].classList.add("active-text");
+    }
+</script>
   
 </body>
 </html>

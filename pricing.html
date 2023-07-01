@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focusd</title>
+    <title>Pricing</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <link rel="icon" href="resources/tab.png">
     <style>
         *{
         margin: 0;
@@ -31,7 +30,7 @@
       }
       .container{
         display: flex;
-        justify-content:space-evenly;
+        justify-content:space-around;
         align-items: center;
         position: absolute;
         padding: 20px;
@@ -41,42 +40,187 @@
         bottom: 0;
       }
       .card{
-        width: 45%;
-        height: 50vh;
+        width: 40%;
+        height: 60vh;
         background: none;
         align-items: center;
         text-align: center;
         border-radius: 20px;
+        overflow: hidden;
+        border: none;
       }
-      .card a{
-        display: flex;
-        position: relative;
-        border-radius: 50px;
-        background: transparent;
-        color: white;
-        border: 3px solid rgb(196, 112, 140);
-        font-weight: 400;
-        margin: 10px 0;
-        text-align: center;
-        max-width: 150px;
-      }
-      .btn{
-        display: flex;
-        text-align: center;
-        justify-content: center;
-      }
-      .btn:hover{
-        border: 3px solid white;
-        color: white;
-      }
-      .card-title{
-        color: white;
-        font-size: 40px;
-      }
-      .card-text{
-        color: white;
-        font-size: 30px;
-      }
+      .box{
+            width: 500px;
+            min-height: 500px;
+            padding: 50px;
+            background: lightblue;
+            text-align: center;
+            border-radius: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }    
+        .box1{
+            width: 500px;
+            min-height: 500px;
+            padding: 50px;
+            background: lightblue;
+            text-align: center;
+            border-radius: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .box h2{
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .box1 h2{
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .box h1{
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .box1 h1{
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .box h1 span{
+            font-size: 20px;
+            color: black;
+        }
+        .box1 h1 span{
+            font-size: 20px;
+            color: black;
+        }
+        .box b{
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .box p{
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .box1 p{
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .box button{
+            display: block;
+            margin: 30px auto;
+            border: 0;
+            outline: 0;
+            padding: 12px 40px;
+            border-radius: 30px;
+            background-color: yellowgreen;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .box1 button{
+            display: block;
+            margin: 30px auto;
+            border: 0;
+            outline: 0;
+            padding: 12px 40px;
+            border-radius: 30px;
+            background-color: yellowgreen;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .box img{
+            width: 180px;
+        }
+        .box1 img{
+            width: 180px;
+        }
+        .ribbon-wrap{
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+        .ribbon-wrap1{
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+        .ribbon-wrap::before, .ribbon-wrap::after{
+            content: '';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            background: yellowgreen;
+            z-index: -1;
+        }.ribbon-wrap1::before, .ribbon-wrap1::after{
+            content: '';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            background: yellowgreen;
+            z-index: -1;
+        }
+        .ribbon-wrap::before{
+            top: 0;
+            left: 0;
+        }
+        .ribbon-wrap1::before{
+            top: 0;
+            left: 0;
+        }
+        .ribbon-wrap::after{
+            bottom: 0;
+            right: 0;
+        }
+        .ribbon-wrap1::after{
+            bottom: 0;
+            right: 0;
+        }
+        .ribbon{
+            width: 225px;
+            text-align: center;
+            padding: 8px 0;
+            background: yellowgreen;
+            position: absolute;
+            transform: rotate(45deg);
+            left: -17%;
+            top: 29%;
+            font-weight: 600;
+        }
+        .ribbon1{
+            width: 225px;
+            text-align: center;
+            padding: 8px 0;
+            background: yellowgreen;
+            position: absolute;
+            transform: rotate(45deg);
+            left: -17%;
+            top: 29%;
+            font-weight: 600;
+        }
+        section{
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          margin-bottom: 20px;
+        }
+        section h1{
+          font-size: 60px;
+          color: white;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+        }
     </style>
 
 </head>
@@ -85,7 +229,7 @@
     <nav class="navbar navbar-expand-lg" >
         <div class="container-fluid">
             <div class="navbar-brands">
-              <a class="nav-link" href="home.html"><img src="resources/logo.png" class="logo"></a>
+              <a class="nav-link" href="index.html"><img src="resources/logo.png" class="logo"></a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -98,52 +242,41 @@
         </div>
     </nav>
 
+    <section>
+      <h1>Pick your plan</h1>
+    </section>
+
     <div class="container">
         <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Monthly Subscription</h5>
-              <p class="card-text">2$</p>
+          <div class="hero">
+            <div class="box">
+                <h2>Monthly</h2>
+                <h1>$2.99<span>/month</span></h1>
+                <b></b>
+                <p>Billed monthly</p>
+                <button>SUBSCRIBE</button>
+                <img src="resources/logo.png" alt="">
             </div>
-            <a href="#" class="btn col-8">Subscribe</a>
+          </div>
         </div>
         <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Yearly Subscription</h5>
-              <p class="card-text">20$</p>
+          <div class="hero1">
+            <div class="box1">
+                <h2>Annual</h2>
+                <h1>$1.99<span>/month</span></h1>
+                <b></b>
+                <p>$23.88 Billed annually</p>
+                <button>SUBSCRIBE</button>
+                <img src="resources/logo.png" alt="">
+    
+                <div class="ribbon-wrap1">
+                    <div class="ribbon1">BEST VALUE</div>
+                </div>
             </div>
-            <a href="#" class="btn  col-8">Subscribe</a>
+        </div>
         </div>
     </div>
- <!-- Messenger Chat Plugin Code -->
- <div id="fb-root"></div>
 
- <!-- Your Chat Plugin code -->
- <div id="fb-customer-chat" class="fb-customerchat">
- </div>
-
- <script>
-   var chatbox = document.getElementById('fb-customer-chat');
-   chatbox.setAttribute("page_id", "101730169646137");
-   chatbox.setAttribute("attribution", "biz_inbox");
- </script>
-
- <!-- Your SDK code -->
- <script>
-   window.fbAsyncInit = function() {
-     FB.init({
-       xfbml            : true,
-       version          : 'v17.0'
-     });
-   };
-
-   (function(d, s, id) {
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) return;
-     js = d.createElement(s); js.id = id;
-     js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
- </script>
 
 </body>
 </html>
