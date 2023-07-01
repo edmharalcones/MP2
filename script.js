@@ -347,21 +347,19 @@ function getSelectionText() {
   return text;
 }
 
-// Get the tab container and tabs div
 var tabContainer = document.querySelector('.tabs');
 var tabsDiv = document.querySelector('.tab');
 
-// Add event listener to the "Add Tab" button
-document.querySelector('.btn1').addEventListener('click', addTab);
 
-// Add Tab function
+
 function addTab() {
   var numTabs = document.querySelectorAll('.tablinks').length + 1;
+  var tabId = 'Tab' + numTabs;
 
   var tabButton = document.createElement('button');
   tabButton.className = 'tablinks';
   tabButton.innerHTML = 'Note ' + numTabs;
-  tabButton.setAttribute('data-tab-id', 'Tab' + numTabs);
+  tabButton.setAttribute('data-tab-id', tabId);
   tabButton.addEventListener('click', createTabClickHandler(numTabs));
 
   var tabsDiv = document.querySelector('.tab');
@@ -392,57 +390,37 @@ function createTabClickHandler(tabIndex) {
 }
 
 
-function createTabClickHandler(tabIndex) {
-  return function(event) {
-    openTabs(event, 'Tab' + tabIndex);
-  };
-}
 
 
 
-// Function to save the tabs and their content to local storage
+
 function saveTabsToLocalStorage() {
-  // Get all tab buttons and tab contents
+  
   var tabButtons = document.querySelectorAll('.tablinks');
   var tabContents = document.querySelectorAll('.tabcontent');
-
-  // Create an array to store the tab data
   var tabData = [];
-
-  // Iterate over the tab buttons and tab contents
   for (var i = 0; i < tabButtons.length; i++) {
     var tabButton = tabButtons[i];
     var tabContent = tabContents[i];
-
-    // Create an object to store the tab data
     var tab = {
       buttonId: tabButton.id,
       contentId: tabContent.id,
       buttonText: tabButton.innerHTML,
       contentText: tabContent.querySelector('.editable-div').innerHTML
     };
-
-    // Push the tab data object to the array
     tabData.push(tab);
   }
 
-  // Save the tab data to local storage
   localStorage.setItem('tabs', JSON.stringify(tabData));
 }
 
-// Function to load the tabs and their content from local storage
 function loadTabsFromLocalStorage() {
-  // Get the tab data from local storage
   var tabData = JSON.parse(localStorage.getItem('tabs'));
-
-  // If there is no tab data, return
   if (!tabData) return;
 
-  // Iterate over the tab data and create the tabs and their content
-  for (var i = 0; i < tabData.length; i++) {
+  for (var i = tabData.length - 1; i >= 0; i--) {
     var tab = tabData[i];
 
-    // Create the tab button
     var tabButton = document.createElement('button');
     tabButton.className = 'tablinks';
     tabButton.id = tab.buttonId;
@@ -450,44 +428,29 @@ function loadTabsFromLocalStorage() {
     tabButton.onclick = function(event) {
       openTabs(event, tab.contentId);
     };
+    tabsDiv.insertBefore(tabButton, tabsDiv.firstChild);
 
-    // Add the tab button to the tab container
-    tabsDiv.appendChild(tabButton);
-
-    // Create the tab content
     var tabContent = document.createElement('div');
     tabContent.id = tab.contentId;
     tabContent.className = 'tabcontent';
 
-    // Create the editable div inside the tab content
     var editableDiv = document.createElement('div');
     editableDiv.id = 'input-text';
     editableDiv.className = 'editable-div';
     editableDiv.contentEditable = true;
     editableDiv.innerHTML = tab.contentText;
-
-    // Add the editable div to the tab content
     tabContent.appendChild(editableDiv);
 
-    // Add the tab content to the tab container
-    tabContainer.appendChild(tabContent);
+    tabContainer.insertBefore(tabContent, tabContainer.firstChild);
   }
 }
 
-// Function to open tabs
 function openTabs(event, tabId) {
-  // Get all tab contents
   var tabContents = document.querySelectorAll('.tabcontent');
-
-  // Hide all tab contents
   for (var i = 0; i < tabContents.length; i++) {
     tabContents[i].style.display = 'none';
   }
-
-  // Show the selected tab content
   document.getElementById(tabId).style.display = 'block';
-
-  // Set the active class on the clicked tab button
   var tabButtons = document.querySelectorAll('.tablinks');
   for (var i = 0; i < tabButtons.length; i++) {
     tabButtons[i].classList.remove('active');
@@ -495,7 +458,6 @@ function openTabs(event, tabId) {
   event.currentTarget.classList.add('active');
 }
 
-// Load the tabs from local storage when the page loads
 loadTabsFromLocalStorage();
 
 
