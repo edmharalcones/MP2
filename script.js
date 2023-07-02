@@ -337,6 +337,18 @@ function makeStrikethrough() {
   saveTabsContent();
 }
 
+function printTab() {
+  const activeDiv = document.querySelector("div[style='display: block;']");
+  const content = activeDiv.innerHTML;
+
+  html2canvas(activeDiv).then(canvas => {
+    const imageData = canvas.toDataURL('image/png');
+    const doc = new jsPDF();
+    doc.addImage(imageData, 'PNG', 10, 10);
+    doc.save('editable_div_content.pdf');
+  });
+}
+
 function getSelectionText() {
   var text = "";
   if (window.getSelection) {
