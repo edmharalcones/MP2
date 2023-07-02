@@ -336,17 +336,22 @@ function makeStrikethrough() {
   document.execCommand('insertHTML', false, '<span class="strikeout">' + getSelectionText() + '</span>');
   saveTabsContent();
 }
-
 function printTab() {
-  const activeDiv = document.querySelector("div[style='display: block;']");
-  const content = activeDiv.innerHTML;
+  var activeTabButton = document.querySelector('.tablinks.active');
+  var activeTabId = activeTabButton.getAttribute('data-tab-id');
+  var activeTabContent = document.getElementById(activeTabId);
+  var divContents = activeTabContent.querySelector('.editable-div').innerHTML;
+  var tabName = activeTabButton.textContent.trim();
 
-  html2canvas(activeDiv).then(canvas => {
-    const imageData = canvas.toDataURL('image/png');
-    const doc = new jsPDF();
-    doc.addImage(imageData, 'PNG', 10, 10);
-    doc.save('editable_div_content.pdf');
-  });
+  var printWindow = window.open('', '', 'height=500,width=500');
+  printWindow.document.write('<html>');
+  printWindow.document.write('<body>');
+  printWindow.document.write('<h1>Tab content for: ' + tabName + '</h1><br>');
+  printWindow.document.write('<div>' + divContents + '</div>');
+  printWindow.document.write('</body>');
+  printWindow.document.write('</html>');
+  printWindow.document.close();
+  printWindow.print();
 }
 
 function getSelectionText() {
@@ -386,6 +391,9 @@ function addTab() {
   innerDiv.id = 'input-text';
   innerDiv.className = 'editable-div';
   innerDiv.contentEditable = true;
+
+  innerDiv.addEventListener('input', saveTabsContent);
+  innerDiv.addEventListener('paste', saveTabsContent);
 
   tabContent.appendChild(innerDiv);
 
@@ -537,6 +545,10 @@ function loadTabsContent() {
 document.getElementById("defaultOpen").click();
 loadTabsContent();
 
+// Add event listeners to input and paste events for the default active editable-div
+var activeEditableDiv = document.querySelector('.tabcontent.active .editable-div');
+activeEditableDiv.addEventListener('input', saveTabsContent);
+activeEditableDiv.addEventListener('paste', saveTabsContent);
 
 
 // calculator
