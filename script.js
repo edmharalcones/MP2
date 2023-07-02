@@ -249,10 +249,33 @@ function toggleFullscreen() {
       if (timeRemaining <= 0) {
         clearInterval(countdown);
         countdown = null;
-        document.getElementById("timer").innerHTML = "00:00:00";
+  
+        if (reset === 1) {
+          // Pomodoro timer runs out
+          if (pomodoroCounter < 3) {
+            // After the first three pomodoros, display a short break alert
+            pomodoroCounter++;
+            alert("Time's up! Take a short break.");
+            Sbreak();
+          } else {
+            // After the fourth pomodoro, display a long break alert
+            pomodoroCounter = 0;
+            alert("Congratulations! Job well done. Take a long break.");
+            Lbreak();
+          }
+        } else if (reset === 2) {
+          // Short break runs out, prompt the user to start the pomodoro timer again
+          alert("Short break is over. Start the next pomodoro.");
+          Pomodoro();
+        } else {
+          // Long break runs out, prompt the user to start the pomodoro timer again
+          alert("Long break is over. Start the next pomodoro.");
+          Pomodoro();
+        }
       }
     }
   }
+  
   
 
   // Todo
