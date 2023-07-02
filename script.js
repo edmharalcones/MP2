@@ -162,6 +162,12 @@ function toggleFullscreen() {
     reset = 1;
     document.getElementById("timer").innerHTML = "00:25:00";
     initialTime = 25 * 60 * 1000;
+    document.getElementById('pomodoro').style.background="#D3D576";
+    document.getElementById('pomodoro').style.color= "#14141F";
+    document.getElementById('sbreak').style.background="transparent";
+    document.getElementById('sbreak').style.color="#E6E6E6";
+    document.getElementById('lbreak').style.background="transparent";
+    document.getElementById('lbreak').style.color="#E6E6E6";
   }
 
   function Sbreak() {
@@ -171,6 +177,12 @@ function toggleFullscreen() {
     reset = 2;
     document.getElementById("timer").innerHTML = "00:05:00";
     initialTime = 5 * 60 * 1000;
+    document.getElementById('sbreak').style.background="#D3D576";
+    document.getElementById('sbreak').style.color= "#14141F";
+    document.getElementById('pomodoro').style.background="transparent";
+    document.getElementById('pomodoro').style.color="#E6E6E6";
+    document.getElementById('lbreak').style.background="transparent";
+    document.getElementById('lbreak').style.color="#E6E6E6";
     
   }
 
@@ -183,6 +195,12 @@ function toggleFullscreen() {
     
     const [hours, minutes, seconds] = longbreak.split(":").map(Number);
     initialTime = (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
+    document.getElementById('lbreak').style.background="#D3D576";
+    document.getElementById('lbreak').style.color="#14141F";
+    document.getElementById('pomodoro').style.background="transparent";
+    document.getElementById('pomodoro').style.color="#E6E6E6";
+    document.getElementById('sbreak').style.background="transparent";
+    document.getElementById('sbreak').style.color="#E6E6E6";
   }
   
   function startTimer() {
@@ -251,24 +269,24 @@ function toggleFullscreen() {
         countdown = null;
   
         if (reset === 1) {
-          // Pomodoro timer runs out
+          
           if (pomodoroCounter < 3) {
-            // After the first three pomodoros, display a short break alert
+       
             pomodoroCounter++;
             alert("Time's up! Take a short break.");
             Sbreak();
           } else {
-            // After the fourth pomodoro, display a long break alert
+          
             pomodoroCounter = 0;
             alert("Congratulations! Job well done. Take a long break.");
             Lbreak();
           }
         } else if (reset === 2) {
-          // Short break runs out, prompt the user to start the pomodoro timer again
+       
           alert("Short break is over. Start the next pomodoro.");
           Pomodoro();
         } else {
-          // Long break runs out, prompt the user to start the pomodoro timer again
+        
           alert("Long break is over. Start the next pomodoro.");
           Pomodoro();
         }
@@ -283,6 +301,38 @@ function toggleFullscreen() {
   var activeCounter = document.getElementById("activeCounter");
   var completedCounter = document.getElementById("completedCounter");
   
+  // Load data from local storage
+  function loadData() {
+    var tasks = localStorage.getItem("tasks");
+    var activeCount = localStorage.getItem("activeCount");
+    var completedCount = localStorage.getItem("completedCount");
+  
+    if (tasks) {
+      document.getElementById("myUL").innerHTML = tasks;
+    }
+  
+    if (activeCount) {
+      activeCounter.textContent = activeCount;
+    }
+  
+    if (completedCount) {
+      completedCounter.textContent = completedCount;
+    }
+  
+    attachEventListeners(); // Attach event listeners to the loaded li elements
+  }
+  
+  // Save data to local storage
+  function saveData() {
+    var tasks = document.getElementById("myUL").innerHTML;
+    var activeCount = activeCounter.textContent;
+    var completedCount = completedCounter.textContent;
+  
+    localStorage.setItem("tasks", tasks);
+    localStorage.setItem("activeCount", activeCount);
+    localStorage.setItem("completedCount", completedCount);
+  }
+  
   function updateCounters() {
     var tasks = document.getElementsByTagName("LI");
     var activeCount = 0;
@@ -292,13 +342,19 @@ function toggleFullscreen() {
       activeCount++;
       if (tasks[i].classList.contains("checked")) {
         completedCount++;
-      } else {
-       
       }
     }
   
     activeCounter.textContent = activeCount;
     completedCounter.textContent = completedCount;
+  
+    var ul = document.getElementById("myUL");
+    if (tasks.length === 0) {
+      activeCounter.textContent = 0;
+      completedCounter.textContent = 0;
+    }
+  
+    saveData(); // Save data to local storage
   }
   
   function newElement() {
@@ -306,14 +362,14 @@ function toggleFullscreen() {
     var inputValue = document.getElementById("myInput").value;
     var t = document.createTextNode(inputValue);
     li.appendChild(t);
-    
-    if (inputValue === '') {
+  
+    if (inputValue === "") {
       alert("You must write something!");
     } else {
       document.getElementById("myUL").appendChild(li);
       updateCounters();
     }
-    
+  
     document.getElementById("myInput").value = "";
   
     var span = document.createElement("SPAN");
@@ -322,17 +378,42 @@ function toggleFullscreen() {
     span.appendChild(txt);
     li.appendChild(span);
   
-    span.onclick = function() {
+    span.onclick = function () {
       var div = this.parentElement;
-      div.style.display = "none";
+      div.remove();
       updateCounters();
     };
   
-    li.onclick = function() {
+    li.onclick = function () {
       this.classList.toggle("checked");
       updateCounters();
     };
   }
+  
+  function attachEventListeners() {
+    var lis = document.getElementsByTagName("li");
+    for (var i = 0; i < lis.length; i++) {
+      var span = lis[i].querySelector(".close");
+      span.onclick = function () {
+        var div = this.parentElement;
+        div.remove();
+        updateCounters();
+      };
+  
+      lis[i].onclick = function () {
+        this.classList.toggle("checked");
+        updateCounters();
+      };
+    }
+  }
+  
+  // Load data on page load
+  window.onload = function () {
+    loadData();
+  };
+
+  
+  
 // notepad
 
 function makeBold() {
@@ -540,9 +621,9 @@ function loadTabsContent() {
       }
     }
 
-    // Load the created tabs
+    
     var tabsContainer = document.querySelector(".tab");
-    tabsContainer.innerHTML = ""; // Clear existing tabs
+    tabsContainer.innerHTML = ""; 
 
     for (var i = 0; i < tabsData.tabLinks.length; i++) {
       var tabName = tabsData.tabLinks[i];
@@ -568,7 +649,7 @@ function loadTabsContent() {
 document.getElementById("defaultOpen").click();
 loadTabsContent();
 
-// Add event listeners to input and paste events for the default active editable-div
+
 var activeEditableDiv = document.querySelector('.tabcontent.active .editable-div');
 activeEditableDiv.addEventListener('input', saveTabsContent);
 activeEditableDiv.addEventListener('paste', saveTabsContent);
