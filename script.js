@@ -599,13 +599,13 @@ loadTabsFromLocalStorage();
 function saveTabsContent() {
   var tabContents = document.getElementsByClassName("editable-div");
   var tabContentsData = [];
-  for (var i = 0; i < tabContents.length; i++) {
-    tabContentsData.push(tabContents[i].innerHTML);
+  for (var a= 0; a < tabContents.length; a++) {
+    tabContentsData.push(tabContents[a].innerHTML);
   }
   var tabLinks = document.getElementsByClassName("tablinks");
   var tabLinksData = [];
-  for (var i = 0; i < tabLinks.length; i++) {
-    tabLinksData.push(tabLinks[i].textContent);
+  for (var a = 0; a < tabLinks.length; a++) {
+    tabLinksData.push(tabLinks[a].textContent);
   }
   var tabsData = {
     tabContents: tabContentsData,
@@ -619,15 +619,15 @@ function loadTabsContent() {
   if (tabsData) {
     tabsData = JSON.parse(tabsData);
     var tabContents = document.getElementsByClassName("editable-div");
-    for (var i = 0; i < tabContents.length; i++) {
-      if (tabsData.tabContents[i]) {
-        tabContents[i].innerHTML = tabsData.tabContents[i];
+    for (var a = 0; a < tabContents.length; a++) {
+      if (tabsData.tabContents[a]) {
+        tabContents[a].innerHTML = tabsData.tabContents[a];
       }
     }
     var tabLinks = document.getElementsByClassName("tablinks");
-    for (var i = 0; i < tabLinks.length; i++) {
-      if (tabsData.tabLinks[i]) {
-        tabLinks[i].textContent = tabsData.tabLinks[i];
+    for (var a = 0; a < tabLinks.length; a++) {
+      if (tabsData.tabLinks[a]) {
+        tabLinks[a].textContent = tabsData.tabLinks[a];
       }
     }
 
@@ -635,9 +635,9 @@ function loadTabsContent() {
     var tabsContainer = document.querySelector(".tab");
     tabsContainer.innerHTML = ""; 
 
-    for (var i = 0; i < tabsData.tabLinks.length; i++) {
-      var tabName = tabsData.tabLinks[i];
-      var tabId = "Tab" + (i + 1);
+    for (var a = 0; a < tabsData.tabLinks.length; a++) {
+      var tabName = tabsData.tabLinks[a];
+      var tabId = "Tab" + (a + 1);
 
       var tabButton = document.createElement("button");
       tabButton.className = "tablinks";
@@ -660,9 +660,6 @@ document.getElementById("defaultOpen").click();
 loadTabsContent();
 
 
-var activeEditableDiv = document.querySelector('.tabcontent.active .editable-div');
-activeEditableDiv.addEventListener('input', saveTabsContent);
-activeEditableDiv.addEventListener('paste', saveTabsContent);
 
 
 // calculator
@@ -914,12 +911,12 @@ for (let x = day; x > 0; x--) {
   days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
 }
 
-for (let i = 1; i <= lastDate; i++) {
+for (let v = 1; v <= lastDate; v++) {
 
   let event = false;
   eventsArr.forEach((eventObj) => {
     if (
-      eventObj.day === i &&
+      eventObj.day === v &&
       eventObj.month === month + 1 &&
       eventObj.year === year
     ) {
@@ -927,23 +924,23 @@ for (let i = 1; i <= lastDate; i++) {
     }
   });
   if (
-    i === new Date().getDate() &&
+    v === new Date().getDate() &&
     year === new Date().getFullYear() &&
     month === new Date().getMonth()
   ) {
-    activeDay = i;
-    getActiveDay(i);
-    updateEvents(i);
+    activeDay = v;
+    getActiveDay(v);
+    updateEvents(v);
     if (event) {
-      days += `<div class="day today active event">${i}</div>`;
+      days += `<div class="day today active event">${v}</div>`;
     } else {
-      days += `<div class="day today active">${i}</div>`;
+      days += `<div class="day today active">${v}</div>`;
     }
   } else {
     if (event) {
-      days += `<div class="day event">${i}</div>`;
+      days += `<div class="day event">${v}</div>`;
     } else {
-      days += `<div class="day ">${i}</div>`;
+      days += `<div class="day ">${v}</div>`;
     }
   }
 }
