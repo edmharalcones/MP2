@@ -347,30 +347,32 @@ function toggleFullscreen() {
     localStorage.setItem("completedCount", completedCount);
   }
   
-  function updateCounters() {
+  function updateCounters(decrementActiveCount) {
     var tasks = document.getElementsByTagName("LI");
     var activeCount = 0;
     var completedCount = 0;
   
     for (var i = 0; i < tasks.length; i++) {
-      activeCount++;
       if (tasks[i].classList.contains("checked")) {
         completedCount++;
+      } else {
+        activeCount++;
       }
     }
   
-    activeCounter.textContent = activeCount;
-    completedCounter.textContent = completedCount;
-  
-    var ul = document.getElementById("myUL");
-    if (tasks.length === 0) {
-      activeCounter.textContent = 0;
-      completedCounter.textContent = 0;
+    if (decrementActiveCount) {
+      activeCount--; // Decrement the active count by 1 if specified
     }
-  
-    saveData(); // Save data to local storage
+  activeCounter.textContent = activeCount;
+  completedCounter.textContent = completedCount;
+
+  if (tasks.length === 0) {
+    activeCounter.textContent = 0;
+    completedCounter.textContent = 0;
   }
-  
+
+  saveData();
+}
   function newElement() {
     var li = document.createElement("li");
     var inputValue = document.getElementById("myInput").value;
@@ -381,7 +383,7 @@ function toggleFullscreen() {
       alert("You must write something!");
     } else {
       document.getElementById("myUL").appendChild(li);
-      updateCounters();
+      updateCounters(-1);
     }
   
     document.getElementById("myInput").value = "";
@@ -425,6 +427,7 @@ function toggleFullscreen() {
   window.onload = function () {
     loadData();
   };
+
 
   
 // notepad
