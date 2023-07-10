@@ -95,6 +95,7 @@ margin: 0.5em;
     transform: translate(-50%, -50%);
     border-radius: 15px;
     overflow: hidden;
+    display: none;
  
   }
 
@@ -260,7 +261,7 @@ border: 2px solid  #D3D576;
 
 
   .timerimgbtn{
-    width: 5%;
+    width: 3%;
     height: auto;
   }
 
@@ -349,7 +350,8 @@ ul li.checked::before {
 }
 
 
-input {
+#myInput{
+  background-color: rgb(182, 178, 178);
   margin: 0;
   border: none;
   border-radius: 0;
@@ -358,10 +360,6 @@ input {
   float: left;
   font-size: 12px;
   border-radius: 25px;
-}
-
-#myInput{
-  background-color: rgb(182, 178, 178);
 }
 
 .addBtn {
@@ -942,7 +940,7 @@ input {
       position: absolute;
       top: 50%;
       right: 0;
-      font-size: 0.5rem;
+      font-size: 0.75rem;
       line-height: 1;
       display: none;
       align-items: center;
