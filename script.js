@@ -139,6 +139,8 @@ function toggleFullscreen() {
       document.documentElement.msRequestFullscreen();
     }
     isFullscreen = true;
+    fullscreenButton.classList.remove('fa-sharp','fa-solid', 'fa-expand');
+    fullscreenButton.classList.add('fa-sharp', 'fa-solid', 'fa-compress');
   } else {
     if (document.exitFullscreen) {
       document.exitFullscreen();
@@ -150,6 +152,8 @@ function toggleFullscreen() {
       document.msExitFullscreen();
     }
     isFullscreen = false;
+    fullscreenButton.classList.remove('fa-sharp', 'fa-solid', 'fa-compress');
+    fullscreenButton.classList.add('fa-sharp','fa-solid', 'fa-expand');
   }
 }
 
@@ -423,7 +427,6 @@ function toggleFullscreen() {
   };
 
   
-  
 // notepad
 
 function makeBold() {
@@ -478,187 +481,198 @@ function getSelectionText() {
   return text;
 }
 
+
 var tabContainer = document.querySelector('.tabs');
 var tabsDiv = document.querySelector('.tab');
 
-
-
 function addTab() {
-  var numTabs = document.querySelectorAll('.tablinks').length + 1;
-  var tabId = 'Tab' + numTabs;
+var numTabs = document.querySelectorAll('.tablinks-li').length + 1;
+var tabId = 'Tab' + numTabs;
 
-  var tabButton = document.createElement('button');
-  tabButton.className = 'tablinks';
-  tabButton.innerHTML = 'Note ' + numTabs;
-  tabButton.setAttribute('data-tab-id', tabId);
-  tabButton.addEventListener('click', createTabClickHandler(numTabs));
+var tabList = document.getElementById('tablist');
+var newTab = document.createElement('li');
+newTab.className = 'tablinks-li';
+newTab.setAttribute('data-tab-id', tabId);
+newTab.onclick = function (event) {
+openTabs(event, tabId);
+};
+newTab.innerHTML = 'Note ' + numTabs;
 
-  var tabsDiv = document.querySelector('.tab');
-  tabsDiv.appendChild(tabButton);
+tabList.appendChild(newTab);
 
-  var tabContent = document.createElement('div');
-  tabContent.id = 'Tab' + numTabs;
-  tabContent.className = 'tabcontent';
-  tabContent.style.display = 'none';
+var tabContent = document.createElement('div');
+tabContent.id = tabId;
+tabContent.className = 'tabcontent';
+if (numTabs === 1) {
+tabContent.style.display = 'block';
+newTab.classList.add('active');
+} else {
+tabContent.style.display = 'none';
+}
 
-  var innerDiv = document.createElement('div');
-  innerDiv.id = 'input-text';
-  innerDiv.className = 'editable-div';
-  innerDiv.contentEditable = true;
+var innerDiv = document.createElement('div');
+innerDiv.className = 'input-text editable-div';
+innerDiv.contentEditable = true;
 
-  innerDiv.addEventListener('input', saveTabsContent);
-  innerDiv.addEventListener('paste', saveTabsContent);
+innerDiv.addEventListener('input', saveTabsContent);
+innerDiv.addEventListener('paste', saveTabsContent);
 
-  tabContent.appendChild(innerDiv);
+tabContent.appendChild(innerDiv);
 
-  var tabsContainer = document.querySelector('.tabs');
-  tabsContainer.appendChild(tabContent);
 
-  saveTabsToLocalStorage();
+var tabsContainer = document.querySelector('.tabs');
+tabsContainer.appendChild(tabContent);
+
+saveTabsToLocalStorage();
 }
 
 function createTabClickHandler(tabIndex) {
-  return function(event) {
-    openTabs(event, 'Tab' + tabIndex);
-  };
+return function(event) {
+openTabs(event, 'Tab' + tabIndex);
+};
 }
 
-
-
-
-
-
 function saveTabsToLocalStorage() {
-  
-  var tabButtons = document.querySelectorAll('.tablinks');
-  var tabContents = document.querySelectorAll('.tabcontent');
-  var tabData = [];
-  for (var i = 0; i < tabButtons.length; i++) {
-    var tabButton = tabButtons[i];
-    var tabContent = tabContents[i];
-    var tab = {
-      buttonId: tabButton.id,
-      contentId: tabContent.id,
-      buttonText: tabButton.innerHTML,
-      contentText: tabContent.querySelector('.editable-div').innerHTML
-    };
-    tabData.push(tab);
-  }
+var tabLinks = document.querySelectorAll('.tablinks-li');
+var tabContents = document.querySelectorAll('.tabcontent');
+var tabData = [];
+for (var i = 0; i < tabLinks.length; i++) {
+var tabLink = tabLinks[i];
+var tabContent = tabContents[i];
+var tab = {
+  tabId: tabLink.id,
+contentId: tabContent.id,
+  buttonText: tabLink.innerHTML,
+  contentText: tabContent.querySelector('.editable-div').innerHTML
+};
+tabData.push(tab);
+}
 
-  localStorage.setItem('tabs', JSON.stringify(tabData));
+localStorage.setItem('tabs', JSON.stringify(tabData));
 }
 
 function loadTabsFromLocalStorage() {
-  var tabData = JSON.parse(localStorage.getItem('tabs'));
-  if (!tabData) return;
+var tabData = JSON.parse(localStorage.getItem('tabs'));
+if (!tabData) return;
 
-  for (var i = tabData.length - 1; i >= 0; i--) {
-    var tab = tabData[i];
+var tabList = document.getElementById('tablist');
+tabList.innerHTML = '';
 
-    var tabButton = document.createElement('button');
-    tabButton.className = 'tablinks';
-    tabButton.id = tab.buttonId;
-    tabButton.innerHTML = tab.buttonText;
-    tabButton.onclick = function(event) {
-      openTabs(event, tab.contentId);
-    };
-    tabsDiv.insertBefore(tabButton, tabsDiv.firstChild);
+for (var i = 0; i < tabData.length; i++) {
+var tab = tabData[i];
 
-    var tabContent = document.createElement('div');
-    tabContent.id = tab.contentId;
-    tabContent.className = 'tabcontent';
+var newTab = document.createElement('li');
+newTab.className = 'tablinks-li';
+newTab.id = tab.tabId; // Assign the correct tabId
+newTab.innerHTML = tab.buttonText;
+newTab.setAttribute('data-tab-id', tab.tabId);
+newTab.onclick = createTabClickHandler(i + 1); 
 
-    var editableDiv = document.createElement('div');
-    editableDiv.id = 'input-text';
-    editableDiv.className = 'editable-div';
-    editableDiv.contentEditable = true;
-    editableDiv.innerHTML = tab.contentText;
-    tabContent.appendChild(editableDiv);
+tabList.appendChild(newTab);
 
-    tabContainer.insertBefore(tabContent, tabContainer.firstChild);
-  }
+var tabContent = document.createElement('div');
+tabContent.id = tab.contentId; 
+tabContent.className = 'tabcontent';
+
+var innerDiv = document.createElement('div');
+innerDiv.className = 'editable-div';
+innerDiv.contentEditable = true;
+innerDiv.innerHTML = tab.contentText;
+
+tabContent.appendChild(innerDiv);
+
+var tabsContainer = document.querySelector('.tabs');
+tabsContainer.appendChild(tabContent);
+}
+}
+
+function createTabClickHandler(tabIndex) {
+return function (event) {
+openTabs(event, 'Tab' + tabIndex);
+};
 }
 
 function openTabs(event, tabId) {
-  var tabContents = document.querySelectorAll('.tabcontent');
-  for (var i = 0; i < tabContents.length; i++) {
-    tabContents[i].style.display = 'none';
-  }
-  document.getElementById(tabId).style.display = 'block';
-  var tabButtons = document.querySelectorAll('.tablinks');
-  for (var i = 0; i < tabButtons.length; i++) {
-    tabButtons[i].classList.remove('active');
-  }
-  event.currentTarget.classList.add('active');
+var tabContents = document.querySelectorAll('.tabcontent');
+for (var i = 0; i < tabContents.length; i++) {
+tabContents[i].style.display = 'none';
 }
-
-loadTabsFromLocalStorage();
-
-
+document.getElementById(tabId).style.display = 'block';
+var tabLinks = document.querySelectorAll('.tablinks-li');
+for (var i = 0; i < tabLinks.length; i++) {
+tabLinks[i].classList.remove('active');
+}
+event.currentTarget.classList.add('active');
+}
 
 function saveTabsContent() {
-  var tabContents = document.getElementsByClassName("editable-div");
-  var tabContentsData = [];
-  for (var a= 0; a < tabContents.length; a++) {
-    tabContentsData.push(tabContents[a].innerHTML);
-  }
-  var tabLinks = document.getElementsByClassName("tablinks");
-  var tabLinksData = [];
-  for (var a = 0; a < tabLinks.length; a++) {
-    tabLinksData.push(tabLinks[a].textContent);
-  }
-  var tabsData = {
-    tabContents: tabContentsData,
-    tabLinks: tabLinksData
-  };
-  localStorage.setItem("tabsData", JSON.stringify(tabsData));
+var tabContents = document.getElementsByClassName('editable-div');
+var tabContentsData = [];
+for (var i = 0; i < tabContents.length; i++) {
+tabContentsData.push(tabContents[i].innerHTML);
 }
-
+var tabLinks = document.getElementsByClassName('tablinks-li');
+var tabLinksData = [];
+for (var i = 0; i < tabLinks.length; i++) {
+tabLinksData.push(tabLinks[i].textContent);
+}
+var tabsData = {
+tabContents: tabContentsData,
+tabLinks: tabLinksData
+};
+localStorage.setItem('tabsData', JSON.stringify(tabsData));
+}
 function loadTabsContent() {
-  var tabsData = localStorage.getItem("tabsData");
-  if (tabsData) {
-    tabsData = JSON.parse(tabsData);
-    var tabContents = document.getElementsByClassName("editable-div");
-    for (var a = 0; a < tabContents.length; a++) {
-      if (tabsData.tabContents[a]) {
-        tabContents[a].innerHTML = tabsData.tabContents[a];
-      }
-    }
-    var tabLinks = document.getElementsByClassName("tablinks");
-    for (var a = 0; a < tabLinks.length; a++) {
-      if (tabsData.tabLinks[a]) {
-        tabLinks[a].textContent = tabsData.tabLinks[a];
-      }
-    }
+var tabsData = JSON.parse(localStorage.getItem('tabsData'));
+if (!tabsData) return;
 
-    
-    var tabsContainer = document.querySelector(".tab");
-    tabsContainer.innerHTML = ""; 
+var tabList = document.getElementById('tablist');
+tabList.innerHTML = '';
 
-    for (var a = 0; a < tabsData.tabLinks.length; a++) {
-      var tabName = tabsData.tabLinks[a];
-      var tabId = "Tab" + (a + 1);
+var existingTabs = document.querySelectorAll('.tabcontent');
+for (var i = 0; i < existingTabs.length; i++) {
+existingTabs[i].remove();
+}
 
-      var tabButton = document.createElement("button");
-      tabButton.className = "tablinks";
-      tabButton.textContent = tabName;
-      tabButton.setAttribute("data-tab-id", tabId);
+var tabContentsLength = tabsData.tabContents.length;
+for (var i = 0; i < tabContentsLength; i++) {
+var tabName = tabsData.tabLinks[i];
+var tabId = 'Tab' + (i + 1);
 
-      tabButton.onclick = function (event) {
-        var tabId = event.currentTarget.getAttribute("data-tab-id");
-        openTabs(event, tabId);
-      };
+var newTab = document.createElement('li');
+newTab.className = 'tablinks-li';
+newTab.setAttribute('data-tab-id', tabId);
+newTab.onclick = createTabClickHandler(i + 1);
+newTab.innerHTML = tabName;
 
-      tabsContainer.appendChild(tabButton);
-    }
-  }
+tabList.appendChild(newTab);
+
+var tabContent = document.createElement('div');
+tabContent.id = tabId;
+tabContent.className = 'tabcontent';
+if (i === 0) {
+  tabContent.style.display = 'block';
+  newTab.classList.add('active');
+} else {
+  tabContent.style.display = 'none';
+}
+
+var innerDiv = document.createElement('div');
+innerDiv.className = 'editable-div';
+innerDiv.contentEditable = true;
+innerDiv.innerHTML = tabsData.tabContents[i];
+
+tabContent.appendChild(innerDiv);
+
+var tabsContainer = document.querySelector('.tabs');
+tabsContainer.appendChild(tabContent);
+}
 }
 
 
 
-document.getElementById("defaultOpen").click();
+document.getElementById('defaultOpen').click();
 loadTabsContent();
-
 
 
 

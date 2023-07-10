@@ -21,7 +21,7 @@ margin: 0.5em;
   }
   
   .navimg{
-    width: 30px;
+    width: 30px ;
     margin-left: 10px;
   }
   .avatar{
@@ -86,17 +86,33 @@ margin: 0.5em;
   }
 
 #notepad{
-    width: 300px;
+  width: 300px;
     height: 300px;
-    background-color: #E6E6E6;
-    border: 1px solid #14141F;
+    background-color: #3f4458;
+    color: white;
+    border: none;
     position: absolute;
     transform: translate(-50%, -50%);
-    display: none;
     border-radius: 15px;
     overflow: hidden;
  
   }
+
+  .btn-group{
+    background-color: #3f4458;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .btn1{
+    padding: 10px;
+    background-color: #3f4458;
+    color: white;
+    border: none;
+  }
+  
 
   #todo{
     width: 300px;
@@ -190,9 +206,9 @@ margin: 0.5em;
     cursor: move;
   }
   
-  .title {
-    font-weight: 800;
-    font-size: 20px;
+
+  .add-event-header i {
+    font-size: 0.5rem !important;
   
   }
  
@@ -277,9 +293,6 @@ ul li {
 }
 
 
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
 
 
 ul li:hover {
@@ -427,9 +440,9 @@ input {
     .editable-div {
       width: 200px;
       height: 200px;
-      border: 1px solid #ccc;
       padding: 5px;
       font-size: 0.75rem;
+      overflow: auto;
     }
 
     .strikeout {
@@ -438,16 +451,23 @@ input {
     .tab {
       float: left;
       border: 1px solid #ccc;
-      background-color: #f1f1f1;
+      background-color: #3f4458;
       width: 30%;
       height: 200px;
+      overflow: auto;
+
     }
-    
-   
-    .tab button {
+
+    .tab ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tablinks-li {
+      color: white !important;
       display: block;
-      background-color: inherit;
-      color: black;
+      background-color: #3f4458;
       padding: 4px 2px;
       width: 100%;
       border: none;
@@ -456,19 +476,26 @@ input {
       cursor: pointer;
       transition: 0.3s;
       font-size: 8px;
+      box-sizing: border-box;
+    }
+
+    .tablinks-li:hover {
+      background-color: white;
+      color: black !important;
     }
     
- 
-    .tab button:hover {
-      background-color: #ddd;
+    .tablinks-li.active {
+      background-color:white;
+      color: black !important;
     }
     
 
-    .tab button.active {
-      background-color: #ccc;
+    .close-icon {
+      margin-left: 5px;
+      cursor: pointer;
     }
-    
 
+  
     .tabcontent {
       float: left;
       padding: 0px 3px;
