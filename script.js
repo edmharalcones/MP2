@@ -40,6 +40,7 @@ makeDraggable(document.getElementById('todo'));
 makeDraggable(document.getElementById('calculator'));
 makeDraggable(document.getElementById('spotify'));
 makeDraggable(document.getElementById('calendartab'));
+makeDraggable(document.getElementById('timertab'));
 
 // navbuttons
 
@@ -120,6 +121,20 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// background select
+
+function bgselect() {
+  var selectedImage = event.target.src; 
+  document.body.style.backgroundImage = 'url(' + selectedImage + ')';
+  localStorage.setItem('selectedBackground', selectedImage);
+}
+window.addEventListener('load', function() {
+  var selectedBackground = localStorage.getItem('selectedBackground');
+  if (selectedBackground) {
+    document.body.style.backgroundImage = 'url(' + selectedBackground + ')';
+  }
+});
+
 
 // fullscreen
 const fullscreenButton = document.getElementById('fullscreen-button');
@@ -176,12 +191,9 @@ function toggleFullscreen() {
     reset = 1;
     document.getElementById("timer").innerHTML = "00:25:00";
     initialTime = 25 * 60 * 1000;
-    document.getElementById('pomodoro').style.background="#D3D576";
-    document.getElementById('pomodoro').style.color= "#14141F";
-    document.getElementById('sbreak').style.background="transparent";
-    document.getElementById('sbreak').style.color="#E6E6E6";
-    document.getElementById('lbreak').style.background="transparent";
-    document.getElementById('lbreak').style.color="#E6E6E6";
+    document.getElementById('pomodoro').style.color= "purple";
+    document.getElementById('sbreak').style.color="white";
+    document.getElementById('lbreak').style.color="white";
   }
 
   function Sbreak() {
@@ -191,12 +203,9 @@ function toggleFullscreen() {
     reset = 2;
     document.getElementById("timer").innerHTML = "00:05:00";
     initialTime = 5 * 60 * 1000;
-    document.getElementById('sbreak').style.background="#D3D576";
-    document.getElementById('sbreak').style.color= "#14141F";
-    document.getElementById('pomodoro').style.background="transparent";
-    document.getElementById('pomodoro').style.color="#E6E6E6";
-    document.getElementById('lbreak').style.background="transparent";
-    document.getElementById('lbreak').style.color="#E6E6E6";
+    document.getElementById('sbreak').style.color= "purple";
+    document.getElementById('pomodoro').style.color="white";
+    document.getElementById('lbreak').style.color="white";
     
   }
 
@@ -209,12 +218,9 @@ function toggleFullscreen() {
     
     const [hours, minutes, seconds] = longbreak.split(":").map(Number);
     initialTime = (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
-    document.getElementById('lbreak').style.background="#D3D576";
-    document.getElementById('lbreak').style.color="#14141F";
-    document.getElementById('pomodoro').style.background="transparent";
-    document.getElementById('pomodoro').style.color="#E6E6E6";
-    document.getElementById('sbreak').style.background="transparent";
-    document.getElementById('sbreak').style.color="#E6E6E6";
+    document.getElementById('lbreak').style.color="purple";
+    document.getElementById('pomodoro').style.color="white";
+    document.getElementById('sbreak').style.color="white";
   }
   
   function startTimer() {
@@ -312,67 +318,37 @@ function toggleFullscreen() {
 
   // Todo
 
-  var activeCounter = document.getElementById("activeCounter");
-  var completedCounter = document.getElementById("completedCounter");
+
   
-  // Load data from local storage
   function loadData() {
     var tasks = localStorage.getItem("tasks");
-    var activeCount = localStorage.getItem("activeCount");
-    var completedCount = localStorage.getItem("completedCount");
   
     if (tasks) {
       document.getElementById("myUL").innerHTML = tasks;
     }
   
-    if (activeCount) {
-      activeCounter.textContent = activeCount;
-    }
-  
-    if (completedCount) {
-      completedCounter.textContent = completedCount;
-    }
-  
-    attachEventListeners(); // Attach event listeners to the loaded li elements
+    attachEventListeners(); // Move attachEventListeners() here
   }
   
-  // Save data to local storage
   function saveData() {
     var tasks = document.getElementById("myUL").innerHTML;
-    var activeCount = activeCounter.textContent;
-    var completedCount = completedCounter.textContent;
   
     localStorage.setItem("tasks", tasks);
-    localStorage.setItem("activeCount", activeCount);
-    localStorage.setItem("completedCount", completedCount);
   }
   
   function updateCounters(decrementActiveCount) {
     var tasks = document.getElementsByTagName("LI");
-    var activeCount = 0;
     var completedCount = 0;
   
     for (var i = 0; i < tasks.length; i++) {
       if (tasks[i].classList.contains("checked")) {
         completedCount++;
-      } else {
-        activeCount++;
       }
     }
   
-    if (decrementActiveCount) {
-      activeCount--; // Decrement the active count by 1 if specified
-    }
-  activeCounter.textContent = activeCount;
-  completedCounter.textContent = completedCount;
-
-  if (tasks.length === 0) {
-    activeCounter.textContent = 0;
-    completedCounter.textContent = 0;
+    saveData();
   }
-
-  saveData();
-}
+  
   function newElement() {
     var li = document.createElement("li");
     var inputValue = document.getElementById("myInput").value;
@@ -383,7 +359,7 @@ function toggleFullscreen() {
       alert("You must write something!");
     } else {
       document.getElementById("myUL").appendChild(li);
-      updateCounters(-1);
+      updateCounters();
     }
   
     document.getElementById("myInput").value = "";
@@ -397,11 +373,6 @@ function toggleFullscreen() {
     span.onclick = function () {
       var div = this.parentElement;
       div.remove();
-      updateCounters();
-    };
-  
-    li.onclick = function () {
-      this.classList.toggle("checked");
       updateCounters();
     };
   }
@@ -423,12 +394,9 @@ function toggleFullscreen() {
     }
   }
   
-  // Load data on page load
   window.onload = function () {
     loadData();
   };
-
-
   
 // notepad
 

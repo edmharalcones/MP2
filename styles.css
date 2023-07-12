@@ -1,5 +1,7 @@
 body{
   background-image: url('resources/background.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 input::-webkit-outer-spin-button,
@@ -85,6 +87,13 @@ margin: 0.5em;
     display: none;
   }
 
+  .theme {
+    width: 30%;
+    height: auto;
+    margin: 10px;
+ 
+  }
+
 #notepad{
   width: 300px;
     height: 300px;
@@ -154,6 +163,20 @@ margin: 0.5em;
  
   }
 
+  #timertab {
+    width: 410px;
+    height: 125px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: black;
+    padding: 10px;
+ 
+  }
+#pomodoro{
+  color: purple;
+}
 
   #myUL {
     max-height: 200px; 
@@ -179,7 +202,10 @@ margin: 0.5em;
     background-color: #14141F; 
   }
   
-
+h5{
+  font-weight: 700;
+  color: white;
+}
   #notepad {
     left: 80%;
     top: 30%;
@@ -198,6 +224,11 @@ margin: 0.5em;
     left: 75%;
     top: 70%;
   } 
+
+  #timertab {
+    left: 50%;
+    top: 40%;
+  }
 
  
   
@@ -224,18 +255,13 @@ body {
 height:100%;
 }
 
-.wrapper {
-width: 800px;
-margin: 30px auto;
-text-align:center;
-padding-top: 15%;
-}
+
 
 h1{
   font-family: 'Roboto', sans-serif;
-  font-weight: 100;
+  font-weight: 800;
   font-size: 3em;
-  color: #E6E6E6;
+  color: purple;
 
 
 }

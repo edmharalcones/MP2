@@ -32,18 +32,48 @@
             <a class="dropdown-item" href="#" id="file-link" onclick="triggerFileInput()">Profile picture</a>
             <input id="input-file" class="upload-image" onchange="changeImage()" type="file" name="changeavatar" accept="image/jpeg, image/png">
             <a class="dropdown-item" href="pricing.html" target="_blank">Subscription</a>
+            <a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#bgselect">Theme</a>
           </div>
         </div>
       </div>
     </div>
+    <div class="modal" id="bgselect">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <!-- Modal header -->
+              <div class="modal-header">Select a Theme
+                <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"></button>  
+                  
+              </div>
+              <!-- Modal Body -->
+              <div class="modal-body" style="overflow: auto;">
+              <div class="d-flex row" style="flex-wrap: wrap; justify-content: center; align-items: center; box-sizing: border-box;">
+            <img src="resources/themes/theme1.png" class="theme" onclick="bgselect()">
+            <img src="resources/themes/theme2.png" class="theme" onclick="bgselect()">
+            <img src="resources/themes/theme3.png" class="theme" onclick="bgselect()">
+            <img src="resources/themes/theme4.png" class="theme" onclick="bgselect()">
+            <img src="resources/themes/theme5.png" class="theme" onclick="bgselect()">
+            <img src="resources/themes/theme6.png" class="theme" onclick="bgselect()">
+             </div>
+              
+              
+              <!-- Modal Footer -->
+              <div class="modal-footer">
+                  
+              </div>
+          </div>
+      </div>
+  </div> 
+  </div>
   </nav>
+  
   <img src="resources/nav/calculator.png" class="navimg" role="button" style="position: absolute; top: 60%;"  onclick="calcbtn()">
   <img src="resources/nav/weather.png" class="navimg" style="position: absolute; top: 65%;" >
   <img src="resources/nav/calendar.png" class="navimg" style="position: absolute; top: 70%;" onclick="calendarbtn()" >
   <img src="resources/nav/todo.png" class="navimg" role="button"  style="position: absolute; top: 75%;" onclick="todobtn()">
   <img src="resources/nav/notes.png" class="navimg" role="button" style="position: absolute; top: 80%;"  onclick="notepadbtn()">
   <img src="resources/nav/spotify.png" class="navimg" role="button" style="position: absolute; top: 85%;" onclick="spotifybtn()">
-  <i role="button" id="fullscreen-button" style="position: absolute; top: 95%; left: 95%; color: white;" class="fa-sharp fa-solid fa-expand"></i> 
+  <i role="button" id="fullscreen-button" style="position: absolute; top: 90%; left: 95%; color: white;" class="fa-sharp fa-solid fa-expand"></i> 
   <!-- notepad -->
    <div id="notepad" class="draggable">
     <div class="title-bar">
@@ -78,10 +108,6 @@
     <div id="todo" class="draggable">
       <div class="title-bar">
         <span class="title">To do</span>
-        <div class="counter">
-          Completed <span id="completedCounter">0</span> /
-          <span id="activeCounter">0</span> 
-        </div>
       </div>
      
       <div class="content">
@@ -143,45 +169,49 @@
     </div>
 
 <!-- Timer -->
-    <div class="wrapper">
-      <button class="timerbtn" id="pomodoro" onclick="Pomodoro()">Pomodoro</button>
-      <button class="timerbtn" id="sbreak" onclick="Sbreak()">Short Break</button>
-      <button class="timerbtn" id="lbreak" onclick="Lbreak()">Long Break</button>
-      <h1 id="timer">00:25:00</h1>
-      <button class="timerbtn" onclick="startTimer()">Start</button>
-      <br>
-      <div class="d-flex justify-content-center">
-      <input type="image" class="timerimgbtn" onclick="resetTimer()" src="resources/icons/reset.png">
-      <input type="image" class="timerimgbtn" data-bs-toggle="modal" data-bs-target="#settings" src="resources/icons/settings.png">
+<div id="timertab" class="draggable">
+  <div class="title-bar">
+  </div>
+  <div class="d-flex justify-content-start" >
+    <h5 id="pomodoro" onclick="Pomodoro()" style="margin-right: 5%;">Pomodoro</h5>
+    <h5 id="sbreak" onclick="Sbreak()" style="margin-right: 5%;">Short Break</h5>
+    <h5 id="lbreak" onclick="Lbreak()" style="margin-right: 5%;">Long Break</h5>
+  </div>
+    <div class="d-flex">
+      <h1 id="timer" style="margin-right: 5%;">00:25:00</h1>
+      <i class="fa-solid fa-play fa-2x" style="color: white; align-self: center; margin-right: 5%;"onclick="startTimer()" ></i>
+      <i class="fa-solid fa-arrow-rotate-right fa-2x" style="color: white; align-self: center; margin-right: 5%;"onclick="resetTimer()"></i>
+      <i class="fa-solid fa-gear fa-2x" style="color: white; align-self: center; margin-right: 5%;" data-bs-toggle="modal" data-bs-target="#settings"></i>
      </div>
-      </div> 
-      <div class="modal" id="settings">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal header -->
-                <div class="modal-header">
-                  <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"></button>  
-                    
-                </div>
-                <!-- Modal Body -->
-                <div class="modal-body">
-                <div class="row">
-               <div class="d-flex justify-content-center" style="margin-bottom: 10px;">
-                <label for="SetLongBreak">Set longbreak in minutes</label>
-                 <input type="number" id="SetLongBreak" placeholder="60">
-                 <button class="btn btn-submit" id="SubmitLongBreak"  data-bs-dismiss="modal" onclick="LongBreakbtn()"> Submit</button>  
-               </div>
-                </div>
-                </div>
+   
+   
+  </div>
+  <div class="modal" id="settings">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+              <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"></button>  
                 
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    
-                </div>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+            <div class="row">
+           <div class="d-flex justify-content-center" style="margin-bottom: 10px;">
+            <label for="SetLongBreak">Set longbreak in minutes</label>
+             <input type="number" id="SetLongBreak" placeholder="60">
+             <button class="btn btn-submit" id="SubmitLongBreak"  data-bs-dismiss="modal" onclick="LongBreakbtn()"> Submit</button>  
+           </div>
+            </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                
             </div>
         </div>
-    </div> 
-
+    </div>
+</div> 
     <!-- Calendar -->
 
     <div id="calendartab" class="draggable">
