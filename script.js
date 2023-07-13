@@ -329,39 +329,18 @@ function toggleFullscreen() {
   // Todo
 
 
-  
-  var myNodelist = document.getElementsByTagName("LI");
-  var i;
-  for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span);
-  }
-  
-  // Click on a close button to hide the current list item
-  var close = document.getElementsByClassName("close");
-  var i;
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.remove();
-    };
-  }
-  // Add a "checked" symbol when clicking on a list item
   var list = document.querySelector('ul#myUL');
   list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
       var listItem = ev.target;
       listItem.classList.toggle('checked');
       if (listItem.classList.contains('checked')) {
-        list.appendChild(listItem); // Move checked item to the last position
+        list.appendChild(listItem); 
       }
     }
   }, false);
   
-  // Create a new list item when clicking on the "Add" button
+
   function newElement() {
     var li = document.createElement("li");
     var inputValue = document.getElementById("myInput").value;
@@ -381,40 +360,79 @@ function toggleFullscreen() {
     span.appendChild(txt);
     li.appendChild(span);
   
-    for (i = 0; i < close.length; i++) {
-      close[i].onclick = function() {
-        var div = this.parentElement;
-        div.remove();
-      };
+    span.onclick = function() {
+      var div = this.parentElement;
+      var taskText = div.firstChild.textContent.trim();
+      div.remove();
+      removeTaskFromLocalStorage(taskText);
+    };
+    }
+  
+
+ 
+
+  function saveListToLocalStorage() {
+    var myUl = document.getElementById("myUL");
+    var topLi = myUl.querySelector("li:last-child"); 
+    if (topLi) {
+      var listItemText = topLi.textContent.trim(); 
+  
+    
+      var existingItems = localStorage.getItem("tasks");
+      var listItems = [];
+  
+      if (existingItems) {
+
+        listItems = JSON.parse(existingItems);
+      }
+
+      listItems.push(listItemText);
+      localStorage.setItem("tasks", JSON.stringify(listItems));
     }
   }
 
-  function saveListToLocalStorage() {
+  function removeTaskFromLocalStorage(taskText) {
+    var existingItems = localStorage.getItem("tasks");
     var listItems = [];
-    var myUl = document.getElementById("myUL");
-    var myNodelist = myUl.querySelectorAll("li"); // Select only li elements under the specific ul
-    for (var i = 0; i < myNodelist.length; i++) {
-      listItems.push(myNodelist[i].textContent);
+  
+    if (existingItems) {
+      listItems = JSON.parse(existingItems);
     }
-    localStorage.setItem("tasks", JSON.stringify(listItems)); // Store listItems instead of tasks
+  
+    var index = listItems.indexOf(taskText);
+  
+    if (index > -1) {
+      listItems.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(listItems));
+    }
   }
   function loadListFromLocalStorage() {
     var tasks = localStorage.getItem("tasks");
     if (tasks) {
       tasks = JSON.parse(tasks);
       var ul = document.getElementById("myUL");
-      ul.innerHTML = ""; // Clear existing list items
+      ul.innerHTML = ""; 
       for (var i = 0; i < tasks.length; i++) {
         var li = document.createElement("li");
-        li.appendChild(document.createTextNode(tasks[i]));
+        li.innerHTML = tasks[i] + '<span class="close">x</span>';
         ul.appendChild(li);
       }
     }
   }
-
   window.addEventListener("load", function() {
     loadListFromLocalStorage();
+
+    var close = document.getElementsByClassName("close");
+    for (var i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
+        var li = this.parentElement;
+        li.remove();
+        removeTaskFromLocalStorage(taskText);
+      };
+    }
   });
+
+
 
 // notepad
 
@@ -662,6 +680,7 @@ tabsContainer.appendChild(tabContent);
 
 document.getElementById('defaultOpen').click();
 loadTabsContent();
+
 
 
 
