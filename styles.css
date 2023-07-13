@@ -170,6 +170,7 @@ margin: 0.5em;
     transform: translate(-50%, -50%);
     border-radius: 15px;
     overflow: hidden;
+    display: none;
     background-color: black;
     padding: 10px;
  

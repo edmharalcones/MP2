@@ -53,6 +53,16 @@ function notepadbtn() {
   }
 }
 
+function timerbtn() {
+  var NotepadView = document.getElementById("timertab");
+  if (NotepadView.style.display === "block") {
+    NotepadView.style.display = "none";
+  } else {
+    NotepadView.style.display = "block";
+  }
+}
+
+
 function todobtn() {
   var TodoView = document.getElementById("todo");
   if (TodoView.style.display === "block") {
@@ -320,48 +330,49 @@ function toggleFullscreen() {
 
 
   
-  function loadData() {
-    var tasks = localStorage.getItem("tasks");
-  
-    if (tasks) {
-      document.getElementById("myUL").innerHTML = tasks;
-    }
-  
-    attachEventListeners(); // Move attachEventListeners() here
+  var myNodelist = document.getElementsByTagName("LI");
+  var i;
+  for (i = 0; i < myNodelist.length; i++) {
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    myNodelist[i].appendChild(span);
   }
   
-  function saveData() {
-    var tasks = document.getElementById("myUL").innerHTML;
-  
-    localStorage.setItem("tasks", tasks);
+  // Click on a close button to hide the current list item
+  var close = document.getElementsByClassName("close");
+  var i;
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.remove();
+    };
   }
-  
-  function updateCounters(decrementActiveCount) {
-    var tasks = document.getElementsByTagName("LI");
-    var completedCount = 0;
-  
-    for (var i = 0; i < tasks.length; i++) {
-      if (tasks[i].classList.contains("checked")) {
-        completedCount++;
+  // Add a "checked" symbol when clicking on a list item
+  var list = document.querySelector('ul#myUL');
+  list.addEventListener('click', function(ev) {
+    if (ev.target.tagName === 'LI') {
+      var listItem = ev.target;
+      listItem.classList.toggle('checked');
+      if (listItem.classList.contains('checked')) {
+        list.appendChild(listItem); // Move checked item to the last position
       }
     }
+  }, false);
   
-    saveData();
-  }
-  
+  // Create a new list item when clicking on the "Add" button
   function newElement() {
     var li = document.createElement("li");
     var inputValue = document.getElementById("myInput").value;
     var t = document.createTextNode(inputValue);
     li.appendChild(t);
-  
-    if (inputValue === "") {
+    if (inputValue === '') {
       alert("You must write something!");
     } else {
       document.getElementById("myUL").appendChild(li);
-      updateCounters();
+      saveListToLocalStorage(); 
     }
-  
     document.getElementById("myInput").value = "";
   
     var span = document.createElement("SPAN");
@@ -370,34 +381,41 @@ function toggleFullscreen() {
     span.appendChild(txt);
     li.appendChild(span);
   
-    span.onclick = function () {
-      var div = this.parentElement;
-      div.remove();
-      updateCounters();
-    };
-  }
-  
-  function attachEventListeners() {
-    var lis = document.getElementsByTagName("li");
-    for (var i = 0; i < lis.length; i++) {
-      var span = lis[i].querySelector(".close");
-      span.onclick = function () {
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function() {
         var div = this.parentElement;
         div.remove();
-        updateCounters();
-      };
-  
-      lis[i].onclick = function () {
-        this.classList.toggle("checked");
-        updateCounters();
       };
     }
   }
-  
-  window.onload = function () {
-    loadData();
-  };
-  
+
+  function saveListToLocalStorage() {
+    var listItems = [];
+    var myUl = document.getElementById("myUL");
+    var myNodelist = myUl.querySelectorAll("li"); // Select only li elements under the specific ul
+    for (var i = 0; i < myNodelist.length; i++) {
+      listItems.push(myNodelist[i].textContent);
+    }
+    localStorage.setItem("tasks", JSON.stringify(listItems)); // Store listItems instead of tasks
+  }
+  function loadListFromLocalStorage() {
+    var tasks = localStorage.getItem("tasks");
+    if (tasks) {
+      tasks = JSON.parse(tasks);
+      var ul = document.getElementById("myUL");
+      ul.innerHTML = ""; // Clear existing list items
+      for (var i = 0; i < tasks.length; i++) {
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(tasks[i]));
+        ul.appendChild(li);
+      }
+    }
+  }
+
+  window.addEventListener("load", function() {
+    loadListFromLocalStorage();
+  });
+
 // notepad
 
 function makeBold() {
