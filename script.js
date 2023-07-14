@@ -192,6 +192,10 @@ function toggleFullscreen() {
   let reset = 1;
   let longbreak = "00:60:00";
 
+  $('#start').click(function() {
+    $(this).toggleClass('fa-solid fa-pause fa-2x');
+    $(this).toggleClass('fa-solid fa-play fa-2x');
+});
   
 
   function Pomodoro() {
@@ -238,6 +242,10 @@ function toggleFullscreen() {
       targetTime = new Date().getTime() + initialTime - 1000; 
       countdown = setInterval(updateCountdown, 1000);
       paused = false;
+    }else {
+      clearInterval(countdown);
+      countdown = null;
+      paused = true;
     }
   }
 
@@ -461,13 +469,13 @@ function makeStrikethrough() {
   saveTabsContent();
 }
 function printTab() {
-  var activeTabButton = document.querySelector('.tablinks.active');
+  var activeTabButton = document.querySelector('.tablinks-li.active');
   var activeTabId = activeTabButton.getAttribute('data-tab-id');
   var activeTabContent = document.getElementById(activeTabId);
   var divContents = activeTabContent.querySelector('.editable-div').innerHTML;
   var tabName = activeTabButton.textContent.trim();
 
-  var printWindow = window.open('', '', 'height=500,width=500');
+  var printWindow = window.open('', '', 'height=800,width=800');
   printWindow.document.write('<html>');
   printWindow.document.write('<body>');
   printWindow.document.write('<h1>Tab content for: ' + tabName + '</h1><br>');

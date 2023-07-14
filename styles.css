@@ -1,7 +1,28 @@
 body{
   background-image: url('resources/background.png');
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+
+
+}
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("img_girl.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 input::-webkit-outer-spin-button,
@@ -28,11 +49,12 @@ margin: 0.5em;
   }
   .avatar{
     width: 40px;
-    margin-left: 10px;
     border-radius: 25px;
   }
 
-
+.dropdown-item{
+  cursor: pointer;
+}
   
   .navimg:hover {
     
@@ -43,31 +65,33 @@ margin: 0.5em;
     
   }
 
+.nav-link {
+  padding: 0px;
+  color:white;
 
+}
   
   .navbar-brands{
     display: block;
     position: relative;
-    width: 40%;
-    left: 2%;
     height: auto;
   }
   
   .logo{
-    width: 30%;
+    width: 20%;
     height: auto;
   }
   
   @media screen and (max-width: 600px) {
     .logo{
-      width: 100%;
+      width: 30%;
     
     }
   }
   
   .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
   
@@ -214,22 +238,27 @@ h5{
 
   #spotify {
     left: 50%;
-    top: 30%;
+    top: 40%;
   }
   #todo {
-    left: 20%;
-    top: 70%;
+    left: 50%;
+    top: 75%;
   } 
 
   #calculator {
-    left: 75%;
-    top: 70%;
+    left: 70%;
+    top: 75%;
   } 
 
   #timertab {
     left: 50%;
-    top: 40%;
+    top: 20%;
   }
+
+  #calendartab {
+    left: 20%;
+    top: 40%;
+  } 
 
  
   
@@ -1034,10 +1063,7 @@ ul li.checked::before {
         display: none;
         padding: 1px;
         }
-       #calendartab {
-        left: 20%;
-        top: 40%;
-      } 
+
       .add-event-btn{
         font-size: 0.5rem;
       }
