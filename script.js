@@ -1,3 +1,28 @@
+const signupcheck = (localStorage.getItem('signupname') !== null);
+let signinavatar = document.getElementById('avatar');
+let signinchecker = document.getElementById('signin');
+if (signupcheck)  {
+  var signupname = localStorage.getItem("signupname");
+  signinchecker.innerHTML = "Hi <span id='user'></span> !";
+  document.getElementById("user").textContent = signupname;
+}else{
+  signinchecker.innerText = "Sign up";
+  signinavatar.src="resources/login.png";
+  signinavatar.style.borderRadius="0px";
+  signinavatar.removeAttribute('data-bs-toggle');
+  $('.navimg').removeAttr('onclick')
+  $( ".navimg" ).on( "click", function() {
+    alert( "Sign in is required." );
+  } );
+  signinavatar.onclick=function() {
+    window.location.replace('SignIn.html');
+  }
+  $(document).ready(function(){
+    $("#tutorial").modal('show');
+});
+
+}
+
 
 function makeDraggable(element) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -44,6 +69,8 @@ makeDraggable(document.getElementById('timertab'));
 
 // navbuttons
 
+let windowcheck = 0;
+
 function notepadbtn() {
   var NotepadView = document.getElementById("notepad");
   if (NotepadView.style.display === "block") {
@@ -54,11 +81,11 @@ function notepadbtn() {
 }
 
 function timerbtn() {
-  var NotepadView = document.getElementById("timertab");
-  if (NotepadView.style.display === "block") {
-    NotepadView.style.display = "none";
+  var TimerdView = document.getElementById("timertab");
+  if (TimerdView.style.display === "block") {
+    TimerdView.style.display = "none";
   } else {
-    NotepadView.style.display = "block";
+    TimerdView.style.display = "block";
   }
 }
 
@@ -91,11 +118,11 @@ function spotifybtn() {
 }
 
 function calendarbtn() {
-  var SpotifyView = document.getElementById("calendartab");
-  if (SpotifyView.style.display === "block") {
-    SpotifyView.style.display = "none";
+  var CalendarView = document.getElementById("calendartab");
+  if (CalendarView.style.display === "block") {
+    CalendarView.style.display = "none";
   } else {
-    SpotifyView.style.display = "block";
+    CalendarView.style.display = "block";
   }
 }
 

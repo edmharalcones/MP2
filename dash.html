@@ -17,31 +17,90 @@
     <title>Focusd</title>
 </head>
 <body>
+  <div class="modal" id="tutorial">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal header -->
+        <div class="modal-header">Welcome to Focusd!
+          <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <!-- Modal Body -->
+        <div class="modal-body" style="overflow: auto;">
+          <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="resources/steps/step1.png" class="d-block w-100" alt="...">
+                
+              </div>
+              <div class="carousel-item">
+                <img src="resources/steps/step2.png" class="d-block w-100" alt="...">
+              
+              </div>
+              <div class="carousel-item">
+                <img src="resources/steps/step3.png" class="d-block w-100" alt="...">
+              
+              </div>
+              <div class="carousel-item">
+                <img src="resources/steps/step4.png" class="d-block w-100" alt="...">
+              
+              </div>
+
+              <div class="carousel-item">
+                <img src="resources/steps/step5.png" class="d-block w-100" alt="...">
+              
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
   <nav class="navbar navbar-expand-lg">
     <div class="container" style="background-color: transparent;" !important>
-      <div class="navbar-brands d-flex justify-content-start" >
-        <a class="nav-link" href="index.html" >ABOUT</a>
+      <div class="navbar-brands d-flex justify-content-start">
+        <a class="nav-link" href="index.html">ABOUT</a>
       </div>
-      <div class="navbar-brands d-flex justify-content-center" >
-        <img src="resources/logo.png" class="logo" >
+      <div class="navbar-brands d-flex justify-content-center">
+        <img src="resources/logo.png" class="logo">
       </div>
       <div class="row">
-        <div class="co-6">
-      <p>Hi <span></span>!</p>
-      <div class="col navbar-profile">
-      </div>
-        <div class="dropdown">
-          <img id="avatar" src="resources/profile.png" class="avatar dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-          <div id="myDropdown" class="dropdown-menu dropdown-menu-dark" >
-            <a class="dropdown-item" href="#" id="file-link" onclick="triggerFileInput()">Profile picture</a>
-            <input id="input-file" class="upload-image" onchange="changeImage()" type="file" name="changeavatar" accept="image/jpeg, image/png">
-            <a class="dropdown-item" href="pricing.html" target="_blank">Subscription</a>
-            <a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#bgselect">Theme</a>
+        <div class="col-12">
+          <div class="d-flex align-items-center">
+            <p style="margin-right: 10px;" id="signin">Hi <span id="user"></span>!</p>
+            <div class="dropdown">
+              <img id="avatar" src="resources/profile.png" class="avatar dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div id="myDropdown" class="dropdown-menu dropdown-menu-dark">
+                <a class="dropdown-item" id="file-link" onclick="triggerFileInput()">Profile picture</a>
+                <input id="input-file" class="upload-image" onchange="changeImage()" type="file" name="changeavatar" accept="image/jpeg, image/png">
+                <a class="dropdown-item" href="pricing.html" target="_blank">Subscription</a>
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#bgselect">Theme</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
     <div class="modal" id="bgselect">

@@ -12,18 +12,6 @@ body, html {
   margin: 0;
 }
 
-.bg {
-  /* The image used */
-  background-image: url("img_girl.jpg");
-
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -78,13 +66,14 @@ margin: 0.5em;
   }
   
   .logo{
-    width: 20%;
-    height: auto;
+    width: auto;
+    height: 100px;
   }
   
   @media screen and (max-width: 600px) {
     .logo{
-      width: 30%;
+      width: auto;
+      height: 50px;
     
     }
   }
@@ -93,6 +82,7 @@ margin: 0.5em;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
   
   .navbar-profile {
@@ -116,6 +106,35 @@ margin: 0.5em;
     height: auto;
     margin: 10px;
  
+  }
+
+  .carousel .carousel-indicators button{
+    background-color: purple;
+    color: purple;
+  }
+
+
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    outline: black;
+    background-size: 100%, 100%;
+    background-image: none;
+  }
+  
+  .carousel-control-next-icon:after
+  {
+    content: '>';
+    font-size: 55px;
+    color: purple;
+  }
+  
+  .carousel-control-prev-icon:after {
+    content: '<';
+    font-size: 55px;
+    color: purple;
   }
 
 #notepad{
