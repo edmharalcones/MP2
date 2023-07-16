@@ -23,6 +23,10 @@ if (signupcheck)  {
 
 }
 
+// lightdarkmode
+
+
+
 
 function makeDraggable(element) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -69,63 +73,177 @@ makeDraggable(document.getElementById('timertab'));
 
 // navbuttons
 
-let windowcheck = 0;
+const savedBgColor = localStorage.getItem('bgColor');
+const savedTextColor = localStorage.getItem('textColor');
+document.documentElement.style.setProperty('--bgcolor', savedBgColor || 'white');
+document.documentElement.style.setProperty('--textcolor', savedTextColor || 'black');
+var checked = JSON.parse(localStorage.getItem('lightdark'));
+document.getElementById('lightdark').checked = checked;
+function handleThemeCheckChange() {
+  var checkbox = document.getElementById('lightdark');
+  document.getElementById('lightdark').checked = checkbox.checked;
+  localStorage.setItem('lightdark', checkbox.checked);
+}
+
+document.getElementById('lightdark').addEventListener('change', handleThemeCheckChange);
+
+function coloswitchbtn(){
+  var coloswitch=document.getElementById('lightdark');
+  if (coloswitch.checked == true){
+    document.getElementById('lightdarklabel').innerHTML='Dark mode';
+    document.documentElement.style.setProperty('--bgcolor','black');
+    document.documentElement.style.setProperty('--textcolor','white');
+    localStorage.setItem('bgColor', 'black');
+    localStorage.setItem('textColor', 'white');
+  }
+  else{
+    document.getElementById('lightdarklabel').innerHTML='Light mode';
+    document.documentElement.style.setProperty('--bgcolor','white');
+    document.documentElement.style.setProperty('--textcolor','black');
+    localStorage.setItem('bgColor', 'white');
+    localStorage.setItem('textColor', 'black');
+  }
+}
+
+var activeFunction = null;
 
 function notepadbtn() {
   var NotepadView = document.getElementById("notepad");
+  if (window.innerWidth < 600) {
+
+    if (activeFunction !== "notepad") {
+      hideActiveFunction();
+      NotepadView.style.display = "block";
+      activeFunction = "notepad";
+    } else {
+      NotepadView.style.display = "none";
+      activeFunction = null;
+    }
+  } else{
   if (NotepadView.style.display === "block") {
     NotepadView.style.display = "none";
   } else {
     NotepadView.style.display = "block";
   }
 }
+}
 
 function timerbtn() {
   var TimerdView = document.getElementById("timertab");
+  if (window.innerWidth < 600) {
+    if (activeFunction !== "timertab") {
+      hideActiveFunction();
+      TimerdView.style.display = "block";
+      activeFunction = "timertab";
+    } else {
+      TimerdView.style.display = "none";
+      activeFunction = null;
+    }
+  } else{
   if (TimerdView.style.display === "block") {
     TimerdView.style.display = "none";
   } else {
     TimerdView.style.display = "block";
   }
+  
+  }
 }
-
 
 function todobtn() {
   var TodoView = document.getElementById("todo");
+  if (window.innerWidth < 600) {
+    if (activeFunction !== "todo") {
+      hideActiveFunction();
+      TodoView.style.display = "block";
+      activeFunction = "todo";
+    } else {
+      TodoView.style.display = "none";
+      activeFunction = null;
+    }
+  } else{
   if (TodoView.style.display === "block") {
     TodoView.style.display = "none";
   } else {
     TodoView.style.display = "block";
   }
 }
+}
 
 function calcbtn() {
   var CalculatorView = document.getElementById("calculator");
+  if (window.innerWidth < 600) {
+    if (activeFunction !== "calculator") {
+      hideActiveFunction();
+      CalculatorView.style.display = "block";
+      activeFunction = "calculator";
+    } else {
+      CalculatorView.style.display = "none";
+      activeFunction = null;
+    }
+  }  else{
   if (CalculatorView.style.display === "block") {
     CalculatorView.style.display = "none";
   } else {
     CalculatorView.style.display = "block";
   }
 }
+}
 
 function spotifybtn() {
   var SpotifyView = document.getElementById("spotify");
-  if (SpotifyView.style.display === "block") {
+  if (window.innerWidth < 600) {
+    if (activeFunction !== "spotify") {
+      hideActiveFunction();
+      SpotifyView.style.display = "block";
+      activeFunction = "spotify";
+    } else {
+      SpotifyView.style.display = "none";
+      activeFunction = null;
+    }
+  } else{
+   if (SpotifyView.style.display === "block") {
     SpotifyView.style.display = "none";
   } else {
     SpotifyView.style.display = "block";
   }
 }
+}
 
 function calendarbtn() {
   var CalendarView = document.getElementById("calendartab");
+  if (window.innerWidth < 600) {
+
+    if (activeFunction !== "calendartab") {
+      hideActiveFunction();
+      CalendarView.style.display = "block";
+      activeFunction = "calendartab";
+    } else {
+      CalendarView.style.display = "none";
+      activeFunction = null;
+    }
+  } else {
   if (CalendarView.style.display === "block") {
     CalendarView.style.display = "none";
   } else {
     CalendarView.style.display = "block";
   }
 }
+}
 
+function hideActiveFunction() {
+  if (activeFunction) {
+    var activeView = document.getElementById(activeFunction);
+    activeView.style.display = "none";
+  }
+  
+}
+
+window.addEventListener("resize", function() {
+  if (window.innerWidth >= 600) {
+    hideActiveFunction();
+    activeFunction = null;
+  }
+});
 function triggerFileInput() {
   document.getElementById("input-file").click();
 }
