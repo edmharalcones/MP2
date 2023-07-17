@@ -58,7 +58,7 @@ function handleSignUp(event) {
     if (loginEmail === storedUsername && password === storedPassword) {
       alert('Login successful! Redirecting to homepage...');
       // Perform redirect to the homepage here
-      window.location.href = 'dash.html';
+      window.location.href = 'index.html';
     } else {
       alert('Invalid username or password. Please try again.');
     }
