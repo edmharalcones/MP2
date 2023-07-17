@@ -20,7 +20,17 @@ body, html {
 
 h1, h2, h3, h4, h5, h6, .form-check-label{
   color:var(--primary-clr);
+  font-weight: 800;
 }
+.btn-close{
+  color:var(--primary-clr) !important;
+  background-image: url('data:image/svg+xml;utf8,<svg stroke="purple" stroke-width="4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M1.458 1.458l21.084 21.084m0-21.084L1.458 22.542" /></svg>');
+
+
+}
+
+
+
 .modal-content{
   background-color: var(--bgcolor);
 }
@@ -96,12 +106,11 @@ margin: 0.5em;
   }
   
   .dropdown-menu {
-    
     transform: scale(0.5);
     transform-origin: top left;
-    background-color: black;
   }
 
+ 
   .upload-image{
     display: none;
   }
@@ -114,11 +123,10 @@ margin: 0.5em;
   }
 
   .carousel .carousel-indicators button{
-    background-color: purple;
-    color: purple;
+    background-color:var(--primary-clr);
+    color: var(--primary-clr);
+
   }
-
-
 
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
@@ -133,19 +141,19 @@ margin: 0.5em;
   {
     content: '>';
     font-size: 55px;
-    color: purple;
+    color: var(--primary-clr);
   }
   
   .carousel-control-prev-icon:after {
     content: '<';
     font-size: 55px;
-    color: purple;
+    color: var(--primary-clr);
   }
 
 #notepad{
   width: 300px;
     height: 300px;
-    background-color: #3f4458;
+    background-color: var(--bgcolor);
     color:var(--bgcolor);
     border: none;
     position: absolute;
@@ -157,7 +165,7 @@ margin: 0.5em;
   }
 
   .btn-group{
-    background-color: #3f4458;
+    background-color: var(--bgcolor);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -166,8 +174,8 @@ margin: 0.5em;
 
   .btn1{
     padding: 10px;
-    background-color: #3f4458;
-    color: white;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
     border: none;
   }
   
@@ -175,7 +183,8 @@ margin: 0.5em;
   #todo{
     width: 300px;
     height: 300px;
-    background-color: #E6E6E6;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
     border: 1px solid #14141F;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -188,7 +197,8 @@ margin: 0.5em;
   #calculator {
     width: 225px;
     height: 350px;
-    background-color: #E6E6E6;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
     border: 1px solid #14141F;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -219,7 +229,8 @@ margin: 0.5em;
     border-radius: 15px;
     overflow: hidden;
     display: none;
-    background-color: black;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
     padding: 10px;
  
   }
@@ -227,11 +238,16 @@ margin: 0.5em;
   color: var(--primary-clr);
 }
 
+.timebtn{
+  color:var(--textcolor);
+   align-self: center;
+    margin-right: 5%;
+}
   #myUL {
     max-height: 200px; 
     overflow-y: auto; 
     scrollbar-width: thin; 
-       scrollbar-color: #14141F #E6E6E6;
+    scrollbar-color: #14141F #E6E6E6;
   }
 
 
@@ -253,7 +269,7 @@ margin: 0.5em;
   
 h5{
   font-weight: 700;
-  color: white;
+  color: var(--primary-clr);
 }
   #notepad {
     left: 80%;
@@ -261,16 +277,16 @@ h5{
   }
 
   #spotify {
-    left: 50%;
-    top: 40%;
+    left: 20%;
+    top: 80%;
   }
   #todo {
     left: 50%;
-    top: 75%;
+    top: 50%;
   } 
 
   #calculator {
-    left: 70%;
+    left: 80%;
     top: 75%;
   } 
 
@@ -298,7 +314,14 @@ h5{
     width: 100% !important;
   }
 }
-  
+
+.console{
+  flex-wrap: nowrap;
+  background-color:var(--bgcolor);
+  width: 40%; text-align: center;
+   padding: 10px;
+    border-radius: 10px;
+}
  
   
   .title-bar {
@@ -330,8 +353,7 @@ h1{
   font-family: 'Roboto', sans-serif;
   font-weight: 800;
   font-size: 3em;
-  color: purple;
-
+  color: var(--primary-clr);
 
 }
 
@@ -340,7 +362,7 @@ h1{
 }
 
 .timerbtn {
-  color: #E6E6E6;
+  color: var(--textcolor);
   background: transparent;
 border-radius: 50em;
 border: 2px solid  #D3D576;
@@ -377,7 +399,7 @@ ul li {
   position: relative;
   padding: 12px 8px 12px 40px;
   list-style-type: none;
-  background: #eee;
+  background:var(--bgcolor);
   font-size: 12px;
   transition: 0.2s;
   
@@ -392,12 +414,12 @@ ul li {
 
 
 ul li:hover {
-  background: #ddd;
+  background: var(--primary-clr);
 }
 
 
 ul li.checked {
-  background: #888;
+  background: var(--primary-clr);
   color: #fff;
   text-decoration: line-through;
 }
@@ -485,26 +507,29 @@ ul li.checked::before {
   .calculator-grid > button {
     cursor: pointer;
     font-size: 0.75rem;
-    border: 1px, solid #E6E6E6;
-    outline: none;     
-    border-radius: 50%;
-    color: #E6E6E6;
-    background-color: black;
+    outline: none;   
+    margin: 2px;  
+    border: transparent;
+    border-radius: 10px;
+    color:var(--textcolor);
+    font-weight: 900;
+    background-color: rgba(226, 213, 226, 0.016);
   }
 
-    .calculator-grid > button:hover {
-      background-color: #a9a9a9;
-    }
+  .operation{
+    color: var(--primary-clr) !important;
+  }
 
+ 
     .span-two {
       grid-column: span 2;
-      color: #E6E6E6;
-      background-color: black;
+      background-color: rgba(226, 213, 226, 0.016);
+      color: var(--primary-clr) !important;
     }
 
     .output{
       grid-column: 1 / -1;
-      background-color: #E6E6E6;
+
    
       display: flex;
       align-items: flex-end;
@@ -519,12 +544,12 @@ ul li.checked::before {
     }
 
     .output .previous-operand{
-      color: #14141F!important;
+      color:var(--textcolor);
       font-size: 1rem;
     }
 
     .output .current-operand{
-      color: #14141F!important;
+      color:var(--textcolor);
       font-size: 1rem;
     }
 
@@ -534,6 +559,7 @@ ul li.checked::before {
       width: 200px;
       height: 200px;
       padding: 5px;
+      border: none;
       font-size: 0.75rem;
       overflow: auto;
     }
@@ -543,8 +569,8 @@ ul li.checked::before {
     }
     .tab {
       float: left;
-      border: 1px solid #ccc;
-      background-color: #3f4458;
+      border-right: 3px solid var(--primary-clr);
+      background-color: var(--bgcolor);
       width: 30%;
       height: 200px;
       overflow: auto;
@@ -555,12 +581,13 @@ ul li.checked::before {
       list-style-type: none;
       padding: 0;
       margin: 0;
+      
     }
 
+
     .tablinks-li {
-      color: white !important;
+      color: var(--bgcolor) !important;
       display: block;
-      background-color: #3f4458;
       padding: 4px 2px;
       width: 100%;
       border: none;
@@ -573,13 +600,12 @@ ul li.checked::before {
     }
 
     .tablinks-li:hover {
-      background-color: white;
-      color: black !important;
+      background-color: var(--primary-clr);
     }
     
     .tablinks-li.active {
-      background-color:white;
-      color: black !important;
+      color: var(--textcolor) !important;
+      font-weight: 800;
     }
     
 
@@ -626,7 +652,7 @@ ul li.checked::before {
       margin: 0 auto;
       color: #fff;
       display: flex;
-      background-color: #373c4f;
+      background-color: var(--bgcolor);
     }
     
     .left {
@@ -640,8 +666,8 @@ ul li.checked::before {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      color: #878895;
-      background-color: #fff;
+      color: var(--textcolor);
+      background-color: var(--bgcolor);
       padding: 2px;
       overflow: auto;
     }
@@ -738,7 +764,7 @@ ul li.checked::before {
     .calendar .days .active {
       position: relative;
       font-size: 1rem;
-      color: black;
+      color: var(--textcolor);
       background-color: var(--primary-clr);
     }
     
@@ -767,7 +793,7 @@ ul li.checked::before {
       max-height: 0;
       overflow: hidden;
       border-radius: 5px;
-      background-color: #fff;
+      background-color:var(--bgcolor);
       transform: translateX(-50%);
       transition: max-height 0.5s ease;
     }
@@ -783,7 +809,7 @@ ul li.checked::before {
       align-items: center;
       justify-content: space-between;
       padding: 0 5px;
-      color: #373c4f;
+      color: var(--primary-clr);
       border-bottom: 1px solid #f5f5f5;
     }
     .add-event-header .close {
@@ -822,10 +848,10 @@ ul li.checked::before {
       padding: 0 1px;
       font-size: 0.5rem;
       font-weight: 400;
-      color: #373c4f;
+      color:var(--primary-clr);
     }
     .add-event-body .add-event-input input::placeholder {
-      color: #a5a5a5;
+      color: var(--primary-clr);
     }
     .add-event-body .add-event-input input:focus {
       border-bottom: 1px solid var(--primary-clr);
@@ -962,13 +988,14 @@ ul li.checked::before {
       text-transform: capitalize;
     }
     .right .today-date .event-day {
-      font-size: 0.5rem;
-      font-weight: 500;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--textcolor);
     }
     .right .today-date .event-date {
-      font-size: 0.5rem;
-      font-weight: 400;
-      color: #878895;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary-clr);
     }
     
     .events {
@@ -992,7 +1019,7 @@ ul li.checked::before {
       padding: 0 20px;
     
       color: #fff;
-      background: linear-gradient(90deg, #3f4458, transparent);
+      background: linear-gradient(90deg, var(--primary-clr), transparent);
       cursor: pointer;
     }
     
@@ -1020,12 +1047,12 @@ ul li.checked::before {
     .events .event .event-time {
       font-size: 0.5rem;
       font-weight: 400;
-      color: #878895;
+      color: var(--bgcolor);
       margin-left: 15px;
       pointer-events: none;
     }
     .events .event:hover .event-time {
-      color: #fff;
+      color: var(--textcolor);
     }
     
     .events .event::after {
@@ -1067,7 +1094,7 @@ ul li.checked::before {
       right: 10px;
       background: transparent;
       border: none;
-      color: #fff;
+      color: var(--textcolor);
       cursor: pointer;
     }
     .add-event:hover {
@@ -1087,12 +1114,12 @@ ul li.checked::before {
       justify-content: center;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #878895;
+      color: var(--textcolor);
     }
         #calendartab {
           width: 500px;
           height: 400px;
-          background-color: #373c4f;  
+          background-color: var(--bgcolor);  
           position: absolute;
         transform: translate(-50%, -50%);
         border-radius: 15px;

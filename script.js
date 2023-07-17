@@ -87,7 +87,7 @@ function handleThemeCheckChange() {
 
 document.getElementById('lightdark').addEventListener('change', handleThemeCheckChange);
 
-function coloswitchbtn(){
+function colorswitchbtn(){
   var coloswitch=document.getElementById('lightdark');
   if (coloswitch.checked == true){
     document.getElementById('lightdarklabel').innerHTML='Dark mode';
@@ -104,7 +104,7 @@ function coloswitchbtn(){
     localStorage.setItem('textColor', 'black');
   }
 }
-
+window.addEventListener('DOMContentLoaded', colorswitchbtn);
 var activeFunction = null;
 
 function notepadbtn() {
@@ -341,8 +341,9 @@ function toggleFullscreen() {
     $(this).toggleClass('fa-solid fa-pause fa-2x');
     $(this).toggleClass('fa-solid fa-play fa-2x');
 });
-  
-
+const styles = getComputedStyle(document.documentElement);
+const bgset = styles.getPropertyValue('--primary-clr');
+const bgset1= styles.getPropertyValue('--textcolor');
   function Pomodoro() {
     clearInterval(countdown);
     countdown = null;
@@ -350,9 +351,9 @@ function toggleFullscreen() {
     reset = 1;
     document.getElementById("timer").innerHTML = "00:25:00";
     initialTime = 25 * 60 * 1000;
-    document.getElementById('pomodoro').style.color= "purple";
-    document.getElementById('sbreak').style.color="white";
-    document.getElementById('lbreak').style.color="white";
+    document.getElementById('pomodoro').style.color= bgset;
+    document.getElementById('sbreak').style.color=bgset1;
+    document.getElementById('lbreak').style.color=bgset1;
   }
 
   function Sbreak() {
@@ -362,9 +363,9 @@ function toggleFullscreen() {
     reset = 2;
     document.getElementById("timer").innerHTML = "00:05:00";
     initialTime = 5 * 60 * 1000;
-    document.getElementById('sbreak').style.color= "purple";
-    document.getElementById('pomodoro').style.color="white";
-    document.getElementById('lbreak').style.color="white";
+    document.getElementById('sbreak').style.color= bgset;
+    document.getElementById('pomodoro').style.color=bgset1;
+    document.getElementById('lbreak').style.color=bgset1;
     
   }
 
@@ -377,9 +378,9 @@ function toggleFullscreen() {
     
     const [hours, minutes, seconds] = longbreak.split(":").map(Number);
     initialTime = (hours * 60 * 60 + minutes * 60 + seconds) * 1000;
-    document.getElementById('lbreak').style.color="purple";
-    document.getElementById('pomodoro').style.color="white";
-    document.getElementById('sbreak').style.color="white";
+    document.getElementById('lbreak').style.color=bgset;
+    document.getElementById('pomodoro').style.color=bgset1;
+    document.getElementById('sbreak').style.color=bgset1;
   }
   
   function startTimer() {

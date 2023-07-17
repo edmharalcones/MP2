@@ -108,7 +108,7 @@
           <div class="modal-content">
               <!-- Modal header -->
               <div class="modal-header"><h6>Select a Theme</h6>
-                <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"></button>  
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>  
                   
               </div>
               <!-- Modal Body -->
@@ -126,7 +126,7 @@
               <!-- Modal Footer -->
               <div class="modal-footer">
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="lightdark" onclick="coloswitchbtn()">
+                  <input class="form-check-input" type="checkbox" role="switch" id="lightdark" onclick="colorswitchbtn()">
                   <label class="form-check-label" for="lightdark" id="lightdarklabel">Light mode</label>
                 </div>
                   
@@ -139,7 +139,7 @@
   <!-- notepad -->
    <div id="notepad" class="draggable">
     <div class="title-bar">
-      <span class="title">Notes</span>
+      <span class="title"><h6>Notes</h6></span>
     </div>
     <div class="tab">
       <ul id="tablist">
@@ -169,13 +169,13 @@
     <!-- Todo -->
     <div id="todo" class="draggable">
       <div class="title-bar">
-        <span class="title">To do</span>
+        <span class="title"><h6>To do</h6></span>
       </div>
      
       <div class="content">
         <div id="myDIV" class="header">
           <input type="text" id="myInput" placeholder="Task..">
-          <span onclick="newElement()" class="addBtn">Add</span>
+          <span onclick="newElement()" class="addBtn"><h6>Add</h6></span>
         </div>
       
         <ul id="myUL">
@@ -191,25 +191,25 @@
       <div data-previous-operand class="previous-operand"></div>
       <div data-current-operand class="current-operand"></div>
       </div>
-      <button data-all-clear>AC</button>
-      <button data-delete>DEL</button>
-      <button data-number>.</button>
-      <button data-operation>÷</button>
+      <button data-all-clear class="operation">AC</button>
+      <button data-delete class="operation">DEL</button>
+      <button data-number class="operation">.</button>
+      <button data-operation class="operation">÷</button>
       <button data-number>1</button>
       <button data-number>2</button>
       <button data-number>3</button>
-      <button data-operation>*</button>
+      <button data-operation class="operation">*</button>
       <button data-number>4</button>
       <button data-number>5</button>
       <button data-number>6</button>
-      <button data-operation>+</button>
+      <button data-operation class="operation">+</button>
       <button data-number>7</button>
       <button data-number>8</button>
       <button data-number>9</button>
-      <button data-operation>-</button>
+      <button data-operation class="operation">-</button>
       <button data-number>00</button>
       <button data-number>0</button>
-      <button data-equals class="span-two" style="border-radius: 25px;">=</button>
+      <button data-equals class="span-two" style="border-radius: 15px;">=</button>
   
       </div>
     </div>
@@ -241,9 +241,9 @@
   </div>
     <div class="d-flex">
       <h1 id="timer" style="margin-right: 5%;">00:25:00</h1>
-      <i id ="start"class="fa-solid fa-play fa-2x" style="color: white; align-self: center; margin-right: 5%;"onclick="startTimer()" ></i>
-      <i class="fa-solid fa-arrow-rotate-right fa-2x" style="color: white; align-self: center; margin-right: 5%;"onclick="resetTimer()"></i>
-      <i class="fa-solid fa-gear fa-2x" style="color: white; align-self: center; margin-right: 5%;" data-bs-toggle="modal" data-bs-target="#settings"></i>
+      <i id ="start"class="fa-solid fa-play fa-2x timebtn" onclick="startTimer()" ></i>
+      <i class="fa-solid fa-arrow-rotate-right fa-2x timebtn" onclick="resetTimer()"></i>
+      <i class="fa-solid fa-gear fa-2x timebtn"  data-bs-toggle="modal" data-bs-target="#settings"></i>
      </div>
    
    
@@ -315,7 +315,6 @@
           <div class="add-event-wrapper">
             <div class="add-event-header">
               <div class="title">Add Event</div>
-              <i class="fas fa-times close fa-2xs"></i>
             </div>
             <div class="add-event-body">
               <div class="add-event-input">
@@ -351,7 +350,7 @@
     </div>
 
   <div class="container-fluid d-flex justify-content-center" style="position: absolute;bottom: 5%;">
-    <div class="row d-flex console" style=" flex-wrap: nowrap; background-color: white; width: 40%; text-align: center; padding: 10px; border-radius: 10px;">
+    <div class="row d-flex console" >
       <div class="col-12">
       <i  role="button"  class="fa-regular fa-clock fa-2x"  style="padding-right: 15px; padding-left: 15px; color: purple;" onclick="timerbtn()"></i>
       <i  role="button"  class="fa-regular fa-calendar-days fa-2x"  style="padding-right: 15px; padding-left: 15px; color: purple;" onclick="calendarbtn()"></i>
