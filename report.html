@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>Report</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/eabe26cd9e.js" crossorigin="anonymous"></script>
-
     <style>
         *{
         margin: 0;
@@ -30,16 +29,27 @@
         width: 30%;
         height: auto;
       }
+      .container{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+      }.card{
+        background: transparent;
+        border: none;
+        padding: 10px;
+      }
       form{
         padding: 10px 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
       }
-      input , textarea{
-        margin-top: 15px;
+      input{
+        margin-top: 20px;
         margin-bottom: 15px;
-        padding: 10px;
+        padding: 7px;
         font-weight: 500;
         color: black;
         border-radius: 10px;
@@ -47,11 +57,15 @@
         outline: none;
         border: none;
       }
-      #bug{
-        margin-top: 90px;
-        right: 70%;
+      textarea{
+        margin-top: 70px;
         display: flex;
-        overflow: hidden;
+        margin-left: 15px;
+        bottom: 50%;
+        height: 80%;
+        border-radius: 10px;
+        position: relative;
+        width: 90%;
       }
       button{
         padding: 10px;
@@ -66,14 +80,14 @@
         justify-content: center;
         left: 70%;
         margin-top: 25px;
-        bottom: -10%;
+        bottom: -15%;
         border: none;
       }
       h1{
         font-size: 50px;
         color: white;
         padding-bottom: 25px;
-        left: 70%;
+        left: 0%;
         display: flex;
         position: relative;
       }
@@ -92,7 +106,6 @@
         color: black;
         font-size: 25px;
       }
-      
     </style>
 </head>
 <body style="background-image: url('resources/background.png');">
@@ -113,16 +126,18 @@
         </div>
     </nav>
 
-    <div class="container text-center">
-        <form>
-            <div class="row">
-                <div class="col">
-                    <h1>Report a bug</h1>
-                    <input type="text"  class="form-control" placeholder="Name" required><br>
-                    <input type="email" class="form-control" placeholder="Email" required>
+
+    <div class="container">
+        <h1>Report a bug</h1>
+        <div class="row row-cols-lg-2 row-cols-md-2 g-5 d-flex">
+            <div class="col">
+              <div class="card w-100">
+                <form action="">
+                    <input type="text" class="form-control"  placeholder="Name" required><br>
+                    <input type="email" class="form-control"  placeholder="Email" required>
                     <label>Date and time you first noticed the bug</label><br>
-                    <input type="date" style="width: 25%; left: 0%; display: flex;">
-                    <input type="time" style="width: 25%; left: 40%; top:-9%; display: flex; position: relative;"><br>
+                    <input type="date" style="width: 50%;">
+                    <input type="time" style="width: 50%;"><br>
                     <label>Supporting images</label><br>
                     <label class="label"  for="uploadBtn"><i class="fa-solid fa-cloud-arrow-up"></i></label>
                     <input type="file" id="uploadBtn">
@@ -131,14 +146,15 @@
                     <label class="label"  for="uploadBtn"><i class="fa-solid fa-cloud-arrow-up"></i></label>
                     <input type="file" id="uploadBtn">
                     <button type="submit">Submit</button>
-
-                </div>
-                <div class="col" id="bug">
-                    <textarea placeholder="Detailed description" style="height:30%"></textarea>
+                </form>
+              </div>
+            </div>
+            <div class="col" id="textarea">
+                <div class="card w-100">
+                    <textarea placeholder="Detailed description" cols="30" rows="10" ></textarea>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-
 </body>
 </html>
