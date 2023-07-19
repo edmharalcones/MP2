@@ -154,7 +154,7 @@ margin: 0.5em;
   width: 300px;
     height: 300px;
     background-color: var(--bgcolor);
-    color:var(--bgcolor);
+    color:var(--textcolor);
     border: none;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -562,6 +562,7 @@ ul li.checked::before {
       border: none;
       font-size: 0.75rem;
       overflow: auto;
+      color: (var(--textcolor));
     }
 
     .strikeout {
