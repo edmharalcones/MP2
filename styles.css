@@ -179,7 +179,13 @@ margin: 0.5em;
     border: none;
   }
   
-
+  .btn2{
+    
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
+    border: none;
+  }
+  
   #todo{
     width: 300px;
     height: 300px;
@@ -272,8 +278,8 @@ h5{
   color: var(--primary-clr);
 }
   #notepad {
-    left: 80%;
-    top: 30%;
+    left: 87%;
+    top: 40%;
   }
 
   #spotify {
@@ -286,8 +292,8 @@ h5{
   } 
 
   #calculator {
-    left: 80%;
-    top: 75%;
+    left: 69%;
+    top: 60%;
   } 
 
   #timertab {
@@ -296,7 +302,7 @@ h5{
   }
 
   #calendartab {
-    left: 20%;
+    left: 18%;
     top: 40%;
   } 
   @media screen and (max-width: 600px) {
@@ -587,7 +593,7 @@ ul li.checked::before {
 
 
     .tablinks-li {
-      color: var(--bgcolor) !important;
+      color: var(--textcolor) !important;
       display: block;
       padding: 4px 2px;
       width: 100%;

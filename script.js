@@ -1,11 +1,13 @@
 const signupcheck = (localStorage.getItem('signupname') !== null);
 let signinavatar = document.getElementById('avatar');
 let signinchecker = document.getElementById('signin');
+let trialalert = document.getElementById('subalert');
 if (signupcheck)  {
   var signupname = localStorage.getItem("signupname");
   signinchecker.innerHTML = "Hi <span id='user'></span> !";
   document.getElementById("user").textContent = signupname;
 }else{
+  trialalert.style.display="none";
   signinchecker.innerText = "Sign up";
   signinavatar.src="resources/login.png";
   signinavatar.style.borderRadius="0px";
@@ -631,6 +633,41 @@ function printTab() {
   printWindow.document.close();
   printWindow.print();
 }
+
+
+function deleteTab() {
+  var activeTabButton = document.querySelector('.tablinks-li.active');
+  var activeTabId = activeTabButton.getAttribute('data-tab-id');
+  var activeTabContent = document.getElementById(activeTabId);
+
+  var tabsData = JSON.parse(localStorage.getItem('tabsData'));
+  if (tabsData) {
+    var tabLinksData = tabsData.tabLinks;
+    var tabContentsData = tabsData.tabContents;
+    var activeTabIndex = Array.from(document.querySelectorAll('.tablinks-li')).indexOf(activeTabButton);
+
+    if (activeTabIndex >= 0) {
+      tabLinksData.splice(activeTabIndex, 1);
+      tabContentsData.splice(activeTabIndex, 1);
+      tabsData.tabLinks = tabLinksData;
+      tabsData.tabContents = tabContentsData;
+      localStorage.setItem('tabsData', JSON.stringify(tabsData));
+    }
+  }
+
+  activeTabButton.parentNode.removeChild(activeTabButton);
+  activeTabContent.parentNode.removeChild(activeTabContent);
+
+  var remainingTabs = document.querySelectorAll('.tablinks-li');
+  if (remainingTabs.length > 0) {
+    remainingTabs[0].click(); 
+  } else {
+    localStorage.removeItem('tabsData');
+  }
+}
+
+
+
 
 function getSelectionText() {
   var text = "";
