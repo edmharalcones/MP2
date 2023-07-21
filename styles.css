@@ -424,8 +424,8 @@ ul li:hover {
 
 
 ul li.checked {
-  background: var(--primary-clr);
-  color: #fff;
+
+  color:var(--textcolor);
   text-decoration: line-through;
 }
 
@@ -564,7 +564,7 @@ ul li.checked::before {
       width: 200px;
       height: 200px;
       padding: 5px;
-      border: none;
+      border-left: 3px solid var(--primary-clr);
       font-size: 0.75rem;
       overflow: auto;
       color: (var(--textcolor));
@@ -575,7 +575,7 @@ ul li.checked::before {
     }
     .tab {
       float: left;
-      border-right: 3px solid var(--primary-clr);
+      
       background-color: var(--bgcolor);
       width: 30%;
       height: 200px;

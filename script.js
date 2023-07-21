@@ -339,14 +339,16 @@ function toggleFullscreen() {
   let reset = 1;
   let longbreak = "00:60:00";
 
-  $('#start').click(function() {
-    $(this).toggleClass('fa-solid fa-pause fa-2x');
-    $(this).toggleClass('fa-solid fa-play fa-2x');
-});
+ const start= document.getElementById('start');
 const styles = getComputedStyle(document.documentElement);
 const bgset = styles.getPropertyValue('--primary-clr');
 const bgset1= styles.getPropertyValue('--textcolor');
   function Pomodoro() {
+    if(start.classList.contains('fa-pause')){
+      start.classList.remove( 'fa-pause');
+      start.classList.add('fa-play');
+     
+    }
     clearInterval(countdown);
     countdown = null;
     paused = false;
@@ -359,6 +361,12 @@ const bgset1= styles.getPropertyValue('--textcolor');
   }
 
   function Sbreak() {
+    if(start.classList.contains('fa-pause')){
+      start.classList.remove( 'fa-pause');
+      start.classList.add('fa-play');
+     
+    }
+   
     clearInterval(countdown);
     countdown = null;
     paused = false;
@@ -372,6 +380,12 @@ const bgset1= styles.getPropertyValue('--textcolor');
   }
 
   function Lbreak() {
+    if(start.classList.contains('fa-pause')){
+      start.classList.remove( 'fa-pause');
+      start.classList.add('fa-play');
+     
+    }
+   
     clearInterval(countdown);
     countdown = null;
     paused = false;
@@ -386,18 +400,31 @@ const bgset1= styles.getPropertyValue('--textcolor');
   }
   
   function startTimer() {
+   
     if (!countdown) {
       targetTime = new Date().getTime() + initialTime - 1000; 
       countdown = setInterval(updateCountdown, 1000);
       paused = false;
+      start.classList.remove('fa-play');
+      start.classList.add( 'fa-pause');
+      
     }else {
       clearInterval(countdown);
       countdown = null;
       paused = true;
-    }
+      start.classList.remove( 'fa-pause');
+      start.classList.add('fa-play');
+    } 
+
   }
 
   function resetTimer() {
+    if(start.classList.contains('fa-pause')){
+      start.classList.remove( 'fa-pause');
+      start.classList.add('fa-play');
+     
+    }
+   
     clearInterval(countdown);
     countdown = null;
     paused = false;
@@ -418,6 +445,11 @@ const bgset1= styles.getPropertyValue('--textcolor');
   }
 
   function LongBreakbtn() {
+    if(start.classList.contains('fa-solid fa-pause fa-2x')){
+      start.classList.remove( 'fa-solid fa-pause fa-2x');
+      start.classList.add('fa-solid fa-play fa-2x');
+    }
+   
     var lngbreak = document.getElementById("SetLongBreak").value;
   
     if (lngbreak >= 60) {
@@ -453,6 +485,11 @@ const bgset1= styles.getPropertyValue('--textcolor');
       document.getElementById("timer").innerHTML = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
   
       if (timeRemaining <= 0) {
+        if(start.classList.contains('fa-solid fa-pause fa-2x')){
+          start.classList.remove( 'fa-solid fa-pause fa-2x');
+          start.classList.add('fa-solid fa-play fa-2x');
+        }
+       
         clearInterval(countdown);
         countdown = null;
   
