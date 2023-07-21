@@ -338,7 +338,7 @@ function toggleFullscreen() {
   let initialTime = 25 * 60 * 1000; 
   let reset = 1;
   let longbreak = "00:60:00";
-  pomodoroCounter = 1;
+  pomodoroCounter = 0;
 
  const start= document.getElementById('start');
 const styles = getComputedStyle(document.documentElement);
