@@ -435,6 +435,8 @@ const bgset1= styles.getPropertyValue('--textcolor');
     }
   }
 
+  mySound = document.getElementById('timeout_audio');
+
   function updateCountdown() {
     if (!paused) {
       const now = new Date().getTime();
@@ -461,16 +463,19 @@ const bgset1= styles.getPropertyValue('--textcolor');
             pomodoroCounter++;
             alert("Time's up! Take a short break.");
             Sbreak();
+            mySound.play();
           } else {
           
             pomodoroCounter = 0;
             alert("Congratulations! Job well done. Take a long break.");
             Lbreak();
+            mySound.play();
           }
         } else if (reset === 2) {
        
           alert("Short break is over. Start the next pomodoro.");
           Pomodoro();
+          mySound.play();
         } else {
         
           alert("Long break is over. Start the next pomodoro.");

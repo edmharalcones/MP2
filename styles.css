@@ -13,12 +13,12 @@ body, html {
 }
 
 :root {
-  --primary-clr: purple;
+  --primary-clr: #9c6cb1;
   --bgcolor:white;
   --textcolor:black;
 }
 
-h1, h2, h3, h4, h5, h6, .form-check-label{
+h1, h2, h3, h4, h6, .form-check-label{
   color:var(--primary-clr);
   font-weight: 800;
 }
@@ -29,7 +29,9 @@ h1, h2, h3, h4, h5, h6, .form-check-label{
 
 }
 
-
+h5{
+  font-weight: 700;
+}
 
 .modal-content{
   background-color: var(--bgcolor);
@@ -273,10 +275,7 @@ margin: 0.5em;
     background-color: #14141F; 
   }
   
-h5{
-  font-weight: 700;
-  color: var(--primary-clr);
-}
+
   #notepad {
     left: 87%;
     top: 40%;
