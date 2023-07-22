@@ -186,6 +186,15 @@ margin: 0.5em;
     background-color: var(--bgcolor);
     color: var(--textcolor);
     border: none;
+    padding-right: 10px;
+  }
+
+  .form-control{
+    width: 80%;
+    background-color: var(--bgcolor);
+    color: var(--textcolor);
+    font-size: 0.5em;
+    display: none;
   }
   
   #todo{

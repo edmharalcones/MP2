@@ -144,6 +144,8 @@
       <span class="title"><h6>Notes</h6></span>
     </div>
   <div class="col-6 d-flex justify-content-end px-5" >
+      <button type="button"  onclick=" searchTab()"  class="btn2"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button type="button"  onclick=" copyTab()"  class="btn2"><i class="fa-regular fa-copy"></i></button>
       <button type="button"  onclick=" printTab()"  class="btn2"><i class="fa-solid fa-print"></i></button>
     </div>
     </div>
@@ -160,6 +162,11 @@
     </div>
     <hr>
     <center>
+      <div>
+        <form>
+        <input type="text" class="form-control" placeholder="search.." id="search" >
+      </form>
+      </div>
       <div class="btn-group" role="group" >
         <button type="button"  onclick="addTab()"  class="btn1" style="margin-right: 15px; "> <i class="fa-solid fa-plus" style="border: 1px solid #14141F;"></i> </button>
         <button type="button"  onclick="makeBold()" class="btn1"><i class="fa-solid fa-bold"></i></button>

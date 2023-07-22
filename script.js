@@ -659,6 +659,76 @@ function makeStrikethrough() {
   document.execCommand('insertHTML', false, '<span class="strikeout">' + getSelectionText() + '</span>');
   saveTabsContent();
 }
+
+function searchTab() {
+  let search = document.getElementById('search');
+  let computedDisplay = window.getComputedStyle(search).getPropertyValue('display');
+
+  if (computedDisplay === 'none') {
+    search.style.display = 'block';
+  } else {
+    search.style.display = 'none';
+  }
+
+}
+
+function searchlocate() {
+  const searchText = document.getElementById('search').value;
+  const editableDivs = document.querySelectorAll('.editable-div[contenteditable="true"][style*="display: block"]');
+  let found = false;
+
+  for (const div of editableDivs) {
+    const text = div.innerText;
+
+    if (text.includes(searchText)) {
+      div.focus();
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    alert("Text not found in any editable div with display:block.");
+  }
+}
+
+document.getElementById('search').addEventListener('keyup', function(event) {
+  if (event.key === 'Enter') {
+    searchlocate();
+  }
+});
+
+function copyTab() {
+
+  const tabContents = document.getElementsByClassName('tabcontent');
+  const editableDivs = document.getElementsByClassName('editable-div');
+
+  let tabIndex = -1;
+  for (let i = 0; i < tabContents.length; i++) {
+    if (window.getComputedStyle(tabContents[i]).display === 'block') {
+      tabIndex = i;
+      break;
+    }
+  }
+
+  if (tabIndex !== -1) {
+    const selectedEditableDiv = editableDivs[tabIndex];
+    const contentToCopy = selectedEditableDiv.innerText;
+
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = contentToCopy;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextArea);
+
+    alert('Content copied to clipboard!');
+  } else {
+    alert('No tab content with display:block found!');
+  }
+}
+
+
 function printTab() {
   var activeTabButton = document.querySelector('.tablinks-li.active');
   var activeTabId = activeTabButton.getAttribute('data-tab-id');
