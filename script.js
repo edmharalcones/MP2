@@ -673,30 +673,30 @@ function searchTab() {
 }
 
 function searchlocate() {
-  const searchText = document.getElementById('search').value;
-  const editableDivs = document.querySelectorAll('.editable-div[contenteditable="true"][style*="display: block"]');
-  let found = false;
-
-  for (const div of editableDivs) {
-    const text = div.innerText;
-
-    if (text.includes(searchText)) {
-      div.focus();
-      found = true;
-      break;
+  document.getElementById('search-form').addEventListener('submit', function(event) {
+    console.log('Form submission intercepted.');
+    event.preventDefault(); // Prevent form submission from refreshing the page
+  
+    const searchText = document.getElementById('search').value;
+    const editableDivs = document.querySelectorAll('.editable-div[contenteditable="true"][style*="display: block"]');
+    let found = false;
+  
+    for (const div of editableDivs) {
+      const text = div.innerText;
+  
+      if (text.includes(searchText)) {
+        div.focus();
+        found = true;
+        break;
+      }
     }
-  }
+  
+    if (!found) {
+      alert("Text not found in any editable div with display:block.");
+    }
+  });
 
-  if (!found) {
-    alert("Text not found in any editable div with display:block.");
-  }
 }
-
-document.getElementById('search').addEventListener('keyup', function(event) {
-  if (event.key === 'Enter') {
-    searchlocate();
-  }
-});
 
 function copyTab() {
 
@@ -1119,60 +1119,60 @@ class Calculator {
   })
   
   function calculatorKeydownHandler(event) {
-    var calculator = document.getElementById("calculator");
-    var isHovered = false;
+    const calculator = document.getElementById("calculator");
+  
+    let patternForNumbers = /[0-9]/g;
+    let patternForOperators = /[+\-*\/]/g;
   
     calculator.addEventListener("mouseenter", function() {
-      isHovered = true;
+      document.addEventListener("keydown", function(event) {
+        if (document.activeElement === calculator) {
+          if (event.key.match(patternForNumbers)) {
+            event.preventDefault();
+            calculator.appendNumber(event.key);
+            calculator.updateDisplay();
+          }
+  
+          if (event.key === '.') {
+            event.preventDefault();
+            calculator.appendNumber(event.key);
+            calculator.updateDisplay();
+          }
+  
+          if (event.key.match(patternForOperators)) {
+            event.preventDefault();
+            calculator.chooseOperation(event.key);
+            calculator.updateDisplay();
+          }
+  
+          if (event.key === 'Enter' || event.key === '=') {
+            event.preventDefault();
+            calculator.compute();
+            calculator.updateDisplay();
+          }
+  
+          if (event.key === "Backspace") {
+            event.preventDefault();
+            calculator.delete();
+            calculator.updateDisplay();
+          }
+  
+          if (event.key === 'Delete') {
+            event.preventDefault();
+            calculator.clear();
+            calculator.updateDisplay();
+          }
+        }
+      });
     });
   
     calculator.addEventListener("mouseleave", function() {
-      isHovered = false;
-    });
-  
-    document.addEventListener("keydown", function(event) {
-      if (isHovered && document.activeElement === calculator) {
-        let patternForNumbers = /[0-9]/g;
-        let patternForOperators = /[+\-*\/]/g;
-  
-        if (event.key.match(patternForNumbers)) {
-          event.preventDefault();
-          calculator.appendNumber(event.key);
-          calculator.updateDisplay();
-        }
-  
-        if (event.key === '.') {
-          event.preventDefault();
-          calculator.appendNumber(event.key);
-          calculator.updateDisplay();
-        }
-  
-        if (event.key.match(patternForOperators)) {
-          event.preventDefault();
-          calculator.chooseOperation(event.key);
-          calculator.updateDisplay();
-        }
-  
-        if (event.key === 'Enter' || event.key === '=') {
-          event.preventDefault();
-          calculator.compute();
-          calculator.updateDisplay();
-        }
-  
-        if (event.key === "Backspace") {
-          event.preventDefault();
-          calculator.delete();
-          calculator.updateDisplay();
-        }
-  
-        if (event.key === 'Delete') {
-          event.preventDefault();
-          calculator.clear();
-          calculator.updateDisplay();
-        }
-      }
+      document.removeEventListener("keydown", function(event) {
+        // Remove the keydown event listener when the mouse leaves the calculator element
+      });
     });
   }
+  calculatorKeydownHandler();
   
 // calendar
 const calendar = document.querySelector(".calendar"),
