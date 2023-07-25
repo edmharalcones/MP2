@@ -660,43 +660,6 @@ function makeStrikethrough() {
   saveTabsContent();
 }
 
-function searchTab() {
-  let search = document.getElementById('search');
-  let computedDisplay = window.getComputedStyle(search).getPropertyValue('display');
-
-  if (computedDisplay === 'none') {
-    search.style.display = 'block';
-  } else {
-    search.style.display = 'none';
-  }
-
-}
-
-function searchlocate() {
-  document.getElementById('search-form').addEventListener('submit', function(event) {
-    console.log('Form submission intercepted.');
-    event.preventDefault(); // Prevent form submission from refreshing the page
-  
-    const searchText = document.getElementById('search').value;
-    const editableDivs = document.querySelectorAll('.editable-div[contenteditable="true"][style*="display: block"]');
-    let found = false;
-  
-    for (const div of editableDivs) {
-      const text = div.innerText;
-  
-      if (text.includes(searchText)) {
-        div.focus();
-        found = true;
-        break;
-      }
-    }
-  
-    if (!found) {
-      alert("Text not found in any editable div with display:block.");
-    }
-  });
-
-}
 
 function copyTab() {
 
@@ -1118,61 +1081,42 @@ class Calculator {
     calculator.updateDisplay()
   })
   
-  function calculatorKeydownHandler(event) {
-    const calculator = document.getElementById("calculator");
-  
+  document.addEventListener('keydown', function (event) {
     let patternForNumbers = /[0-9]/g;
-    let patternForOperators = /[+\-*\/]/g;
+    let patternForOperators = /[+\-*\/]/g
+    if (event.key.match(patternForNumbers)) {
+      event.preventDefault();
+      calculator.appendNumber(event.key)
+      calculator.updateDisplay()
+    }
+    if (event.key === '.') {
+      event.preventDefault();
+      calculator.appendNumber(event.key)
+      calculator.updateDisplay()
+    }
+    if (event.key.match(patternForOperators)) {
+      event.preventDefault();
+      calculator.chooseOperation(event.key)
+      calculator.updateDisplay()
+    }
+    if (event.key === 'Enter' || event.key === '=') {
+      event.preventDefault();
+      calculator.compute()
+      calculator.updateDisplay()
+    }
+    if (event.key === "Backspace") {
+      event.preventDefault();
+      calculator.delete()
+      calculator.updateDisplay()
+    }
+    if (event.key == 'Delete') {
+      event.preventDefault();
+      calculator.clear()
+      calculator.updateDisplay()
+    }
   
-    calculator.addEventListener("mouseenter", function() {
-      document.addEventListener("keydown", function(event) {
-        if (document.activeElement === calculator) {
-          if (event.key.match(patternForNumbers)) {
-            event.preventDefault();
-            calculator.appendNumber(event.key);
-            calculator.updateDisplay();
-          }
-  
-          if (event.key === '.') {
-            event.preventDefault();
-            calculator.appendNumber(event.key);
-            calculator.updateDisplay();
-          }
-  
-          if (event.key.match(patternForOperators)) {
-            event.preventDefault();
-            calculator.chooseOperation(event.key);
-            calculator.updateDisplay();
-          }
-  
-          if (event.key === 'Enter' || event.key === '=') {
-            event.preventDefault();
-            calculator.compute();
-            calculator.updateDisplay();
-          }
-  
-          if (event.key === "Backspace") {
-            event.preventDefault();
-            calculator.delete();
-            calculator.updateDisplay();
-          }
-  
-          if (event.key === 'Delete') {
-            event.preventDefault();
-            calculator.clear();
-            calculator.updateDisplay();
-          }
-        }
-      });
-    });
-  
-    calculator.addEventListener("mouseleave", function() {
-      document.removeEventListener("keydown", function(event) {
-        // Remove the keydown event listener when the mouse leaves the calculator element
-      });
-    });
-  }
-  calculatorKeydownHandler();
+  });
+
   
 // calendar
 const calendar = document.querySelector(".calendar"),
