@@ -1081,43 +1081,9 @@ class Calculator {
     calculator.updateDisplay()
   })
   
-  document.addEventListener('keydown', function (event) {
-    let patternForNumbers = /[0-9]/g;
-    let patternForOperators = /[+\-*\/]/g
-    if (event.key.match(patternForNumbers)) {
-      event.preventDefault();
-      calculator.appendNumber(event.key)
-      calculator.updateDisplay()
-    }
-    if (event.key === '.') {
-      event.preventDefault();
-      calculator.appendNumber(event.key)
-      calculator.updateDisplay()
-    }
-    if (event.key.match(patternForOperators)) {
-      event.preventDefault();
-      calculator.chooseOperation(event.key)
-      calculator.updateDisplay()
-    }
-    if (event.key === 'Enter' || event.key === '=') {
-      event.preventDefault();
-      calculator.compute()
-      calculator.updateDisplay()
-    }
-    if (event.key === "Backspace") {
-      event.preventDefault();
-      calculator.delete()
-      calculator.updateDisplay()
-    }
-    if (event.key == 'Delete') {
-      event.preventDefault();
-      calculator.clear()
-      calculator.updateDisplay()
-    }
-  
-  });
+ 
 
-  
+
 // calendar
 const calendar = document.querySelector(".calendar"),
 date = document.querySelector(".date"),
